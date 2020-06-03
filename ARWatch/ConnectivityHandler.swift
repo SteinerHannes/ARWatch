@@ -8,10 +8,13 @@
 
 import Foundation
 import WatchConnectivity
+import AudioToolbox
 
 class ConnectivityHandler : NSObject, WCSessionDelegate {
     
     var session = WCSession.default
+    
+    @objc dynamic var messages = [String]()
     
     override init() {
         super.init()
@@ -20,7 +23,7 @@ class ConnectivityHandler : NSObject, WCSessionDelegate {
         session.activate()
         
         
-        debugPrint("%@", "Is paired: \(session.isPaired), Paired Watch: \(session.isPaired), Watch App Installed: \(session.isWatchAppInstalled)")
+        debugPrint("%@", "Activation State: \(session.activationState), Paired Watch: \(session.isPaired), Watch App Installed: \(session.isWatchAppInstalled)")
     }
     
     // MARK: - WCSessionDelegate
@@ -39,13 +42,33 @@ class ConnectivityHandler : NSObject, WCSessionDelegate {
     
     func sessionWatchStateDidChange(_ session: WCSession) {
         debugPrint("sessionWatchStateDidChange: \(session)")
+        
+        debugPrint("Paired Watch: \(session.isPaired), Watch App Installed: \(session.isWatchAppInstalled)")
+        
     }
     
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
         debugPrint("didReceiveMessage: \(message)")
         if message["request"] as? String == "date" {
-            replyHandler(["date" : "\(Date())"])
+            self.messages.append("Watch requested info")
+            replyHandler(["date": "\(Date())"])
         }
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        let msg = message["msg"]!
+        self.messages.append("Message \(msg)")
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+    }
+    
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        let msg = applicationContext["msg"]!
+        self.messages.append("AppContext \(msg)")
+    }
+    
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
+        let msg = userInfo["msg"]!
+        self.messages.append("UserInfo \(msg)")
     }
     
 }
