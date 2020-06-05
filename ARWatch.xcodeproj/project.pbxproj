@@ -174,10 +174,9 @@
 		EFD443F7248683710037CC73 /* WKARWatch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EFF266C1248A4EDC00133785 /* Model */,
 				EFF266BE248A405300133785 /* Views */,
 				EFC8A2F1248695DA00B934CA /* WKARWatch Extension.entitlements */,
-				EFD443F8248683710037CC73 /* ContentView.swift */,
-				EFF266BF248A472F00133785 /* WCSessionModel.swift */,
 				EFD443FA248683710037CC73 /* HostingController.swift */,
 				EFD443FC248683710037CC73 /* ExtensionDelegate.swift */,
 				EFD443FE248683710037CC73 /* NotificationController.swift */,
@@ -209,8 +208,17 @@
 		EFF266BE248A405300133785 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EFD443F8248683710037CC73 /* ContentView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		EFF266C1248A4EDC00133785 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EFF266BF248A472F00133785 /* WCSessionModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
