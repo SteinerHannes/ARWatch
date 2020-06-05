@@ -3,11 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		EF2F3D7324869BFB005B74D0 /* ConnectivityHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F3D7224869BFB005B74D0 /* ConnectivityHandler.swift */; };
+		EF4881A7248A66E60026187C /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4881A6248A66E60026187C /* ListView.swift */; };
+		EF4881AA248A7CB60026187C /* MainMenuCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4881A9248A7CB60026187C /* MainMenuCore.swift */; };
+		EF4881AD248A7D370026187C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF4881AC248A7D370026187C /* ComposableArchitecture */; };
+		EF8273BE248A8AB400948B9A /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8273BD248A8AB400948B9A /* PagingScrollView.swift */; };
 		EFD443D2248683290037CC73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD443D1248683290037CC73 /* AppDelegate.swift */; };
 		EFD443D4248683290037CC73 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD443D3248683290037CC73 /* art.scnassets */; };
 		EFD443D6248683290037CC73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD443D5248683290037CC73 /* ViewController.swift */; };
@@ -28,6 +32,9 @@
 		EFD44415248684AE0037CC73 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD44414248684AE0037CC73 /* SceneDelegate.swift */; };
 		EFD44418248684EA0037CC73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD44417248684EA0037CC73 /* ContentView.swift */; };
 		EFF266C0248A472F00133785 /* WCSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266BF248A472F00133785 /* WCSessionModel.swift */; };
+		EFF266C4248A510400133785 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EFF266C3248A510400133785 /* ComposableArchitecture */; };
+		EFF266C7248A566E00133785 /* ContentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266C6248A566E00133785 /* ContentCore.swift */; };
+		EFF266C9248A575300133785 /* ARCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266C8248A575300133785 /* ARCore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +81,9 @@
 
 /* Begin PBXFileReference section */
 		EF2F3D7224869BFB005B74D0 /* ConnectivityHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityHandler.swift; sourceTree = "<group>"; };
+		EF4881A6248A66E60026187C /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		EF4881A9248A7CB60026187C /* MainMenuCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCore.swift; sourceTree = "<group>"; };
+		EF8273BD248A8AB400948B9A /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
 		EFC8A2EF248695C000B934CA /* WKARWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WKARWatch.entitlements; sourceTree = "<group>"; };
 		EFC8A2F0248695D000B934CA /* ARWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ARWatch.entitlements; sourceTree = "<group>"; };
 		EFC8A2F1248695DA00B934CA /* WKARWatch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WKARWatch Extension.entitlements"; sourceTree = "<group>"; };
@@ -102,6 +112,8 @@
 		EFD44414248684AE0037CC73 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EFD44417248684EA0037CC73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EFF266BF248A472F00133785 /* WCSessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionModel.swift; sourceTree = "<group>"; };
+		EFF266C6248A566E00133785 /* ContentCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCore.swift; sourceTree = "<group>"; };
+		EFF266C8248A575300133785 /* ARCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFF266C4248A510400133785 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,12 +129,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF4881AD248A7D370026187C /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF4881A8248A7CA00026187C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EF4881A9248A7CB60026187C /* MainMenuCore.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		EF4881AB248A7D370026187C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF8273BC248A8A8F00948B9A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EF8273BD248A8AB400948B9A /* PagingScrollView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		EFD443C5248683290037CC73 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +166,7 @@
 				EFD443E82486836F0037CC73 /* WKARWatch */,
 				EFD443F7248683710037CC73 /* WKARWatch Extension */,
 				EFD443CF248683290037CC73 /* Products */,
+				EF4881AB248A7D370026187C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,6 +183,7 @@
 		EFD443D0248683290037CC73 /* ARWatch */ = {
 			isa = PBXGroup;
 			children = (
+				EFF266C5248A563A00133785 /* App */,
 				EFC8A2F0248695D000B934CA /* ARWatch.entitlements */,
 				EFD44416248684DA0037CC73 /* Views */,
 				EFD443D1248683290037CC73 /* AppDelegate.swift */,
@@ -174,6 +213,7 @@
 		EFD443F7248683710037CC73 /* WKARWatch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EF4881A8248A7CA00026187C /* App */,
 				EFF266C1248A4EDC00133785 /* Model */,
 				EFF266BE248A405300133785 /* Views */,
 				EFC8A2F1248695DA00B934CA /* WKARWatch Extension.entitlements */,
@@ -208,7 +248,9 @@
 		EFF266BE248A405300133785 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EF8273BC248A8A8F00948B9A /* Components */,
 				EFD443F8248683710037CC73 /* ContentView.swift */,
+				EF4881A6248A66E60026187C /* ListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +261,15 @@
 				EFF266BF248A472F00133785 /* WCSessionModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		EFF266C5248A563A00133785 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EFF266C6248A566E00133785 /* ContentCore.swift */,
+				EFF266C8248A575300133785 /* ARCore.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +290,9 @@
 				EFD4440A248683720037CC73 /* PBXTargetDependency */,
 			);
 			name = ARWatch;
+			packageProductDependencies = (
+				EFF266C3248A510400133785 /* ComposableArchitecture */,
+			);
 			productName = ARWatch;
 			productReference = EFD443CE248683290037CC73 /* ARWatch.app */;
 			productType = "com.apple.product-type.application";
@@ -273,6 +327,9 @@
 			dependencies = (
 			);
 			name = "WKARWatch Extension";
+			packageProductDependencies = (
+				EF4881AC248A7D370026187C /* ComposableArchitecture */,
+			);
 			productName = "WKARWatch Extension";
 			productReference = EFD443F3248683710037CC73 /* WKARWatch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -307,6 +364,9 @@
 				Base,
 			);
 			mainGroup = EFD443C5248683290037CC73;
+			packageReferences = (
+				EFF266C2248A510400133785 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = EFD443CF248683290037CC73 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -355,7 +415,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFF266C7248A566E00133785 /* ContentCore.swift in Sources */,
 				EFD443D6248683290037CC73 /* ViewController.swift in Sources */,
+				EFF266C9248A575300133785 /* ARCore.swift in Sources */,
 				EFD443D2248683290037CC73 /* AppDelegate.swift in Sources */,
 				EFD44418248684EA0037CC73 /* ContentView.swift in Sources */,
 				EF2F3D7324869BFB005B74D0 /* ConnectivityHandler.swift in Sources */,
@@ -367,11 +429,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF4881AA248A7CB60026187C /* MainMenuCore.swift in Sources */,
 				EFF266C0248A472F00133785 /* WCSessionModel.swift in Sources */,
 				EFD443FB248683710037CC73 /* HostingController.swift in Sources */,
 				EFD443F9248683710037CC73 /* ContentView.swift in Sources */,
+				EF4881A7248A66E60026187C /* ListView.swift in Sources */,
 				EFD443FF248683710037CC73 /* NotificationController.swift in Sources */,
 				EFD443FD248683710037CC73 /* ExtensionDelegate.swift in Sources */,
+				EF8273BE248A8AB400948B9A /* PagingScrollView.swift in Sources */,
 				EFD44401248683710037CC73 /* NotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -703,6 +768,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EFF266C2248A510400133785 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EF4881AC248A7D370026187C /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFF266C2248A510400133785 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		EFF266C3248A510400133785 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFF266C2248A510400133785 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EFD443C6248683290037CC73 /* Project object */;
 }

@@ -16,6 +16,9 @@ struct ContentView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack(alignment: .leading, spacing: 10) {
+                NavigationLink(destination: ListView()) {
+                    Text("ListView")
+                }
                 Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
                 Button(action: {
                     self.model.session?.sendMessage(

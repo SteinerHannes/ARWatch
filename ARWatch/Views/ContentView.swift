@@ -8,6 +8,7 @@
 
 import SwiftUI
 import UIKit
+import ComposableArchitecture
 
 struct ContentView: View {
     @State var messages: [String] = []
@@ -22,41 +23,43 @@ struct ContentView: View {
     }
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: true) {
-            VStack(alignment: .leading, spacing: 10) {
-                Button(action: {
-                    self.counter += 1
-                    self.connectivityHandler.session.sendMessage(["msg": "Message \(self.counter)"], replyHandler: nil) { error in
-                        debugPrint("Error sending message: \(error)")
+        NavigationView {
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Button(action: {
+                        self.counter += 1
+                        self.connectivityHandler.session.sendMessage(["msg": "Message \(self.counter)"], replyHandler: nil) { error in
+                            debugPrint("Error sending message: \(error)")
+                        }
+                    }) {
+                        Text("Send message")
                     }
-                }) {
-                    Text("Send message")
-                }
-                Button(action: {
-                    self.counter += 1
-                    try! self.connectivityHandler.session.updateApplicationContext(["msg": "Message \(self.counter)"])
-                }) {
-                    Text("Update App Context")
-                }
-                Button(action: {
-                    self.counter += 1
-                    self.connectivityHandler.session.transferUserInfo(["msg": "Message \(self.counter)"])
-                }) {
-                    Text("Transfer User Info")
-                }
-                ForEach(0..<self.messages.count, id: \.self) { index in
-                    Text(self.messages[index])
-                }
-            }.onAppear{
-                self.updateMessages()
-                self.messagesObservation = self.connectivityHandler.observe(\.messages) { _, _ in
-                    OperationQueue.main.addOperation {
-                        self.updateMessages()
+                    Button(action: {
+                        self.counter += 1
+                        try! self.connectivityHandler.session.updateApplicationContext(["msg": "Message \(self.counter)"])
+                    }) {
+                        Text("Update App Context")
                     }
-                }
-            }.onDisappear{
-                
-            }.frame(width: UIScreen.main.bounds.width)
+                    Button(action: {
+                        self.counter += 1
+                        self.connectivityHandler.session.transferUserInfo(["msg": "Message \(self.counter)"])
+                    }) {
+                        Text("Transfer User Info")
+                    }
+                    ForEach(0..<self.messages.count, id: \.self) { index in
+                        Text(self.messages[index])
+                    }
+                }.onAppear{
+                    self.updateMessages()
+                    self.messagesObservation = self.connectivityHandler.observe(\.messages) { _, _ in
+                        OperationQueue.main.addOperation {
+                            self.updateMessages()
+                        }
+                    }
+                }.onDisappear{
+                    
+                }.frame(width: UIScreen.main.bounds.width)
+            }.navigationBarTitle("ARWatch", displayMode: .large)
         }
     }
     

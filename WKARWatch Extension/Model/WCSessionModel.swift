@@ -25,7 +25,6 @@ class WCSessionModel: NSObject, WCSessionDelegate, ObservableObject {
         session = WCSession.default
         session!.delegate = self
         session!.activate()
-        print("HostingController active")
         debugPrint("%@", " Watch App Installed: \(session!.isReachable)")
     }
     
