@@ -22,41 +22,46 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Button(action: {
-                self.counter += 1
-                self.connectivityHandler.session.sendMessage(["msg": "Message \(self.counter)"], replyHandler: nil) { error in
-                    debugPrint("Error sending message: \(error)")
+        ScrollView(.vertical, showsIndicators: true) {
+            VStack(alignment: .leading, spacing: 10) {
+                Button(action: {
+                    self.counter += 1
+                    self.connectivityHandler.session.sendMessage(["msg": "Message \(self.counter)"], replyHandler: nil) { error in
+                        debugPrint("Error sending message: \(error)")
+                    }
+                }) {
+                    Text("Send message")
                 }
-            }) {
-                Text("Send message")
-            }
-            Button(action: {
-                self.counter += 1
-                try! self.connectivityHandler.session.updateApplicationContext(["msg": "Message \(self.counter)"])
-            }) {
-                Text("Update App Context")
-            }
-            Button(action: {
-                self.counter += 1
-                self.connectivityHandler.session.transferUserInfo(["msg": "Message \(self.counter)"])
-            }) {
-                Text("Transfer User Info")
-            }
-        }.onAppear{
-            self.updateMessages()
-            self.messagesObservation = self.connectivityHandler.observe(\.messages) { _, _ in
-                OperationQueue.main.addOperation {
-                    self.updateMessages()
+                Button(action: {
+                    self.counter += 1
+                    try! self.connectivityHandler.session.updateApplicationContext(["msg": "Message \(self.counter)"])
+                }) {
+                    Text("Update App Context")
                 }
-            }
-        }.onDisappear{
-            
+                Button(action: {
+                    self.counter += 1
+                    self.connectivityHandler.session.transferUserInfo(["msg": "Message \(self.counter)"])
+                }) {
+                    Text("Transfer User Info")
+                }
+                ForEach(0..<self.messages.count, id: \.self) { index in
+                    Text(self.messages[index])
+                }
+            }.onAppear{
+                self.updateMessages()
+                self.messagesObservation = self.connectivityHandler.observe(\.messages) { _, _ in
+                    OperationQueue.main.addOperation {
+                        self.updateMessages()
+                    }
+                }
+            }.onDisappear{
+                
+            }.frame(width: UIScreen.main.bounds.width)
         }
     }
     
     func updateMessages() {
-        self.messages.append(self.connectivityHandler.messages.joined(separator: "\n"))
+        self.messages.append(self.connectivityHandler.messages.last ?? "Hello World")
     }
 }
 

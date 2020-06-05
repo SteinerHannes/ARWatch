@@ -27,6 +27,7 @@
 		EFD4440B248683720037CC73 /* WKARWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EFD443E72486836F0037CC73 /* WKARWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EFD44415248684AE0037CC73 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD44414248684AE0037CC73 /* SceneDelegate.swift */; };
 		EFD44418248684EA0037CC73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD44417248684EA0037CC73 /* ContentView.swift */; };
+		EFF266C0248A472F00133785 /* WCSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266BF248A472F00133785 /* WCSessionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		EFD44408248683720037CC73 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		EFD44414248684AE0037CC73 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EFD44417248684EA0037CC73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EFF266BF248A472F00133785 /* WCSessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,8 +174,10 @@
 		EFD443F7248683710037CC73 /* WKARWatch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EFF266BE248A405300133785 /* Views */,
 				EFC8A2F1248695DA00B934CA /* WKARWatch Extension.entitlements */,
 				EFD443F8248683710037CC73 /* ContentView.swift */,
+				EFF266BF248A472F00133785 /* WCSessionModel.swift */,
 				EFD443FA248683710037CC73 /* HostingController.swift */,
 				EFD443FC248683710037CC73 /* ExtensionDelegate.swift */,
 				EFD443FE248683710037CC73 /* NotificationController.swift */,
@@ -198,6 +202,13 @@
 			isa = PBXGroup;
 			children = (
 				EFD44417248684EA0037CC73 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EFF266BE248A405300133785 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -348,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFF266C0248A472F00133785 /* WCSessionModel.swift in Sources */,
 				EFD443FB248683710037CC73 /* HostingController.swift in Sources */,
 				EFD443F9248683710037CC73 /* ContentView.swift in Sources */,
 				EFD443FF248683710037CC73 /* NotificationController.swift in Sources */,

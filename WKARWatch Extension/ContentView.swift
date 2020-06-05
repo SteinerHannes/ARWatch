@@ -7,25 +7,53 @@
 //
 
 import SwiftUI
-import WatchConnectivity
+import Combine
 
 struct ContentView: View {
     
-    init() {}
-    
-    init(session: WCSession?) {
-        self.session = session
-    }
-    
-    var session: WCSession?
+    @ObservedObject var model = WCSessionModel()
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/).foregroundColor(.blue)
-            Button(action: {
-                
-            }) {
-                Text("Button")
+        ScrollView(.vertical, showsIndicators: true) {
+            VStack(alignment: .leading, spacing: 10) {
+                Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                Button(action: {
+                    self.model.session?.sendMessage(
+                        ["request": "date"],
+                        replyHandler: { response in
+                            self.model.messages.append("Reply: \(response)")
+                    }, errorHandler: { error in
+                        print("Error sending message: %@", error)
+                    })
+                }) {
+                    Text("Request Info")
+                }
+                Button(action: {
+                    self.model.counter += 1
+                    self.model.session?.sendMessage(
+                        ["msg": "Message \(self.model.counter)"]
+                        , replyHandler: nil
+                    ) { error in
+                        debugPrint("Error sending message: \(error)")
+                    }
+                }) {
+                    Text("Send Message")
+                }
+                Button(action: {
+                    self.model.counter += 1
+                    try! self.model.session?.updateApplicationContext(["msg": "Message \(self.model.counter)"])
+                }) {
+                    Text("Update App Context")
+                }
+                Button(action: {
+                    self.model.counter += 1
+                    self.model.session?.transferUserInfo(["msg": "Message \(self.model.counter)"])
+                }) {
+                    Text("Transfer User Info")
+                }
+                ForEach(0..<self.model.messages.count, id: \.self) { index in
+                    Text(self.model.messages[index])
+                }
             }
         }
     }
