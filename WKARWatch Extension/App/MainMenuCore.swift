@@ -27,7 +27,6 @@ struct MainMenuState: Equatable {
         CardStruct.init(name: "Audio Player", image: "headphones"),
         CardStruct.init(name: "Einstellungen", image: "gear" )
     ]
-    
 }
 
 enum MainMenuAction: Equatable {

@@ -42,11 +42,8 @@ extension WKSessionClient {
                     let action = message["action"]!
                     subscriber.send(.reciveAction(action as! AppCoreAction))
                 }
-                print("sharedWKSessionManager: ")
                 sharedWKSessionManager = manager
-                return AnyCancellable {
-                    sharedWKSessionManager = manager
-                }
+                return AnyCancellable { }
             }
         },
         send: { action in

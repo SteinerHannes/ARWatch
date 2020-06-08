@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EF4881A7248A66E60026187C /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4881A6248A66E60026187C /* ListView.swift */; };
 		EF4881AA248A7CB60026187C /* MainMenuCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4881A9248A7CB60026187C /* MainMenuCore.swift */; };
 		EF4881AD248A7D370026187C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF4881AC248A7D370026187C /* ComposableArchitecture */; };
 		EF8273BE248A8AB400948B9A /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8273BD248A8AB400948B9A /* PagingScrollView.swift */; };
@@ -34,6 +33,7 @@
 		EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */; };
 		EFF2466F248E47A300BC5B0B /* SharedCoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */; };
 		EFF24670248E47AA00BC5B0B /* SharedCoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */; };
+		EFF24672248E80D200BC5B0B /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF24671248E80D200BC5B0B /* ColorExtension.swift */; };
 		EFF266C4248A510400133785 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EFF266C3248A510400133785 /* ComposableArchitecture */; };
 		EFF266C7248A566E00133785 /* ContentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266C6248A566E00133785 /* ContentCore.swift */; };
 		EFF266C9248A575300133785 /* ARCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266C8248A575300133785 /* ARCore.swift */; };
@@ -82,7 +82,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		EF4881A6248A66E60026187C /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		EF4881A9248A7CB60026187C /* MainMenuCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCore.swift; sourceTree = "<group>"; };
 		EF8273BD248A8AB400948B9A /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
 		EFC8A2EF248695C000B934CA /* WKARWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WKARWatch.entitlements; sourceTree = "<group>"; };
@@ -115,6 +114,7 @@
 		EFF24667248E365C00BC5B0B /* WKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKSessionClient.swift; sourceTree = "<group>"; };
 		EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWKSessionClient.swift; sourceTree = "<group>"; };
 		EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCoreActions.swift; sourceTree = "<group>"; };
+		EFF24671248E80D200BC5B0B /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		EFF266C6248A566E00133785 /* ContentCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCore.swift; sourceTree = "<group>"; };
 		EFF266C8248A575300133785 /* ARCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -269,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */,
+				EFF24671248E80D200BC5B0B /* ColorExtension.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -278,7 +279,6 @@
 			children = (
 				EF8273BC248A8A8F00948B9A /* Components */,
 				EFD443F8248683710037CC73 /* ContentView.swift */,
-				EF4881A6248A66E60026187C /* ListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -438,6 +438,7 @@
 				EFF266C7248A566E00133785 /* ContentCore.swift in Sources */,
 				EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */,
 				EFD443D6248683290037CC73 /* ViewController.swift in Sources */,
+				EFF24672248E80D200BC5B0B /* ColorExtension.swift in Sources */,
 				EFF2466F248E47A300BC5B0B /* SharedCoreActions.swift in Sources */,
 				EFF266C9248A575300133785 /* ARCore.swift in Sources */,
 				EFD443D2248683290037CC73 /* AppDelegate.swift in Sources */,
@@ -454,7 +455,6 @@
 				EFF24670248E47AA00BC5B0B /* SharedCoreActions.swift in Sources */,
 				EFD443FB248683710037CC73 /* HostingController.swift in Sources */,
 				EFD443F9248683710037CC73 /* ContentView.swift in Sources */,
-				EF4881A7248A66E60026187C /* ListView.swift in Sources */,
 				EFD443FF248683710037CC73 /* NotificationController.swift in Sources */,
 				EFD443FD248683710037CC73 /* ExtensionDelegate.swift in Sources */,
 				EF8273BE248A8AB400948B9A /* PagingScrollView.swift in Sources */,
