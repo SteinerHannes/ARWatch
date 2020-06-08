@@ -44,6 +44,7 @@ public struct MainMenuEnvironment {
 let mainMenuReducer = Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment> { state, action, environment in
     switch action {
         case .onAppear:
+            print("onAppear")
             return environment.connectivityClient.start()
                 .catchToEffect()
                 .map(MainMenuAction.connectivityClient)
@@ -56,7 +57,11 @@ let mainMenuReducer = Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment
         case let .digitalCrownChanged(value: value):
             state.selectedCard = Int(value)
             return .none
-        case let .connectivityClient(action):
+        case let .connectivityClient(.success(recivedAction)):
+//            switch recivedAction {
+//                case .reciveAction(AppCoreAction):
+//            }
+            // MARK: TODO
             return .none
     }
 }.debug()

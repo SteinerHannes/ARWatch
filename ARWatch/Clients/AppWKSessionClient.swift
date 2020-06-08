@@ -60,6 +60,10 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
     
     var handler: ([String : Any]) -> Void
     
+    let encoder = JSONEncoder()
+    
+    let decoder = JSONDecoder()
+    
     init(messageHandler: @escaping ([String : Any]) -> Void ){
         handler = messageHandler
         
@@ -78,7 +82,11 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
     }
     
     public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        handler(message)
+        let encodedAction = message["action"]!
+        
+        let action = try! self.decoder.decode(WKCoreAction.self, from: encodedAction as! Data)
+        
+        handler(["action": action])
     }
     
     func send(action: AppCoreAction) {
@@ -103,5 +111,9 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
         debugPrint("sessionWatchStateDidChange: \(session)")
         
         debugPrint("Paired Watch: \(session.isPaired), Watch App Installed: \(session.isWatchAppInstalled)")
+    }
+    
+    public func sessionReachabilityDidChange(_ session: WCSession) {
+        self.session = session
     }
 }

@@ -42,7 +42,11 @@ struct ListView: View {
                     }
                 }
             }
-        }.frame(minWidth: 0, maxWidth: .infinity)
+        }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .onAppear {
+            self.viewStore.send(.onAppear)
+        }
     }
 }
 struct Card: View {

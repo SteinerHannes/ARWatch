@@ -116,7 +116,6 @@ struct PagingScrollView: View {
             // can be changed to simultaneous gesture to work with buttons
             .gesture( DragGesture(minimumDistance: 0, coordinateSpace: .local)
                 .onChanged { value in
-                    print("claue", value.translation.width)
                     self.dragOffset = value.translation.width
                     self.currentScrollOffset = self.computeCurrentScrollOffset()
                 }
@@ -131,7 +130,6 @@ struct PagingScrollView: View {
                     ) {
                         self.activePageIndex = newPageIndex
                         self.currentScrollOffset = self.computeCurrentScrollOffset()
-                        print(self.currentScrollOffset)
                     }
                 }
             )

@@ -11,60 +11,32 @@ import UIKit
 import ComposableArchitecture
 
 struct ContentView: View {
-    @State var messages: [String] = []
     
-    var connectivityHandler: ConnectivityHandler!
-    @State var counter = 0
-    @State var messagesObservation: NSKeyValueObservation?
+    let store: Store<ContentState, ContentAction>
+    
+    @ObservedObject var viewStore: ViewStore<ContentState, ContentAction>
     
     init() {
-        self.connectivityHandler = (UIApplication.shared.delegate as? AppDelegate)?.connectivityHandler
-        
+        self.store = Store(
+            initialState: ContentState(),
+            reducer: contentReducer,
+            environment: ContentEnvironment()
+        )
+        self.viewStore = ViewStore(self.store)
     }
     
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Button(action: {
-                        self.counter += 1
-                        self.connectivityHandler.session.sendMessage(["msg": "Message \(self.counter)"], replyHandler: nil) { error in
-                            debugPrint("Error sending message: \(error)")
-                        }
-                    }) {
-                        Text("Send message")
-                    }
-                    Button(action: {
-                        self.counter += 1
-                        try! self.connectivityHandler.session.updateApplicationContext(["msg": "Message \(self.counter)"])
-                    }) {
-                        Text("Update App Context")
-                    }
-                    Button(action: {
-                        self.counter += 1
-                        self.connectivityHandler.session.transferUserInfo(["msg": "Message \(self.counter)"])
-                    }) {
-                        Text("Transfer User Info")
-                    }
-                    ForEach(0..<self.messages.count, id: \.self) { index in
-                        Text(self.messages[index])
-                    }
-                }.onAppear{
-                    self.updateMessages()
-                    self.messagesObservation = self.connectivityHandler.observe(\.messages) { _, _ in
-                        OperationQueue.main.addOperation {
-                            self.updateMessages()
-                        }
-                    }
-                }.onDisappear{
-                    
+                    Text("\(self.viewStore.value)")
                 }.frame(width: UIScreen.main.bounds.width)
-            }.navigationBarTitle("ARWatch", displayMode: .large)
+            }
+            .navigationBarTitle("ARWatch", displayMode: .large)
+            .onAppear{
+                self.viewStore.send(.onAppear)
+            }
         }
-    }
-    
-    func updateMessages() {
-        self.messages.append(self.connectivityHandler.messages.last ?? "Hello World")
     }
 }
 

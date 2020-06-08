@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EF2F3D7324869BFB005B74D0 /* ConnectivityHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F3D7224869BFB005B74D0 /* ConnectivityHandler.swift */; };
 		EF4881A7248A66E60026187C /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4881A6248A66E60026187C /* ListView.swift */; };
 		EF4881AA248A7CB60026187C /* MainMenuCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4881A9248A7CB60026187C /* MainMenuCore.swift */; };
 		EF4881AD248A7D370026187C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF4881AC248A7D370026187C /* ComposableArchitecture */; };
@@ -35,7 +34,6 @@
 		EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */; };
 		EFF2466F248E47A300BC5B0B /* SharedCoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */; };
 		EFF24670248E47AA00BC5B0B /* SharedCoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */; };
-		EFF266C0248A472F00133785 /* WCSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266BF248A472F00133785 /* WCSessionModel.swift */; };
 		EFF266C4248A510400133785 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EFF266C3248A510400133785 /* ComposableArchitecture */; };
 		EFF266C7248A566E00133785 /* ContentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266C6248A566E00133785 /* ContentCore.swift */; };
 		EFF266C9248A575300133785 /* ARCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266C8248A575300133785 /* ARCore.swift */; };
@@ -84,7 +82,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		EF2F3D7224869BFB005B74D0 /* ConnectivityHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityHandler.swift; sourceTree = "<group>"; };
 		EF4881A6248A66E60026187C /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		EF4881A9248A7CB60026187C /* MainMenuCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCore.swift; sourceTree = "<group>"; };
 		EF8273BD248A8AB400948B9A /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
@@ -118,7 +115,6 @@
 		EFF24667248E365C00BC5B0B /* WKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKSessionClient.swift; sourceTree = "<group>"; };
 		EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWKSessionClient.swift; sourceTree = "<group>"; };
 		EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCoreActions.swift; sourceTree = "<group>"; };
-		EFF266BF248A472F00133785 /* WCSessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionModel.swift; sourceTree = "<group>"; };
 		EFF266C6248A566E00133785 /* ContentCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCore.swift; sourceTree = "<group>"; };
 		EFF266C8248A575300133785 /* ARCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,7 +199,6 @@
 				EFD443DA2486832A0037CC73 /* Assets.xcassets */,
 				EFD443DC2486832A0037CC73 /* LaunchScreen.storyboard */,
 				EFD443DF2486832A0037CC73 /* Info.plist */,
-				EF2F3D7224869BFB005B74D0 /* ConnectivityHandler.swift */,
 			);
 			path = ARWatch;
 			sourceTree = "<group>";
@@ -224,7 +219,6 @@
 			children = (
 				EFF24666248E357900BC5B0B /* Clients */,
 				EF4881A8248A7CA00026187C /* App */,
-				EFF266C1248A4EDC00133785 /* Model */,
 				EFF266BE248A405300133785 /* Views */,
 				EFC8A2F1248695DA00B934CA /* WKARWatch Extension.entitlements */,
 				EFD443FA248683710037CC73 /* HostingController.swift */,
@@ -287,14 +281,6 @@
 				EF4881A6248A66E60026187C /* ListView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		EFF266C1248A4EDC00133785 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				EFF266BF248A472F00133785 /* WCSessionModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		EFF266C5248A563A00133785 /* App */ = {
@@ -456,7 +442,6 @@
 				EFF266C9248A575300133785 /* ARCore.swift in Sources */,
 				EFD443D2248683290037CC73 /* AppDelegate.swift in Sources */,
 				EFD44418248684EA0037CC73 /* ContentView.swift in Sources */,
-				EF2F3D7324869BFB005B74D0 /* ConnectivityHandler.swift in Sources */,
 				EFD44415248684AE0037CC73 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,7 +452,6 @@
 			files = (
 				EF4881AA248A7CB60026187C /* MainMenuCore.swift in Sources */,
 				EFF24670248E47AA00BC5B0B /* SharedCoreActions.swift in Sources */,
-				EFF266C0248A472F00133785 /* WCSessionModel.swift in Sources */,
 				EFD443FB248683710037CC73 /* HostingController.swift in Sources */,
 				EFD443F9248683710037CC73 /* ContentView.swift in Sources */,
 				EF4881A7248A66E60026187C /* ListView.swift in Sources */,

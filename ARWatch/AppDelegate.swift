@@ -13,15 +13,14 @@ import WatchConnectivity
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 //    var window: UIWindow?
-    var connectivityHandler: ConnectivityHandler?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        if WCSession.isSupported() {
-            self.connectivityHandler = ConnectivityHandler()
-        } else {
-            debugPrint("WCSession not supported (f.e. on iPad).")
-        }
+//        if WCSession.isSupported() {
+//            self.connectivityHandler = ConnectivityHandler()
+//        } else {
+//            debugPrint("WCSession not supported (f.e. on iPad).")
+//        }
         
         return true
     }
