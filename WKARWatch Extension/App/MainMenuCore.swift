@@ -30,27 +30,41 @@ struct MainMenuState: Equatable {
     
 }
 
+enum AppCoreAction: Equatable {
+    case reciveTest
+}
+
+enum WKCoreAction: Equatable {
+    case MMselectedCardChanged(value: Int)
+}
+
 enum MainMenuAction: Equatable {
     case onAppear
+    case connectivityClient(Result<WKSessionClient.Action, Never>)
     case selectedCardChanged(value: Int)
     case digitalCrownChanged(value: Double)
 }
 
 public struct MainMenuEnvironment {
-    
+    var connectivityClient: WKSessionClient = .live
 }
 
 let mainMenuReducer = Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment> { state, action, environment in
     switch action {
         case .onAppear:
-            return .none
+            return environment.connectivityClient.start()
+                .catchToEffect()
+                .map(MainMenuAction.connectivityClient)
         case let .selectedCardChanged(value: value):
             state.selectedCard = value
             print("newValue", value)
-            // MARK: TODO send changes via environment
-            return .none
+            return environment.connectivityClient.send(
+                action: WKCoreAction.MMselectedCardChanged(value: value)
+            ).fireAndForget()
         case let .digitalCrownChanged(value: value):
             state.selectedCard = Int(value)
+            return .none
+        case let .connectivityClient(action):
             return .none
     }
 }.debug()
