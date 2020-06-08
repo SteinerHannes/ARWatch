@@ -14,17 +14,17 @@ import Combine
 
 public struct AppWKSessionClient {
     enum Action: Equatable {
-        case newAction(AppCoreAction)
+        case reciveAction(WKCoreAction)
     }
     
     private var create: () -> Effect<Action, Never>
-    private var send: (WKCoreAction) -> Effect<Never, Never>
+    private var send: (AppCoreAction) -> Effect<Never, Never>
     
     func start() -> Effect<Action, Never> {
         self.create()
     }
     
-    func send(action: WKCoreAction) -> Effect<Never, Never> {
+    func send(action: AppCoreAction) -> Effect<Never, Never> {
         return self.send(action)
     }
 }
@@ -37,7 +37,7 @@ extension AppWKSessionClient {
             .run { subscriber in
                 let manager = AppWKSessionManager { (message) in
                     let action = message["action"]!
-                    subscriber.send(.newAction(action as! AppCoreAction))
+                    subscriber.send(.reciveAction(action as! WKCoreAction))
                 }
                 return AnyCancellable { sharedWKSessionManager = manager }
             }
@@ -81,7 +81,7 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
         handler(message)
     }
     
-    func send(action: WKCoreAction) {
+    func send(action: AppCoreAction) {
         let msg = ["action": action]
         session?.sendMessage(
             msg,

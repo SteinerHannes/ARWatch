@@ -14,7 +14,7 @@ import Combine
 
 public struct WKSessionClient {
     enum Action: Equatable {
-        case newAction(AppCoreAction)
+        case reciveAction(AppCoreAction)
     }
     
     private var create: () -> Effect<Action, Never>
@@ -37,7 +37,7 @@ extension WKSessionClient {
             .run { subscriber in
                 let manager = WKSessionManager { (message) in
                     let action = message["action"]!
-                    subscriber.send(.newAction(action as! AppCoreAction))
+                    subscriber.send(.reciveAction(action as! AppCoreAction))
                 }
                 return AnyCancellable { sharedWKSessionManager = manager }
             }
