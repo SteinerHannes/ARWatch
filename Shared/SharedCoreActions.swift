@@ -9,25 +9,42 @@
 import Foundation
 
 enum AppCoreAction: Equatable {
-    case reciveTest
+    case reciveTest(String)
 }
 
+extension AppCoreAction: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case reciveTest
+    }
+    
+    enum AppCoreActionError: Error {
+        case decoding(String)
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        if let value = try? values.decode(String.self, forKey: .reciveTest) {
+            self = .reciveTest(value)
+            return
+        }
+        throw AppCoreActionError.decoding("AppCoreAction konnte nicht decoded werden")
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        switch self {
+            case let .reciveTest(text):
+                try container.encode(text, forKey: .reciveTest)
+        }
+//        throw AppCoreActionError.decoding("AppCoreAction konnte nicht encoded werden")
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-enum WKCoreAction: Equatable, Codable {
+enum WKCoreAction: Equatable {
     case MMselectedCardChanged(value: Int)
 }
 
-extension WKCoreAction {
+extension WKCoreAction: Codable {
     private enum CodingKeys: String, CodingKey {
         case MMselectedCardChanged
     }
@@ -51,5 +68,6 @@ extension WKCoreAction {
             case let .MMselectedCardChanged(value: value):
                 try container.encode(value, forKey: .MMselectedCardChanged)
         }
+//        throw WKCoreActionError.decoding("WKCoreAction konnte nicht encoded werden")
     }
 }

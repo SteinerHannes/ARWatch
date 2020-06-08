@@ -87,8 +87,8 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
     
     public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         let encodedAction = message["action"]!
-//        self.decoder.decode(<#T##type: Decodable.Protocol##Decodable.Protocol#>, from: <#T##Data#>)
-//        handler!(message)
+        let action = try! self.decoder.decode(AppCoreAction.self, from: encodedAction as! Data)
+        handler!(["action" : action])
         WKInterfaceDevice.current().play(.notification)
     }
     
