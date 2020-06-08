@@ -30,14 +30,6 @@ struct MainMenuState: Equatable {
     
 }
 
-enum AppCoreAction: Equatable {
-    case reciveTest
-}
-
-enum WKCoreAction: Equatable {
-    case MMselectedCardChanged(value: Int)
-}
-
 enum MainMenuAction: Equatable {
     case onAppear
     case connectivityClient(Result<WKSessionClient.Action, Never>)

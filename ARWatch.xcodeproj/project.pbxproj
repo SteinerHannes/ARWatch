@@ -32,6 +32,9 @@
 		EFD44415248684AE0037CC73 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD44414248684AE0037CC73 /* SceneDelegate.swift */; };
 		EFD44418248684EA0037CC73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD44417248684EA0037CC73 /* ContentView.swift */; };
 		EFF24668248E365C00BC5B0B /* WKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF24667248E365C00BC5B0B /* WKSessionClient.swift */; };
+		EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */; };
+		EFF2466F248E47A300BC5B0B /* SharedCoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */; };
+		EFF24670248E47AA00BC5B0B /* SharedCoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */; };
 		EFF266C0248A472F00133785 /* WCSessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266BF248A472F00133785 /* WCSessionModel.swift */; };
 		EFF266C4248A510400133785 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EFF266C3248A510400133785 /* ComposableArchitecture */; };
 		EFF266C7248A566E00133785 /* ContentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF266C6248A566E00133785 /* ContentCore.swift */; };
@@ -113,6 +116,8 @@
 		EFD44414248684AE0037CC73 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EFD44417248684EA0037CC73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EFF24667248E365C00BC5B0B /* WKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKSessionClient.swift; sourceTree = "<group>"; };
+		EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWKSessionClient.swift; sourceTree = "<group>"; };
+		EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCoreActions.swift; sourceTree = "<group>"; };
 		EFF266BF248A472F00133785 /* WCSessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCSessionModel.swift; sourceTree = "<group>"; };
 		EFF266C6248A566E00133785 /* ContentCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCore.swift; sourceTree = "<group>"; };
 		EFF266C8248A575300133785 /* ARCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCore.swift; sourceTree = "<group>"; };
@@ -164,6 +169,7 @@
 		EFD443C5248683290037CC73 = {
 			isa = PBXGroup;
 			children = (
+				EFF2466D248E478900BC5B0B /* Shared */,
 				EFD443D0248683290037CC73 /* ARWatch */,
 				EFD443E82486836F0037CC73 /* WKARWatch */,
 				EFD443F7248683710037CC73 /* WKARWatch Extension */,
@@ -185,6 +191,7 @@
 		EFD443D0248683290037CC73 /* ARWatch */ = {
 			isa = PBXGroup;
 			children = (
+				EFF24669248E45B800BC5B0B /* Clients */,
 				EFF266C5248A563A00133785 /* App */,
 				EFC8A2F0248695D000B934CA /* ARWatch.entitlements */,
 				EFD44416248684DA0037CC73 /* Views */,
@@ -254,6 +261,22 @@
 				EFF24667248E365C00BC5B0B /* WKSessionClient.swift */,
 			);
 			path = Clients;
+			sourceTree = "<group>";
+		};
+		EFF24669248E45B800BC5B0B /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		EFF2466D248E478900BC5B0B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		EFF266BE248A405300133785 /* Views */ = {
@@ -427,7 +450,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFF266C7248A566E00133785 /* ContentCore.swift in Sources */,
+				EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */,
 				EFD443D6248683290037CC73 /* ViewController.swift in Sources */,
+				EFF2466F248E47A300BC5B0B /* SharedCoreActions.swift in Sources */,
 				EFF266C9248A575300133785 /* ARCore.swift in Sources */,
 				EFD443D2248683290037CC73 /* AppDelegate.swift in Sources */,
 				EFD44418248684EA0037CC73 /* ContentView.swift in Sources */,
@@ -441,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF4881AA248A7CB60026187C /* MainMenuCore.swift in Sources */,
+				EFF24670248E47AA00BC5B0B /* SharedCoreActions.swift in Sources */,
 				EFF266C0248A472F00133785 /* WCSessionModel.swift in Sources */,
 				EFD443FB248683710037CC73 /* HostingController.swift in Sources */,
 				EFD443F9248683710037CC73 /* ContentView.swift in Sources */,
