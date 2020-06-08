@@ -57,7 +57,7 @@ struct PagingScrollView: View {
     private let itemCount: Int
     
     /// some damping factor to reduce liveness
-    private let scrollDampingFactor: CGFloat = 0.5
+    private let scrollDampingFactor: CGFloat = 0.66
     
     /// current offset of all items
     @State var currentScrollOffset: CGFloat = 0

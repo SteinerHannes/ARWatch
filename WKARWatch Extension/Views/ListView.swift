@@ -33,8 +33,8 @@ struct ListView: View {
                         get: { $0.selectedCard },
                         send: MainMenuAction.selectedCardChanged(value:)),
                     itemCount: self.viewStore.cards.count,
-                    pageWidth: 368,
-                    tileWidth: 368 - 32,
+                    pageWidth: 200,
+                    tileWidth: 200 - 32,
                     tilePadding: 32
                 ) {
                     ForEach(self.viewStore.cards, id: \.hashValue) { card in
@@ -49,6 +49,7 @@ struct ListView: View {
         }
     }
 }
+
 struct Card: View {
     var image: String
     var name: String
@@ -63,12 +64,15 @@ struct Card: View {
                 .scaledToFit()
         }
         .frame(height: 140, alignment: .center)
-        .frame(width: 368 - 32)
+        .frame(width: 200 - 32)
+        .background(Color.gray)
+        .cornerRadius(20)
     }
 }
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
         ListView()
+            .previewDevice("Apple Watch Series 4 - 44mm")
     }
 }
