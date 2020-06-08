@@ -34,9 +34,9 @@ struct ContentView: View {
                         get: { $0.selectedCard },
                         send: MainMenuAction.selectedCardChanged(value:)),
                     itemCount: self.viewStore.cards.count,
-                    pageWidth: 200,
-                    tileWidth: 200 - 32,
-                    tilePadding: 32
+                    pageWidth: 150,
+                    tileWidth: 140,
+                    tilePadding: 10
                 ) {
                     ForEach(self.viewStore.cards, id: \.hashValue) { card in
                         Card(image: card.image, name: card.name)
@@ -68,8 +68,8 @@ struct Card: View {
                 .scaledToFit()
         }
         .frame(height: 140, alignment: .center)
-        .frame(width: 200 - 32)
-        .background(Color.init(red: 0.1, green: 0.1, blue: 0.1))
+        .frame(width: 140)
+        .background(Color.init(red: 0.15, green: 0.15, blue: 0.15))
         .cornerRadius(20)
     }
 }
