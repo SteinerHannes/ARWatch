@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF08167B24B48F2300A738B7 /* example.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF08167A24B48F2300A738B7 /* example.swift */; };
 		EF4881AA248A7CB60026187C /* MainMenuCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4881A9248A7CB60026187C /* MainMenuCore.swift */; };
 		EF4881AD248A7D370026187C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF4881AC248A7D370026187C /* ComposableArchitecture */; };
 		EF8273BE248A8AB400948B9A /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8273BD248A8AB400948B9A /* PagingScrollView.swift */; };
@@ -82,6 +83,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EF08167A24B48F2300A738B7 /* example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = example.swift; sourceTree = "<group>"; };
 		EF4881A9248A7CB60026187C /* MainMenuCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCore.swift; sourceTree = "<group>"; };
 		EF8273BD248A8AB400948B9A /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
 		EFC8A2EF248695C000B934CA /* WKARWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WKARWatch.entitlements; sourceTree = "<group>"; };
@@ -139,6 +141,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF08167924B48F0800A738B7 /* Thesis */ = {
+			isa = PBXGroup;
+			children = (
+				EF08167A24B48F2300A738B7 /* example.swift */,
+			);
+			path = Thesis;
+			sourceTree = "<group>";
+		};
 		EF4881A8248A7CA00026187C /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +175,7 @@
 		EFD443C5248683290037CC73 = {
 			isa = PBXGroup;
 			children = (
+				EF08167924B48F0800A738B7 /* Thesis */,
 				EFF2466D248E478900BC5B0B /* Shared */,
 				EFD443D0248683290037CC73 /* ARWatch */,
 				EFD443E82486836F0037CC73 /* WKARWatch */,
@@ -435,6 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF08167B24B48F2300A738B7 /* example.swift in Sources */,
 				EFF266C7248A566E00133785 /* ContentCore.swift in Sources */,
 				EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */,
 				EFD443D6248683290037CC73 /* ViewController.swift in Sources */,
