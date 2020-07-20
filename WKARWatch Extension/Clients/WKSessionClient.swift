@@ -79,6 +79,17 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
     // MARK: - WCSessionDelegate
     
     public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        switch activationState {
+            case .notActivated:
+                print("notActivated")
+            case .inactive:
+                print("inactive")
+            case .activated:
+                print("activated")
+            @unknown default:
+                print("default")
+        }
+        
         debugPrint("activationDidCompleteWith activationState:\(activationState) error:\(String(describing: error))")
     }
     
