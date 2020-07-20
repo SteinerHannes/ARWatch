@@ -26,16 +26,20 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical, showsIndicators: true) {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("\(self.viewStore.value)")
-                }.frame(width: UIScreen.main.bounds.width)
+        GeometryReader { proxy in
+            NavigationView {
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("\(self.viewStore.value)")
+                    }.frame(width: UIScreen.main.bounds.width)
+                }
+                .navigationBarTitle("ARWatch", displayMode: .large)
+                .onAppear{
+                    self.viewStore.send(.onAppear)
+                }
             }
-            .navigationBarTitle("ARWatch", displayMode: .large)
-            .onAppear{
-                self.viewStore.send(.onAppear)
-            }
+            .frame(width: proxy.size.width/3, height: proxy.size.width/3, alignment: .top)
+            .offset(x: proxy.size.width/3, y: -20)
         }
     }
 }
