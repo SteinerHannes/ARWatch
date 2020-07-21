@@ -84,7 +84,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
-        
+        print(error.localizedDescription)
+    }
+    
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        switch camera.trackingState {
+            case .notAvailable:
+                print("notAvailable")
+                return
+            case .limited(let reason):
+                switch reason {
+                    case .initializing:
+                    print("initializing")
+                    case .excessiveMotion:
+                    print("excessiveMotion")
+                    case .insufficientFeatures:
+                    print("insufficientFeatures")
+                    case .relocalizing:
+                    print("relocalizing")
+                    @unknown default:
+                    print("default")
+            }
+            case .normal:
+                print("normal")
+                return
+        }
     }
     
     func sessionWasInterrupted(_ session: ARSession) {

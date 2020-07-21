@@ -27,7 +27,7 @@ public struct ContentEnvironment {
     var mainQueue: AnySchedulerOf<DispatchQueue> = DispatchQueue.main.eraseToAnyScheduler()
 }
 
-let contentReducer: Reducer<ContentState, ContentAction,ContentEnvironment> =
+let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironment> =
 .combine(
     Reducer { state, action, environment in
         switch action {
