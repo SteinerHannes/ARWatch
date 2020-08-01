@@ -10,11 +10,13 @@ import Foundation
 
 enum AppCoreAction: Equatable {
     case reciveTest(String)
+    case buttonTapped
 }
 
 extension AppCoreAction: Codable {
     private enum CodingKeys: String, CodingKey {
         case reciveTest
+        case buttonTapped
     }
     
     enum AppCoreActionError: Error {
@@ -27,6 +29,11 @@ extension AppCoreAction: Codable {
             self = .reciveTest(value)
             return
         }
+        if (try? values.decode(String.self, forKey: .buttonTapped)) != nil {
+            self = .buttonTapped
+            return
+        }
+        
         throw AppCoreActionError.decoding("AppCoreAction konnte nicht decoded werden")
     }
     
@@ -35,6 +42,9 @@ extension AppCoreAction: Codable {
         switch self {
             case let .reciveTest(text):
                 try container.encode(text, forKey: .reciveTest)
+            case .buttonTapped:
+                try container.encode("\(self)", forKey: .buttonTapped)
+                //try container.
         }
 //        throw AppCoreActionError.decoding("AppCoreAction konnte nicht encoded werden")
     }

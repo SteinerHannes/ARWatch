@@ -25,21 +25,45 @@ struct ContentView: View {
         self.viewStore = ViewStore(self.store)
     }
     
+    var name: String {
+        if self.viewStore.state.value == 0 {
+            return "Karten"
+        }
+        if self.viewStore.state.value == 1 {
+            return "Audioplayer"
+        }
+        if self.viewStore.state.value == 2 {
+            return "Einstellungen"
+        }
+        return "Fehler"
+    }
+    
     var body: some View {
         GeometryReader { proxy in
             NavigationView {
-                ScrollView(.vertical, showsIndicators: true) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("\(self.viewStore.value)")
-                    }.frame(width: UIScreen.main.bounds.width)
-                }
-                .navigationBarTitle("ARWatch", displayMode: .large)
-                .onAppear{
-                    self.viewStore.send(.onAppear)
+                VStack(alignment: .center, spacing: 20) {
+                    ScrollView(.vertical, showsIndicators: true) {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text(self.name)
+                        }.frame(width: UIScreen.main.bounds.width)
+                    }
+                    .navigationBarTitle("ARWatch", displayMode: .large)
+                    .onAppear{
+                        self.viewStore.send(.onAppear)
+                    }
+                    Button(action: {
+                        self.viewStore.send(.buttonTapped)
+                    }) {
+                        Text("Hello World").font(.largeTitle)
+                    }
+                    Spacer()
                 }
             }
             .frame(width: proxy.size.width/3, height: proxy.size.width/3, alignment: .top)
             .offset(x: proxy.size.width/3, y: -20)
+            .onAppear {
+                self.viewStore.send(.onAppear)
+            }
         }
     }
 }

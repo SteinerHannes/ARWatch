@@ -39,13 +39,14 @@ extension AppWKSessionClient {
                     let action = message["action"]!
                     subscriber.send(.reciveAction(action as! WKCoreAction))
                 }
-                return AnyCancellable { sharedWKSessionManager = manager }
+                sharedWKSessionManager = manager
+                return AnyCancellable { }
             }
         },
         send: { action in
             .fireAndForget {
                 guard let manager = sharedWKSessionManager else {
-                    debugPrint("WKSessionManager noch nicht initialisiert")
+                    debugPrint("AppWKSessionManager noch nicht initialisiert")
                     return
                 }
                 manager.send(action: action)
@@ -100,7 +101,9 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
     }
     
     func send(action: AppCoreAction) {
-        let msg = ["action": action]
+        let encodedAction = try! self.encoder.encode(action)
+        print(encodedAction)
+        let msg = ["action": encodedAction]
         session?.sendMessage(
             msg,
             replyHandler: nil, //(([String: Any]) -> Void)?

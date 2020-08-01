@@ -20,6 +20,7 @@ enum ContentAction: Equatable {
     case setNavigationARView(isPresented: Bool)
     case arAction(ARAction)
     case reciveAction(WKCoreAction)
+    case buttonTapped
 }
 
 public struct ContentEnvironment {
@@ -41,8 +42,8 @@ let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironment> =
                 return .none
             case .arAction:
                 return .none
-            case let .sessionClient(.success(reciveaction)):
-                switch reciveaction {
+            case let .sessionClient(.success(recivedAction)):
+                switch recivedAction {
                     case let .reciveAction(action):
                         return Effect(value: .reciveAction(action))
                 }
@@ -53,6 +54,10 @@ let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironment> =
                     state.value = value
                     return .none
                 }
+            case .buttonTapped:
+                return environment.sessionClient.send(
+                    action: AppCoreAction.buttonTapped
+                ).fireAndForget()
         }
     }.debug()
 )

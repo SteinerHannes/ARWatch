@@ -27,6 +27,7 @@ struct MainMenuState: Equatable {
         CardStruct.init(name: "Audio Player", image: "headphones"),
         CardStruct.init(name: "Einstellungen", image: "gear" )
     ]
+    var showText: Bool = false
 }
 
 enum MainMenuAction: Equatable {
@@ -34,6 +35,7 @@ enum MainMenuAction: Equatable {
     case connectivityClient(Result<WKSessionClient.Action, Never>)
     case selectedCardChanged(value: Int)
     case digitalCrownChanged(value: Double)
+    case reciveAction(AppCoreAction)
 }
 
 public struct MainMenuEnvironment {
@@ -57,11 +59,19 @@ let mainMenuReducer = Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment
             state.selectedCard = Int(value)
             return .none
         case let .connectivityClient(.success(recivedAction)):
-//            switch recivedAction {
-//                case .reciveAction(AppCoreAction):
-//            }
-            // MARK: TODO
-            return .none
+            switch recivedAction {
+                case let .reciveAction(action):
+                    return Effect(value: .reciveAction(action))
+            }
+        case let .reciveAction(action):
+            switch action {
+                case let .reciveTest(text):
+                    print(text)
+                    return .none
+                case .buttonTapped:
+                    state.showText.toggle()
+                    return .none
+        }
     }
 }.debug()
 
