@@ -30,6 +30,8 @@
 		EFD44406248683720037CC73 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD44405248683720037CC73 /* Preview Assets.xcassets */; };
 		EFD4440B248683720037CC73 /* WKARWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EFD443E72486836F0037CC73 /* WKARWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EFD44418248684EA0037CC73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD44417248684EA0037CC73 /* ContentView.swift */; };
+		EFEA827E24DF1AFA00E7C162 /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
+		EFEA827F24DF1AFA00E7C162 /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
 		EFF24668248E365C00BC5B0B /* WKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF24667248E365C00BC5B0B /* WKSessionClient.swift */; };
 		EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */; };
 		EFF2466F248E47A300BC5B0B /* SharedCoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */; };
@@ -113,6 +115,7 @@
 		EFD44407248683720037CC73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFD44408248683720037CC73 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		EFD44417248684EA0037CC73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravel.swift; sourceTree = "<group>"; };
 		EFF24667248E365C00BC5B0B /* WKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKSessionClient.swift; sourceTree = "<group>"; };
 		EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWKSessionClient.swift; sourceTree = "<group>"; };
 		EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCoreActions.swift; sourceTree = "<group>"; };
@@ -281,6 +284,7 @@
 			children = (
 				EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */,
 				EFF24671248E80D200BC5B0B /* ColorExtension.swift */,
+				EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -447,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF08167B24B48F2300A738B7 /* example.swift in Sources */,
+				EFEA827E24DF1AFA00E7C162 /* TimeTravel.swift in Sources */,
 				EFF266C7248A566E00133785 /* ContentCore.swift in Sources */,
 				EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */,
 				EFD443D6248683290037CC73 /* ViewController.swift in Sources */,
@@ -469,6 +474,7 @@
 				EFD443F9248683710037CC73 /* ContentView.swift in Sources */,
 				EFD443FF248683710037CC73 /* NotificationController.swift in Sources */,
 				EFD443FD248683710037CC73 /* ExtensionDelegate.swift in Sources */,
+				EFEA827F24DF1AFA00E7C162 /* TimeTravel.swift in Sources */,
 				EF8273BE248A8AB400948B9A /* PagingScrollView.swift in Sources */,
 				EFD44401248683710037CC73 /* NotificationView.swift in Sources */,
 				EFF24668248E365C00BC5B0B /* WKSessionClient.swift in Sources */,
