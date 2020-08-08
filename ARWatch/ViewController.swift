@@ -63,7 +63,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func createHostingController(for node: SCNNode) {
-        let arVC = UIHostingController(rootView: ContentView())
+        
+        
+        
+        let arVC = UIHostingController(rootView:
+            TimeTravelView(
+                initialState: ContentState(),
+                reducer: contentReducer,
+                environment: ContentEnvironment()
+            ) { store in
+                ContentView(store)
+            }
+        )
         DispatchQueue.main.async {
             arVC.willMove(toParent: self)
             self.addChild(arVC)
@@ -73,7 +84,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    func show(hostingVC: UIHostingController<ContentView>, on node: SCNNode) {
+    func show(hostingVC: UIHostingController<TimeTravelView<ContentState, ContentAction, ContentEnvironment, ContentView>>, on node: SCNNode) {
         let material = SCNMaterial()
         hostingVC.view.isOpaque = false
         material.diffuse.contents = hostingVC.view
