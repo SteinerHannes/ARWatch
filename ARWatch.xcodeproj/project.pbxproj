@@ -76,33 +76,12 @@
 			remoteGlobalIDString = EF51B29624E278FF00EC9149;
 			remoteInfo = "WKARWatchDebug Extension";
 		};
-		EFD877EA24E27DE3006AAB55 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EFD443C6248683290037CC73 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EFD443E62486836F0037CC73;
-			remoteInfo = WKARWatch;
-		};
-		EFD877EB24E27DE3006AAB55 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EFD443C6248683290037CC73 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EFD443F2248683710037CC73;
-			remoteInfo = "WKARWatch Extension";
-		};
 		EFD877EE24E27F1F006AAB55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EFD443C6248683290037CC73 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = EF51B28A24E278FD00EC9149;
 			remoteInfo = WKARWatchDebug;
-		};
-		EFD877F224E27FFC006AAB55 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EFD443C6248683290037CC73 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EFD443E62486836F0037CC73;
-			remoteInfo = WKARWatch;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -536,7 +515,6 @@
 			);
 			dependencies = (
 				EFD877EF24E27F1F006AAB55 /* PBXTargetDependency */,
-				EFD877F324E27FFC006AAB55 /* PBXTargetDependency */,
 			);
 			name = ARWatchDebug;
 			packageProductDependencies = (
@@ -807,11 +785,6 @@
 			isa = PBXTargetDependency;
 			target = EF51B28A24E278FD00EC9149 /* WKARWatchDebug */;
 			targetProxy = EFD877EE24E27F1F006AAB55 /* PBXContainerItemProxy */;
-		};
-		EFD877F324E27FFC006AAB55 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EFD443E62486836F0037CC73 /* WKARWatch */;
-			targetProxy = EFD877F224E27FFC006AAB55 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
