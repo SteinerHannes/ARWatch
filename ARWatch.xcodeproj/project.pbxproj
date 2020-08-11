@@ -11,6 +11,21 @@
 		EF2F617924C5D72B004CA1D1 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2F617824C5D72B004CA1D1 /* TestView.swift */; };
 		EF4881AA248A7CB60026187C /* MainMenuCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4881A9248A7CB60026187C /* MainMenuCore.swift */; };
 		EF4881AD248A7D370026187C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF4881AC248A7D370026187C /* ComposableArchitecture */; };
+		EF51B28F24E278FD00EC9149 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF51B28D24E278FD00EC9149 /* Interface.storyboard */; };
+		EF51B29124E278FF00EC9149 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF51B29024E278FF00EC9149 /* Assets.xcassets */; };
+		EF51B29824E278FF00EC9149 /* WKARWatchDebug Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EF51B29724E278FF00EC9149 /* WKARWatchDebug Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EF51B29D24E278FF00EC9149 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51B29C24E278FF00EC9149 /* ContentView.swift */; };
+		EF51B29F24E278FF00EC9149 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51B29E24E278FF00EC9149 /* HostingController.swift */; };
+		EF51B2A124E278FF00EC9149 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51B2A024E278FF00EC9149 /* ExtensionDelegate.swift */; };
+		EF51B2A324E278FF00EC9149 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51B2A224E278FF00EC9149 /* NotificationController.swift */; };
+		EF51B2A524E278FF00EC9149 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51B2A424E278FF00EC9149 /* NotificationView.swift */; };
+		EF51B2A724E2790000EC9149 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF51B2A624E2790000EC9149 /* Assets.xcassets */; };
+		EF51B2AA24E2790000EC9149 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF51B2A924E2790000EC9149 /* Preview Assets.xcassets */; };
+		EF51B2AF24E2790000EC9149 /* WKARWatchDebug.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EF51B28B24E278FD00EC9149 /* WKARWatchDebug.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EF51B2BA24E2799200EC9149 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF51B2B924E2799200EC9149 /* ComposableArchitecture */; };
+		EF51B2BB24E279C800EC9149 /* SharedCoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */; };
+		EF51B2BC24E279D000EC9149 /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
+		EF74A29124E27BA700D4F7EE /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF74A29024E27BA700D4F7EE /* ComposableArchitecture */; };
 		EF8273BE248A8AB400948B9A /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8273BD248A8AB400948B9A /* PagingScrollView.swift */; };
 		EF9C35F624DF2F0000DC567D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9C35F524DF2F0000DC567D /* AppDelegate.swift */; };
 		EF9C35F824DF2F0000DC567D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9C35F724DF2F0000DC567D /* SceneDelegate.swift */; };
@@ -23,7 +38,6 @@
 		EF9C360C24DF30CC00DC567D /* AppWKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */; };
 		EF9C360D24DF31BF00DC567D /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
 		EF9C360E24DF320400DC567D /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
-		EF9C361024DF323F00DC567D /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF9C360F24DF323F00DC567D /* ComposableArchitecture */; };
 		EF9C361124DF324B00DC567D /* WKARWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EFD443E72486836F0037CC73 /* WKARWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EFD443D2248683290037CC73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD443D1248683290037CC73 /* AppDelegate.swift */; };
 		EFD443D4248683290037CC73 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD443D3248683290037CC73 /* art.scnassets */; };
@@ -55,12 +69,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EF9C361224DF324B00DC567D /* PBXContainerItemProxy */ = {
+		EF51B29924E278FF00EC9149 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EFD443C6248683290037CC73 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EFD443E62486836F0037CC73;
-			remoteInfo = WKARWatch;
+			remoteGlobalIDString = EF51B29624E278FF00EC9149;
+			remoteInfo = "WKARWatchDebug Extension";
+		};
+		EF74A29224E27BDA00D4F7EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFD443C6248683290037CC73 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF51B28A24E278FD00EC9149;
+			remoteInfo = WKARWatchDebug;
 		};
 		EFD443F5248683710037CC73 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -79,12 +100,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		EF51B2B324E2790000EC9149 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EF51B29824E278FF00EC9149 /* WKARWatchDebug Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EF9C361424DF324B00DC567D /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
+				EF51B2AF24E2790000EC9149 /* WKARWatchDebug.app in Embed Watch Content */,
 				EF9C361124DF324B00DC567D /* WKARWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
@@ -118,6 +151,22 @@
 		EF08167A24B48F2300A738B7 /* example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = example.swift; sourceTree = "<group>"; };
 		EF2F617824C5D72B004CA1D1 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		EF4881A9248A7CB60026187C /* MainMenuCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCore.swift; sourceTree = "<group>"; };
+		EF51B28B24E278FD00EC9149 /* WKARWatchDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKARWatchDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF51B28E24E278FD00EC9149 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		EF51B29024E278FF00EC9149 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF51B29224E278FF00EC9149 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF51B29724E278FF00EC9149 /* WKARWatchDebug Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WKARWatchDebug Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF51B29C24E278FF00EC9149 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EF51B29E24E278FF00EC9149 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		EF51B2A024E278FF00EC9149 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		EF51B2A224E278FF00EC9149 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		EF51B2A424E278FF00EC9149 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		EF51B2A624E2790000EC9149 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF51B2A924E2790000EC9149 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EF51B2AB24E2790000EC9149 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF51B2AC24E2790000EC9149 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		EF51B2B724E2795400EC9149 /* WKARWatchDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WKARWatchDebug.entitlements; sourceTree = "<group>"; };
+		EF51B2B824E2795C00EC9149 /* WKARWatchDebug Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WKARWatchDebug Extension.entitlements"; sourceTree = "<group>"; };
 		EF8273BD248A8AB400948B9A /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
 		EF9C35F324DF2F0000DC567D /* ARWatchDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARWatchDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9C35F524DF2F0000DC567D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,11 +213,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EF51B29424E278FF00EC9149 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF51B2BA24E2799200EC9149 /* ComposableArchitecture in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EF9C35F024DF2F0000DC567D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF9C361024DF323F00DC567D /* ComposableArchitecture in Frameworks */,
+				EF74A29124E27BA700D4F7EE /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +271,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EF51B28C24E278FD00EC9149 /* WKARWatchDebug */ = {
+			isa = PBXGroup;
+			children = (
+				EF51B2B724E2795400EC9149 /* WKARWatchDebug.entitlements */,
+				EF51B28D24E278FD00EC9149 /* Interface.storyboard */,
+				EF51B29024E278FF00EC9149 /* Assets.xcassets */,
+				EF51B29224E278FF00EC9149 /* Info.plist */,
+			);
+			path = WKARWatchDebug;
+			sourceTree = "<group>";
+		};
+		EF51B29B24E278FF00EC9149 /* WKARWatchDebug Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EF51B2B824E2795C00EC9149 /* WKARWatchDebug Extension.entitlements */,
+				EF51B29C24E278FF00EC9149 /* ContentView.swift */,
+				EF51B29E24E278FF00EC9149 /* HostingController.swift */,
+				EF51B2A024E278FF00EC9149 /* ExtensionDelegate.swift */,
+				EF51B2A224E278FF00EC9149 /* NotificationController.swift */,
+				EF51B2A424E278FF00EC9149 /* NotificationView.swift */,
+				EF51B2A624E2790000EC9149 /* Assets.xcassets */,
+				EF51B2AB24E2790000EC9149 /* Info.plist */,
+				EF51B2AC24E2790000EC9149 /* PushNotificationPayload.apns */,
+				EF51B2A824E2790000EC9149 /* Preview Content */,
+			);
+			path = "WKARWatchDebug Extension";
+			sourceTree = "<group>";
+		};
+		EF51B2A824E2790000EC9149 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EF51B2A924E2790000EC9149 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		EF8273BC248A8A8F00948B9A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +347,8 @@
 				EFD443E82486836F0037CC73 /* WKARWatch */,
 				EFD443F7248683710037CC73 /* WKARWatch Extension */,
 				EF9C35F424DF2F0000DC567D /* ARWatchDebug */,
+				EF51B28C24E278FD00EC9149 /* WKARWatchDebug */,
+				EF51B29B24E278FF00EC9149 /* WKARWatchDebug Extension */,
 				EFD443CF248683290037CC73 /* Products */,
 				EF4881AB248A7D370026187C /* Frameworks */,
 			);
@@ -266,6 +361,8 @@
 				EFD443E72486836F0037CC73 /* WKARWatch.app */,
 				EFD443F3248683710037CC73 /* WKARWatch Extension.appex */,
 				EF9C35F324DF2F0000DC567D /* ARWatchDebug.app */,
+				EF51B28B24E278FD00EC9149 /* WKARWatchDebug.app */,
+				EF51B29724E278FF00EC9149 /* WKARWatchDebug Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -382,6 +479,43 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EF51B28A24E278FD00EC9149 /* WKARWatchDebug */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF51B2B424E2790000EC9149 /* Build configuration list for PBXNativeTarget "WKARWatchDebug" */;
+			buildPhases = (
+				EF51B28924E278FD00EC9149 /* Resources */,
+				EF51B2B324E2790000EC9149 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF51B29A24E278FF00EC9149 /* PBXTargetDependency */,
+			);
+			name = WKARWatchDebug;
+			productName = WKARWatchDebug;
+			productReference = EF51B28B24E278FD00EC9149 /* WKARWatchDebug.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		EF51B29624E278FF00EC9149 /* WKARWatchDebug Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF51B2B024E2790000EC9149 /* Build configuration list for PBXNativeTarget "WKARWatchDebug Extension" */;
+			buildPhases = (
+				EF51B29324E278FF00EC9149 /* Sources */,
+				EF51B29424E278FF00EC9149 /* Frameworks */,
+				EF51B29524E278FF00EC9149 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WKARWatchDebug Extension";
+			packageProductDependencies = (
+				EF51B2B924E2799200EC9149 /* ComposableArchitecture */,
+			);
+			productName = "WKARWatchDebug Extension";
+			productReference = EF51B29724E278FF00EC9149 /* WKARWatchDebug Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		EF9C35F224DF2F0000DC567D /* ARWatchDebug */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EF9C360624DF2F0300DC567D /* Build configuration list for PBXNativeTarget "ARWatchDebug" */;
@@ -394,11 +528,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				EF9C361324DF324B00DC567D /* PBXTargetDependency */,
+				EF74A29324E27BDA00D4F7EE /* PBXTargetDependency */,
 			);
 			name = ARWatchDebug;
 			packageProductDependencies = (
-				EF9C360F24DF323F00DC567D /* ComposableArchitecture */,
+				EF74A29024E27BA700D4F7EE /* ComposableArchitecture */,
 			);
 			productName = ARWatchDebug;
 			productReference = EF9C35F324DF2F0000DC567D /* ARWatchDebug.app */;
@@ -473,6 +607,12 @@
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Hannes Steiner";
 				TargetAttributes = {
+					EF51B28A24E278FD00EC9149 = {
+						CreatedOnToolsVersion = 11.6;
+					};
+					EF51B29624E278FF00EC9149 = {
+						CreatedOnToolsVersion = 11.6;
+					};
 					EF9C35F224DF2F0000DC567D = {
 						CreatedOnToolsVersion = 11.6;
 					};
@@ -507,11 +647,31 @@
 				EFD443E62486836F0037CC73 /* WKARWatch */,
 				EFD443F2248683710037CC73 /* WKARWatch Extension */,
 				EF9C35F224DF2F0000DC567D /* ARWatchDebug */,
+				EF51B28A24E278FD00EC9149 /* WKARWatchDebug */,
+				EF51B29624E278FF00EC9149 /* WKARWatchDebug Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EF51B28924E278FD00EC9149 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF51B29124E278FF00EC9149 /* Assets.xcassets in Resources */,
+				EF51B28F24E278FD00EC9149 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF51B29524E278FF00EC9149 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF51B2AA24E2790000EC9149 /* Preview Assets.xcassets in Resources */,
+				EF51B2A724E2790000EC9149 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EF9C35F124DF2F0000DC567D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -554,6 +714,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EF51B29324E278FF00EC9149 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF51B29F24E278FF00EC9149 /* HostingController.swift in Sources */,
+				EF51B29D24E278FF00EC9149 /* ContentView.swift in Sources */,
+				EF51B2A324E278FF00EC9149 /* NotificationController.swift in Sources */,
+				EF51B2BC24E279D000EC9149 /* TimeTravel.swift in Sources */,
+				EF51B2BB24E279C800EC9149 /* SharedCoreActions.swift in Sources */,
+				EF51B2A124E278FF00EC9149 /* ExtensionDelegate.swift in Sources */,
+				EF51B2A524E278FF00EC9149 /* NotificationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EF9C35EF24DF2F0000DC567D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -606,10 +780,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EF9C361324DF324B00DC567D /* PBXTargetDependency */ = {
+		EF51B29A24E278FF00EC9149 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EFD443E62486836F0037CC73 /* WKARWatch */;
-			targetProxy = EF9C361224DF324B00DC567D /* PBXContainerItemProxy */;
+			target = EF51B29624E278FF00EC9149 /* WKARWatchDebug Extension */;
+			targetProxy = EF51B29924E278FF00EC9149 /* PBXContainerItemProxy */;
+		};
+		EF74A29324E27BDA00D4F7EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF51B28A24E278FD00EC9149 /* WKARWatchDebug */;
+			targetProxy = EF74A29224E27BDA00D4F7EE /* PBXContainerItemProxy */;
 		};
 		EFD443F6248683710037CC73 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -624,6 +803,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		EF51B28D24E278FD00EC9149 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF51B28E24E278FD00EC9149 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		EF9C360024DF2F0300DC567D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -659,6 +846,96 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EF51B2B124E2790000EC9149 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "WKARWatchDebug Extension/WKARWatchDebug Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"WKARWatchDebug Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 3M6T8T58SL;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "WKARWatchDebug Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hannessteiner.ARWatchDebug.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		EF51B2B224E2790000EC9149 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "WKARWatchDebug Extension/WKARWatchDebug Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"WKARWatchDebug Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 3M6T8T58SL;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "WKARWatchDebug Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.hannessteiner.ARWatchDebug.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
+		EF51B2B524E2790000EC9149 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WKARWatchDebug/WKARWatchDebug.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3M6T8T58SL;
+				IBSC_MODULE = WKARWatchDebug_Extension;
+				INFOPLIST_FILE = WKARWatchDebug/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hannessteiner.ARWatchDebug.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Debug;
+		};
+		EF51B2B624E2790000EC9149 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WKARWatchDebug/WKARWatchDebug.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3M6T8T58SL;
+				IBSC_MODULE = WKARWatchDebug_Extension;
+				INFOPLIST_FILE = WKARWatchDebug/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hannessteiner.ARWatchDebug.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.2;
+			};
+			name = Release;
+		};
 		EF9C360424DF2F0300DC567D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -950,6 +1227,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EF51B2B024E2790000EC9149 /* Build configuration list for PBXNativeTarget "WKARWatchDebug Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF51B2B124E2790000EC9149 /* Debug */,
+				EF51B2B224E2790000EC9149 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF51B2B424E2790000EC9149 /* Build configuration list for PBXNativeTarget "WKARWatchDebug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF51B2B524E2790000EC9149 /* Debug */,
+				EF51B2B624E2790000EC9149 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EF9C360624DF2F0300DC567D /* Build configuration list for PBXNativeTarget "ARWatchDebug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1014,7 +1309,12 @@
 			package = EFF266C2248A510400133785 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
-		EF9C360F24DF323F00DC567D /* ComposableArchitecture */ = {
+		EF51B2B924E2799200EC9149 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFF266C2248A510400133785 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		EF74A29024E27BA700D4F7EE /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EFF266C2248A510400133785 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
