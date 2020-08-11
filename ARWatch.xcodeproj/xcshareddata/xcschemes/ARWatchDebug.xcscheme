@@ -20,6 +20,20 @@
                ReferencedContainer = "container:ARWatch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EF51B28A24E278FD00EC9149"
+               BuildableName = "WKARWatchDebug.app"
+               BlueprintName = "WKARWatchDebug"
+               ReferencedContainer = "container:ARWatch.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

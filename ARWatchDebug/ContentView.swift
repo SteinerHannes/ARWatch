@@ -75,6 +75,7 @@ struct ContentView_Previews: PreviewProvider {
 
 struct ContentState: Equatable {
     var value: Int = 0
+    var name: String = "Karten"
 }
 
 enum ContentAction: Equatable {
@@ -112,6 +113,16 @@ let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironment> =
                         case let .MMselectedCardChanged(value: value):
                             print("GET MMselectedCardChanged: ", value)
                             state.value = value
+                            switch value {
+                                case 0:
+                                    state.name = "Karten"
+                                case 1:
+                                    state.name = "Audio Player"
+                                case 2:
+                                    state.name = "Einstellungen"
+                                default:
+                                    state.name = "Fehler"
+                            }
                             return .none
                 }
                 case .buttonTapped:

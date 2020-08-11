@@ -40,6 +40,7 @@ enum MainMenuAction: Equatable {
 
 public struct MainMenuEnvironment {
     var connectivityClient: WKSessionClient = .live
+    var mainQueue = DispatchQueue.main.eraseToAnyScheduler()
 }
 
 let mainMenuReducer = Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment> { state, action, environment in
@@ -47,6 +48,7 @@ let mainMenuReducer = Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment
         case .onAppear:
             print("onAppear")
             return environment.connectivityClient.start()
+                .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(MainMenuAction.connectivityClient)
         case let .selectedCardChanged(value: value):
