@@ -293,7 +293,6 @@
 				EFD877FD24E282E0006AAB55 /* Clients */,
 				EFD877F824E28233006AAB55 /* App */,
 				EF51B2B824E2795C00EC9149 /* WKARWatchDebug Extension.entitlements */,
-				EF51B29C24E278FF00EC9149 /* ContentView.swift */,
 				EF51B29E24E278FF00EC9149 /* HostingController.swift */,
 				EF51B2A024E278FF00EC9149 /* ExtensionDelegate.swift */,
 				EF51B2A224E278FF00EC9149 /* NotificationController.swift */,
@@ -459,6 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				EFD8780124E28323006AAB55 /* Components */,
+				EF51B29C24E278FF00EC9149 /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
