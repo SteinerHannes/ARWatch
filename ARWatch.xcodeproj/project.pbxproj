@@ -25,7 +25,6 @@
 		EF51B2BA24E2799200EC9149 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF51B2B924E2799200EC9149 /* ComposableArchitecture */; };
 		EF51B2BB24E279C800EC9149 /* SharedCoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */; };
 		EF51B2BC24E279D000EC9149 /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
-		EF74A29124E27BA700D4F7EE /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF74A29024E27BA700D4F7EE /* ComposableArchitecture */; };
 		EF8273BE248A8AB400948B9A /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8273BD248A8AB400948B9A /* PagingScrollView.swift */; };
 		EF9C35F624DF2F0000DC567D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9C35F524DF2F0000DC567D /* AppDelegate.swift */; };
 		EF9C35F824DF2F0000DC567D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9C35F724DF2F0000DC567D /* SceneDelegate.swift */; };
@@ -57,6 +56,7 @@
 		EFD44406248683720037CC73 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD44405248683720037CC73 /* Preview Assets.xcassets */; };
 		EFD4440B248683720037CC73 /* WKARWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EFD443E72486836F0037CC73 /* WKARWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EFD44418248684EA0037CC73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD44417248684EA0037CC73 /* ContentView.swift */; };
+		EFD877ED24E27F0D006AAB55 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EFD877EC24E27F0D006AAB55 /* ComposableArchitecture */; };
 		EFEA827E24DF1AFA00E7C162 /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
 		EFF24668248E365C00BC5B0B /* WKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF24667248E365C00BC5B0B /* WKSessionClient.swift */; };
 		EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */; };
@@ -76,21 +76,28 @@
 			remoteGlobalIDString = EF51B29624E278FF00EC9149;
 			remoteInfo = "WKARWatchDebug Extension";
 		};
-		EF74A29224E27BDA00D4F7EE /* PBXContainerItemProxy */ = {
+		EFD877EA24E27DE3006AAB55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EFD443C6248683290037CC73 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = EF51B28A24E278FD00EC9149;
-			remoteInfo = WKARWatchDebug;
+			remoteGlobalIDString = EFD443E62486836F0037CC73;
+			remoteInfo = WKARWatch;
 		};
-		EFD443F5248683710037CC73 /* PBXContainerItemProxy */ = {
+		EFD877EB24E27DE3006AAB55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EFD443C6248683290037CC73 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = EFD443F2248683710037CC73;
 			remoteInfo = "WKARWatch Extension";
 		};
-		EFD44409248683720037CC73 /* PBXContainerItemProxy */ = {
+		EFD877EE24E27F1F006AAB55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFD443C6248683290037CC73 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF51B28A24E278FD00EC9149;
+			remoteInfo = WKARWatchDebug;
+		};
+		EFD877F224E27FFC006AAB55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EFD443C6248683290037CC73 /* Project object */;
 			proxyType = 1;
@@ -225,7 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF74A29124E27BA700D4F7EE /* ComposableArchitecture in Frameworks */,
+				EFD877ED24E27F0D006AAB55 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,11 +535,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				EF74A29324E27BDA00D4F7EE /* PBXTargetDependency */,
+				EFD877EF24E27F1F006AAB55 /* PBXTargetDependency */,
+				EFD877F324E27FFC006AAB55 /* PBXTargetDependency */,
 			);
 			name = ARWatchDebug;
 			packageProductDependencies = (
-				EF74A29024E27BA700D4F7EE /* ComposableArchitecture */,
+				EFD877EC24E27F0D006AAB55 /* ComposableArchitecture */,
 			);
 			productName = ARWatchDebug;
 			productReference = EF9C35F324DF2F0000DC567D /* ARWatchDebug.app */;
@@ -785,20 +793,25 @@
 			target = EF51B29624E278FF00EC9149 /* WKARWatchDebug Extension */;
 			targetProxy = EF51B29924E278FF00EC9149 /* PBXContainerItemProxy */;
 		};
-		EF74A29324E27BDA00D4F7EE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EF51B28A24E278FD00EC9149 /* WKARWatchDebug */;
-			targetProxy = EF74A29224E27BDA00D4F7EE /* PBXContainerItemProxy */;
-		};
 		EFD443F6248683710037CC73 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EFD443F2248683710037CC73 /* WKARWatch Extension */;
-			targetProxy = EFD443F5248683710037CC73 /* PBXContainerItemProxy */;
+			targetProxy = EFD877EB24E27DE3006AAB55 /* PBXContainerItemProxy */;
 		};
 		EFD4440A248683720037CC73 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EFD443E62486836F0037CC73 /* WKARWatch */;
-			targetProxy = EFD44409248683720037CC73 /* PBXContainerItemProxy */;
+			targetProxy = EFD877EA24E27DE3006AAB55 /* PBXContainerItemProxy */;
+		};
+		EFD877EF24E27F1F006AAB55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF51B28A24E278FD00EC9149 /* WKARWatchDebug */;
+			targetProxy = EFD877EE24E27F1F006AAB55 /* PBXContainerItemProxy */;
+		};
+		EFD877F324E27FFC006AAB55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EFD443E62486836F0037CC73 /* WKARWatch */;
+			targetProxy = EFD877F224E27FFC006AAB55 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1103,6 +1116,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 3M6T8T58SL;
 				INFOPLIST_FILE = ARWatch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1123,6 +1137,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 3M6T8T58SL;
 				INFOPLIST_FILE = ARWatch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1314,7 +1329,7 @@
 			package = EFF266C2248A510400133785 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
-		EF74A29024E27BA700D4F7EE /* ComposableArchitecture */ = {
+		EFD877EC24E27F0D006AAB55 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EFF266C2248A510400133785 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
