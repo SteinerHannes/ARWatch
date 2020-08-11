@@ -37,7 +37,6 @@
 		EF9C360C24DF30CC00DC567D /* AppWKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */; };
 		EF9C360D24DF31BF00DC567D /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
 		EF9C360E24DF320400DC567D /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
-		EF9C361124DF324B00DC567D /* WKARWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EFD443E72486836F0037CC73 /* WKARWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EFD443D2248683290037CC73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD443D1248683290037CC73 /* AppDelegate.swift */; };
 		EFD443D4248683290037CC73 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD443D3248683290037CC73 /* art.scnassets */; };
 		EFD443D6248683290037CC73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD443D5248683290037CC73 /* ViewController.swift */; };
@@ -57,6 +56,9 @@
 		EFD4440B248683720037CC73 /* WKARWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EFD443E72486836F0037CC73 /* WKARWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EFD44418248684EA0037CC73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD44417248684EA0037CC73 /* ContentView.swift */; };
 		EFD877ED24E27F0D006AAB55 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EFD877EC24E27F0D006AAB55 /* ComposableArchitecture */; };
+		EFD877FA24E2829B006AAB55 /* MainMenuCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD877F924E2829B006AAB55 /* MainMenuCore.swift */; };
+		EFD877FF24E2830C006AAB55 /* WKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD877FE24E2830C006AAB55 /* WKSessionClient.swift */; };
+		EFD8780324E2834D006AAB55 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD8780224E2834D006AAB55 /* PagingScrollView.swift */; };
 		EFEA827E24DF1AFA00E7C162 /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
 		EFF24668248E365C00BC5B0B /* WKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF24667248E365C00BC5B0B /* WKSessionClient.swift */; };
 		EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */; };
@@ -83,6 +85,20 @@
 			remoteGlobalIDString = EF51B28A24E278FD00EC9149;
 			remoteInfo = WKARWatchDebug;
 		};
+		EFD877F624E28076006AAB55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFD443C6248683290037CC73 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFD443E62486836F0037CC73;
+			remoteInfo = WKARWatch;
+		};
+		EFD877F724E28076006AAB55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFD443C6248683290037CC73 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFD443F2248683710037CC73;
+			remoteInfo = "WKARWatch Extension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -104,7 +120,6 @@
 			dstSubfolderSpec = 16;
 			files = (
 				EF51B2AF24E2790000EC9149 /* WKARWatchDebug.app in Embed Watch Content */,
-				EF9C361124DF324B00DC567D /* WKARWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +204,9 @@
 		EFD44407248683720037CC73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFD44408248683720037CC73 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		EFD44417248684EA0037CC73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EFD877F924E2829B006AAB55 /* MainMenuCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuCore.swift; sourceTree = "<group>"; };
+		EFD877FE24E2830C006AAB55 /* WKSessionClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKSessionClient.swift; sourceTree = "<group>"; };
+		EFD8780224E2834D006AAB55 /* PagingScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
 		EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravel.swift; sourceTree = "<group>"; };
 		EFF24667248E365C00BC5B0B /* WKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKSessionClient.swift; sourceTree = "<group>"; };
 		EFF2466A248E45D900BC5B0B /* AppWKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWKSessionClient.swift; sourceTree = "<group>"; };
@@ -271,6 +289,9 @@
 		EF51B29B24E278FF00EC9149 /* WKARWatchDebug Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EFD8780024E2831D006AAB55 /* View */,
+				EFD877FD24E282E0006AAB55 /* Clients */,
+				EFD877F824E28233006AAB55 /* App */,
 				EF51B2B824E2795C00EC9149 /* WKARWatchDebug Extension.entitlements */,
 				EF51B29C24E278FF00EC9149 /* ContentView.swift */,
 				EF51B29E24E278FF00EC9149 /* HostingController.swift */,
@@ -416,6 +437,38 @@
 				EF2F617824C5D72B004CA1D1 /* TestView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		EFD877F824E28233006AAB55 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EFD877F924E2829B006AAB55 /* MainMenuCore.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		EFD877FD24E282E0006AAB55 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				EFD877FE24E2830C006AAB55 /* WKSessionClient.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		EFD8780024E2831D006AAB55 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EFD8780124E28323006AAB55 /* Components */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EFD8780124E28323006AAB55 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EFD8780224E2834D006AAB55 /* PagingScrollView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		EFF24666248E357900BC5B0B /* Clients */ = {
@@ -704,13 +757,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFD877FA24E2829B006AAB55 /* MainMenuCore.swift in Sources */,
 				EF51B29F24E278FF00EC9149 /* HostingController.swift in Sources */,
 				EF51B29D24E278FF00EC9149 /* ContentView.swift in Sources */,
+				EFD877FF24E2830C006AAB55 /* WKSessionClient.swift in Sources */,
 				EF51B2A324E278FF00EC9149 /* NotificationController.swift in Sources */,
 				EF51B2BC24E279D000EC9149 /* TimeTravel.swift in Sources */,
 				EF51B2BB24E279C800EC9149 /* SharedCoreActions.swift in Sources */,
 				EF51B2A124E278FF00EC9149 /* ExtensionDelegate.swift in Sources */,
 				EF51B2A524E278FF00EC9149 /* NotificationView.swift in Sources */,
+				EFD8780324E2834D006AAB55 /* PagingScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,12 +830,12 @@
 		EFD443F6248683710037CC73 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EFD443F2248683710037CC73 /* WKARWatch Extension */;
-			targetProxy = EFD877EB24E27DE3006AAB55 /* PBXContainerItemProxy */;
+			targetProxy = EFD877F724E28076006AAB55 /* PBXContainerItemProxy */;
 		};
 		EFD4440A248683720037CC73 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EFD443E62486836F0037CC73 /* WKARWatch */;
-			targetProxy = EFD877EA24E27DE3006AAB55 /* PBXContainerItemProxy */;
+			targetProxy = EFD877F624E28076006AAB55 /* PBXContainerItemProxy */;
 		};
 		EFD877EF24E27F1F006AAB55 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

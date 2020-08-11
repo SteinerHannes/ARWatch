@@ -54,8 +54,6 @@ struct ContentView: View {
                     Spacer()
                 }
             }
-            .frame(width: proxy.size.width/3, height: proxy.size.width/3, alignment: .top)
-            .offset(x: proxy.size.width/3, y: -20)
             .onAppear {
                 self.viewStore.send(.onAppear)
             }
