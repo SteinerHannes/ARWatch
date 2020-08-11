@@ -25,7 +25,7 @@ struct ContentView: View {
             return "Karten"
         }
         if self.viewStore.state.value == 1 {
-            return "Audioplayer"
+            return "Audio Player"
         }
         if self.viewStore.state.value == 2 {
             return "Einstellungen"
@@ -54,9 +54,6 @@ struct ContentView: View {
                     Spacer()
                 }
             }
-            .onAppear {
-                self.viewStore.send(.onAppear)
-            }
         }
     }
 }
@@ -66,69 +63,10 @@ struct ContentView_Previews: PreviewProvider {
         TimeTravelView(
             initialState: ContentState(),
             reducer: contentReducer,
-            environment: ARWatchDebug.ContentEnvironment()
+            environment: ContentEnvironment()
         ) { store in
             ContentView(store)
         }
     }
 }
 
-struct ContentState: Equatable {
-    var value: Int = 0
-    var name: String = "Karten"
-}
-
-enum ContentAction: Equatable {
-    case onAppear
-    case sessionClient(Result<AppWKSessionClient.Action, Never>)
-    case setNavigationARView(isPresented: Bool)
-    case reciveAction(WKCoreAction)
-    case buttonTapped
-}
-
-public struct ContentEnvironment {
-    var sessionClient: AppWKSessionClient = .live
-    var mainQueue: AnySchedulerOf<DispatchQueue> = DispatchQueue.main.eraseToAnyScheduler()
-}
-
-let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironment> =
-    .combine(
-        Reducer { state, action, environment in
-            switch action {
-                case .onAppear:
-                    return environment.sessionClient.start()
-                        .receive(on: environment.mainQueue)
-                        .catchToEffect()
-                        .map(ContentAction.sessionClient)
-                case let .setNavigationARView(isPresented: isPresented):
-                    print(isPresented)
-                    return .none
-                case let .sessionClient(.success(recivedAction)):
-                    switch recivedAction {
-                        case let .reciveAction(action):
-                            return Effect(value: .reciveAction(action))
-                }
-                case let .reciveAction(action):
-                    switch action {
-                        case let .MMselectedCardChanged(value: value):
-                            print("GET MMselectedCardChanged: ", value)
-                            state.value = value
-                            switch value {
-                                case 0:
-                                    state.name = "Karten"
-                                case 1:
-                                    state.name = "Audio Player"
-                                case 2:
-                                    state.name = "Einstellungen"
-                                default:
-                                    state.name = "Fehler"
-                            }
-                            return .none
-                }
-                case .buttonTapped:
-                    return environment.sessionClient.send(
-                        action: AppCoreAction.buttonTapped
-                    ).fireAndForget()
-            }
-        }.debug()
-)

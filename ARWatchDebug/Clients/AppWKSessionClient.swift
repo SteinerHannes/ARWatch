@@ -13,8 +13,9 @@ import Combine
 
 
 public struct AppWKSessionClient {
-    enum Action: Equatable {
+    public enum Action: Equatable {
         case reciveAction(WKCoreAction)
+        case reciveActionAndError(action: WKCoreAction, position: Int)
     }
     
     private var create: () -> Effect<Action, Never>
@@ -37,12 +38,17 @@ extension AppWKSessionClient {
             .run { subscriber in
                 let manager = AppWKSessionManager { (message) in
                     let action = message["action"]!
-                    subscriber.send(.reciveAction(action as! WKCoreAction))
+                    if let position = message["number"] {
+                        subscriber.send(.reciveActionAndError(action: action as! WKCoreAction,
+                                                              position: position as! Int))
+                    } else {
+                        subscriber.send(.reciveAction(action as! WKCoreAction))
+                    }
                 }
                 sharedWKSessionManager = manager
                 return AnyCancellable { }
             }
-    },
+        },
         send: { action in
             .fireAndForget {
                 guard let manager = sharedWKSessionManager else {
@@ -51,11 +57,13 @@ extension AppWKSessionClient {
                 }
                 manager.send(action: action)
             }
-    }
+        }
     )
 }
 
 public final class AppWKSessionManager: NSObject, WCSessionDelegate {
+    
+    var counter: AtomicInteger = AtomicInteger()
     
     var session: WCSession?
     
@@ -93,17 +101,24 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
     }
     
     public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        let encodedAction = message["action"]!
-        
-        let action = try! self.decoder.decode(WKCoreAction.self, from: encodedAction as! Data)
-        
-        handler(["action": action])
+        let encodedAction = message["action"]! as! Data
+        let number = message["number"]! as! Int
+        let action = try! self.decoder.decode(WKCoreAction.self, from: encodedAction)
+        let counter = self.counter.value
+        debugPrint("Paketnummer: \(number), Counter: \(counter)")
+        if number == counter + 1 {
+            self.counter.increment()
+            handler(["action": action])
+        } else {
+            let difference = counter - number + 1
+            self.counter.increment()
+            handler(["action": action, "number": difference])
+        }
     }
     
     func send(action: AppCoreAction) {
         let encodedAction = try! self.encoder.encode(action)
-        print(encodedAction)
-        let msg = ["action": encodedAction]
+        let msg = ["action": encodedAction, "number": counter.incrementAndGet()] as [String : Any]
         session?.sendMessage(
             msg,
             replyHandler: nil, //(([String: Any]) -> Void)?

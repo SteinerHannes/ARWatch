@@ -59,6 +59,9 @@ extension WKSessionClient {
 }
 
 public final class WKSessionManager: NSObject, WCSessionDelegate {
+    
+    var counter: AtomicInteger = AtomicInteger()
+    
     var session: WCSession?
     
     var handler: (([String : Any]) -> Void)?
@@ -94,15 +97,24 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
     }
     
     public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        let encodedAction = message["action"]!
-        let action = try! self.decoder.decode(AppCoreAction.self, from: encodedAction as! Data)
-        handler!(["action" : action])
+        let encodedAction = message["action"]! as! Data
+        let number = message["number"]! as! Int
+        let action = try! self.decoder.decode(AppCoreAction.self, from: encodedAction)
+        let counter = self.counter.value
+        if number == counter + 1 {
+            self.counter.increment()
+            handler!(["action" : action])
+        } else {
+            print("Error!")
+            handler!(["action" : action])
+            WKInterfaceDevice.current().play(.failure)
+        }
         WKInterfaceDevice.current().play(.notification)
     }
     
     func send(action: WKCoreAction) {
         let encodedAction = try! self.encoder.encode(action)
-        let msg = ["action": encodedAction]
+        let msg = ["action": encodedAction, "number": counter.incrementAndGet()] as [String : Any]
         session?.sendMessage(
             msg,
             replyHandler: nil, //(([String: Any]) -> Void)?

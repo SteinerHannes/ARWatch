@@ -26,6 +26,11 @@
 		EF51B2BA24E2799200EC9149 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EF51B2B924E2799200EC9149 /* ComposableArchitecture */; };
 		EF51B2BB24E279C800EC9149 /* SharedCoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */; };
 		EF51B2BC24E279D000EC9149 /* TimeTravel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */; };
+		EF54A9CE24E2C7F900A60E2C /* AtomicInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF54A9CD24E2C7F900A60E2C /* AtomicInteger.swift */; };
+		EF54A9CF24E2C7F900A60E2C /* AtomicInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF54A9CD24E2C7F900A60E2C /* AtomicInteger.swift */; };
+		EF54A9D024E2C7F900A60E2C /* AtomicInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF54A9CD24E2C7F900A60E2C /* AtomicInteger.swift */; };
+		EF54A9D124E2C7F900A60E2C /* AtomicInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF54A9CD24E2C7F900A60E2C /* AtomicInteger.swift */; };
+		EF54A9D424E302A800A60E2C /* ContentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF54A9D324E302A800A60E2C /* ContentCore.swift */; };
 		EF8273BE248A8AB400948B9A /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8273BD248A8AB400948B9A /* PagingScrollView.swift */; };
 		EF9C35F624DF2F0000DC567D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9C35F524DF2F0000DC567D /* AppDelegate.swift */; };
 		EF9C35F824DF2F0000DC567D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9C35F724DF2F0000DC567D /* SceneDelegate.swift */; };
@@ -169,6 +174,8 @@
 		EF51B2AC24E2790000EC9149 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		EF51B2B724E2795400EC9149 /* WKARWatchDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WKARWatchDebug.entitlements; sourceTree = "<group>"; };
 		EF51B2B824E2795C00EC9149 /* WKARWatchDebug Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WKARWatchDebug Extension.entitlements"; sourceTree = "<group>"; };
+		EF54A9CD24E2C7F900A60E2C /* AtomicInteger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicInteger.swift; sourceTree = "<group>"; };
+		EF54A9D324E302A800A60E2C /* ContentCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCore.swift; sourceTree = "<group>"; };
 		EF8273BD248A8AB400948B9A /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
 		EF9C35F324DF2F0000DC567D /* ARWatchDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARWatchDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9C35F524DF2F0000DC567D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -322,6 +329,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		EF54A9D224E3027900A60E2C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EF54A9D324E302A800A60E2C /* ContentCore.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		EF8273BC248A8A8F00948B9A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +348,7 @@
 		EF9C35F424DF2F0000DC567D /* ARWatchDebug */ = {
 			isa = PBXGroup;
 			children = (
+				EF54A9D224E3027900A60E2C /* Core */,
 				EF44585D24E28E6200096D3A /* Clients */,
 				EF9C360724DF2F4400DC567D /* ARWatchDebug.entitlements */,
 				EF9C35F524DF2F0000DC567D /* AppDelegate.swift */,
@@ -503,6 +519,7 @@
 				EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */,
 				EFF24671248E80D200BC5B0B /* ColorExtension.swift */,
 				EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */,
+				EF54A9CD24E2C7F900A60E2C /* AtomicInteger.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -769,6 +786,7 @@
 			files = (
 				EFD877FA24E2829B006AAB55 /* MainMenuCore.swift in Sources */,
 				EF51B29F24E278FF00EC9149 /* HostingController.swift in Sources */,
+				EF54A9D124E2C7F900A60E2C /* AtomicInteger.swift in Sources */,
 				EF51B29D24E278FF00EC9149 /* ContentView.swift in Sources */,
 				EFD877FF24E2830C006AAB55 /* WKSessionClient.swift in Sources */,
 				EF51B2A324E278FF00EC9149 /* NotificationController.swift in Sources */,
@@ -784,7 +802,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF54A9D424E302A800A60E2C /* ContentCore.swift in Sources */,
 				EF9C35F624DF2F0000DC567D /* AppDelegate.swift in Sources */,
+				EF54A9D024E2C7F900A60E2C /* AtomicInteger.swift in Sources */,
 				EF9C35F824DF2F0000DC567D /* SceneDelegate.swift in Sources */,
 				EF9C35FA24DF2F0000DC567D /* ContentView.swift in Sources */,
 				EF9C360E24DF320400DC567D /* TimeTravel.swift in Sources */,
@@ -799,6 +819,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF08167B24B48F2300A738B7 /* example.swift in Sources */,
+				EF54A9CE24E2C7F900A60E2C /* AtomicInteger.swift in Sources */,
 				EFEA827E24DF1AFA00E7C162 /* TimeTravel.swift in Sources */,
 				EFF266C7248A566E00133785 /* ContentCore.swift in Sources */,
 				EFF2466B248E45D900BC5B0B /* AppWKSessionClient.swift in Sources */,
@@ -818,6 +839,7 @@
 			files = (
 				EF4881AA248A7CB60026187C /* MainMenuCore.swift in Sources */,
 				EFF24670248E47AA00BC5B0B /* SharedCoreActions.swift in Sources */,
+				EF54A9CF24E2C7F900A60E2C /* AtomicInteger.swift in Sources */,
 				EFD443FB248683710037CC73 /* HostingController.swift in Sources */,
 				EFD443F9248683710037CC73 /* ContentView.swift in Sources */,
 				EFD443FF248683710037CC73 /* NotificationController.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AppCoreAction: Equatable {
+public enum AppCoreAction: Equatable {
     case reciveTest(String)
     case buttonTapped
 }
@@ -23,7 +23,7 @@ extension AppCoreAction: Codable {
         case decoding(String)
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         if let value = try? values.decode(String.self, forKey: .reciveTest) {
             self = .reciveTest(value)
@@ -37,7 +37,7 @@ extension AppCoreAction: Codable {
         throw AppCoreActionError.decoding("AppCoreAction konnte nicht decoded werden")
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
             case let .reciveTest(text):
@@ -50,7 +50,7 @@ extension AppCoreAction: Codable {
     }
 }
 
-enum WKCoreAction: Equatable {
+public enum WKCoreAction: Equatable {
     case MMselectedCardChanged(value: Int)
 }
 
@@ -63,7 +63,7 @@ extension WKCoreAction: Codable {
         case decoding(String)
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         if let value = try? values.decode(Int.self, forKey: .MMselectedCardChanged) {
             self = .MMselectedCardChanged(value: value)
@@ -72,7 +72,7 @@ extension WKCoreAction: Codable {
         throw WKCoreActionError.decoding("WKCoreAction konnte nicht decoded werden")
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
             case let .MMselectedCardChanged(value: value):
