@@ -36,6 +36,9 @@ extension AppWKSessionClient {
     static let live = AppWKSessionClient(
         create: { () -> Effect<Action, Never> in
             .run { subscriber in
+                if !WCSession.isSupported() {
+                    fatalError("WCSession is not supported on this device.")
+                }
                 let manager = AppWKSessionManager { (message) in
                     guard let action = message["action"] else {
                         let error = message["error"] as! AppWKSessionError
@@ -123,7 +126,6 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
             @unknown default:
                 print("default")
         }
-        debugPrint("activationDidCompleteWith activationState:\(activationState) error:\(String(describing: error))")
     }
     
     public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {

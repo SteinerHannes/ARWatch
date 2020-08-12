@@ -10,8 +10,14 @@ import WatchKit
 import Foundation
 import SwiftUI
 
-class HostingController: WKHostingController<ContentView> {
-    override var body: ContentView {
-        return ContentView()
+class HostingController: WKHostingController<TimeTravelView<MainMenuEnvironment, ContentView>> {
+    override var body: TimeTravelView<MainMenuEnvironment, ContentView> {
+        return TimeTravelView(
+            initialState: MainMenuState(),
+            reducer: mainMenuReducer,
+            environment: MainMenuEnvironment()
+        ) { store in
+            ContentView(store)
+        }
     }
 }

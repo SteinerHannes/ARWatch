@@ -15,6 +15,8 @@ import Combine
 public struct WKSessionClient {
     enum Action: Equatable {
         case reciveAction(AppCoreAction)
+        case reciveActionAndError(action: AppCoreAction, position: Int)
+        case reciveError(WKSessionError)
     }
     
     private var create: () -> Effect<Action, Never>
@@ -39,8 +41,17 @@ extension WKSessionClient {
                     fatalError("WCSession is not supported on this device.")
                 }
                 let manager = WKSessionManager { (message) in
-                    let action = message["action"]!
-                    subscriber.send(.reciveAction(action as! AppCoreAction))
+                    guard let action = message["action"] else {
+                        let error = message["error"] as! WKSessionError
+                        subscriber.send(.reciveError(error))
+                        return
+                    }
+                    if let position = message["number"] {
+                        subscriber.send(.reciveActionAndError(action: action as! AppCoreAction,
+                                                              position: position as! Int))
+                    } else {
+                        subscriber.send(.reciveAction(action as! AppCoreAction))
+                    }
                 }
                 sharedWKSessionManager = manager
                 return AnyCancellable { }
@@ -58,25 +69,48 @@ extension WKSessionClient {
     )
 }
 
+public enum WKSessionError: Error, Equatable {
+    public static func == (lhs: WKSessionError, rhs: WKSessionError) -> Bool {
+        switch (lhs, rhs) {
+            case let (error(lhsError), error(rhsError)):
+                return lhsError.localizedDescription == rhsError.localizedDescription
+            case let (isReachable(lhsBool), isReachable(rhsBool)):
+                return lhsBool == rhsBool
+            case (disconnected, disconnected):
+                return true
+            case let (isPaired(lhsBool), isPaired(rhsBool)):
+                return lhsBool == rhsBool
+            default:
+                return false
+        }
+    }
+    
+    case error(Error)
+    case isReachable(Bool)
+    case disconnected
+    case isPaired(Bool)
+}
+
 public final class WKSessionManager: NSObject, WCSessionDelegate {
     
     var counter: AtomicInteger = AtomicInteger()
     
     var session: WCSession?
     
-    var handler: (([String : Any]) -> Void)?
+    var handler: (([String : Any]) -> Void)
     
     let encoder = JSONEncoder()
     
     let decoder = JSONDecoder()
     
     init(messageHandler: @escaping ([String : Any]) -> Void ){
-        super.init()
         handler = messageHandler
+        
+        super.init()
+        
         session = WCSession.default
         session!.delegate = self
         session!.activate()
-        debugPrint("Watch App Installed: \(session!.isReachable)")
     }
     
     // MARK: - WCSessionDelegate
@@ -84,6 +118,7 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
     public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         switch activationState {
             case .notActivated:
+                handler(["error": WKSessionError.error(error!)])
                 print("notActivated")
             case .inactive:
                 print("inactive")
@@ -92,8 +127,6 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
             @unknown default:
                 print("default")
         }
-        
-        debugPrint("activationDidCompleteWith activationState:\(activationState) error:\(String(describing: error))")
     }
     
     public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
@@ -101,18 +134,24 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
         let number = message["number"]! as! Int
         let action = try! self.decoder.decode(AppCoreAction.self, from: encodedAction)
         let counter = self.counter.value
+        debugPrint("Paketnummer: \(number), Counter: \(counter)")
         if number == counter + 1 {
             self.counter.increment()
-            handler!(["action" : action])
+            handler(["action" : action])
         } else {
-            print("Error!")
-            handler!(["action" : action])
+            let difference = counter - number + 1
+            self.counter.increment()
+            handler(["action": action, "number": difference])
             WKInterfaceDevice.current().play(.failure)
         }
         WKInterfaceDevice.current().play(.notification)
     }
     
     func send(action: WKCoreAction) {
+        if !(session?.isReachable ?? false) {
+            handler(["error": WKSessionError.isReachable(false)])
+            return
+        }
         let encodedAction = try! self.encoder.encode(action)
         let msg = ["action": encodedAction, "number": counter.incrementAndGet()] as [String : Any]
         session?.sendMessage(
@@ -120,24 +159,17 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
             replyHandler: nil, //(([String: Any]) -> Void)?
             errorHandler: { (error) in
                 debugPrint(error)
+                self.handler(["error": WKSessionError.error(error)])
         })
     }
     
-    public func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        //let msg = applicationContext["msg"]!
-        print(applicationContext)
-    }
-    
-    public func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any] = [:]) {
-        //let msg = userInfo["msg"]!
-        print(userInfo)
-    }
-    
     public func sessionReachabilityDidChange(_ session: WCSession) {
-        self.session = session
-    }
-    
-    public func sessionCompanionAppInstalledDidChange(_ session: WCSession) {
-        self.session = session
+        switch session.isReachable {
+            case true:
+                handler(["error": WKSessionError.isReachable(true)])
+            case false:
+                counter.reset()
+                handler(["error": WKSessionError.isReachable(false)])
+        }
     }
 }

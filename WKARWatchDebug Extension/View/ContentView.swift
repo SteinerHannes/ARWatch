@@ -13,12 +13,8 @@ struct ContentView: View {
     let store: Store<MainMenuState,MainMenuAction>
     @ObservedObject var viewStore: ViewStore<MainMenuState,MainMenuAction>
     
-    init() {
-        self.store = Store(
-            initialState: MainMenuState(),
-            reducer: mainMenuReducer,
-            environment: MainMenuEnvironment()
-        )
+    init(_ store: Store<MainMenuState,MainMenuAction>) {
+        self.store = store
         self.viewStore = ViewStore(self.store)
     }
     
@@ -80,7 +76,12 @@ struct Card: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .previewDevice("Apple Watch Series 4 - 44mm")
+        TimeTravelView(
+            initialState: MainMenuState(),
+            reducer: mainMenuReducer,
+            environment: MainMenuEnvironment()
+        ) { store in
+            ContentView(store)
+        }.previewDevice("Apple Watch Series 4 - 44mm")
     }
 }
