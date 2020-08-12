@@ -11,11 +11,11 @@ import WatchConnectivity
 import ComposableArchitecture
 import Combine
 
-
 public struct AppWKSessionClient {
     public enum Action: Equatable {
         case reciveAction(WKCoreAction)
         case reciveActionAndError(action: WKCoreAction, position: Int)
+        case reciveError(AppWKSessionError)
     }
     
     private var create: () -> Effect<Action, Never>
@@ -37,7 +37,11 @@ extension AppWKSessionClient {
         create: { () -> Effect<Action, Never> in
             .run { subscriber in
                 let manager = AppWKSessionManager { (message) in
-                    let action = message["action"]!
+                    guard let action = message["action"] else {
+                        let error = message["error"] as! AppWKSessionError
+                        subscriber.send(.reciveError(error))
+                        return
+                    }
                     if let position = message["number"] {
                         subscriber.send(.reciveActionAndError(action: action as! WKCoreAction,
                                                               position: position as! Int))
@@ -61,6 +65,28 @@ extension AppWKSessionClient {
     )
 }
 
+public enum AppWKSessionError: Error, Equatable {
+    public static func == (lhs: AppWKSessionError, rhs: AppWKSessionError) -> Bool {
+        switch (lhs, rhs) {
+            case let (error(lhsError), error(rhsError)):
+                return lhsError.localizedDescription == rhsError.localizedDescription
+            case let (isReachable(lhsBool), isReachable(rhsBool)):
+                return lhsBool == rhsBool
+            case (disconnected, disconnected):
+                return true
+            case let (isPaired(lhsBool), isPaired(rhsBool)):
+                return lhsBool == rhsBool
+            default:
+                return false
+        }
+    }
+    
+    case error(Error)
+    case isReachable(Bool)
+    case disconnected
+    case isPaired(Bool)
+}
+
 public final class AppWKSessionManager: NSObject, WCSessionDelegate {
     
     var counter: AtomicInteger = AtomicInteger()
@@ -81,7 +107,6 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
         session = WCSession.default
         session!.delegate = self
         session!.activate()
-        debugPrint(" Watch App Installed: \(session!.isReachable)")
     }
     
     // MARK: - WCSessionDelegate
@@ -89,6 +114,7 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
     public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         switch activationState {
             case .notActivated:
+                handler(["error": AppWKSessionError.error(error!)])
                 print("notActivated")
             case .inactive:
                 print("inactive")
@@ -117,6 +143,10 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
     }
     
     func send(action: AppCoreAction) {
+        if !(session?.isReachable ?? false) {
+            handler(["error": AppWKSessionError.isReachable(false)])
+            return
+        }
         let encodedAction = try! self.encoder.encode(action)
         let msg = ["action": encodedAction, "number": counter.incrementAndGet()] as [String : Any]
         session?.sendMessage(
@@ -124,24 +154,38 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
             replyHandler: nil, //(([String: Any]) -> Void)?
             errorHandler: { (error) in
                 debugPrint(error)
+                self.handler(["error": AppWKSessionError.error(error)])
         })
     }
     
+    // The session calls this method when it detects that the user has switched to a different Apple Watch.
     public func sessionDidBecomeInactive(_ session: WCSession) {
-        debugPrint("sessionDidBecomeInactive: \(session)")
+        handler(["error": AppWKSessionError.isPaired(false)])
+        debugPrint("sessionDidBecomeInactive")
     }
     
     public func sessionDidDeactivate(_ session: WCSession) {
-        debugPrint("sessionDidDeactivate: \(session)")
+        handler(["error": AppWKSessionError.isPaired(false)])
+        debugPrint("sessionDidDeactivate")
     }
     
     public func sessionWatchStateDidChange(_ session: WCSession) {
-        debugPrint("sessionWatchStateDidChange: \(session)")
-        
-        debugPrint("Paired Watch: \(session.isPaired), Watch App Installed: \(session.isWatchAppInstalled)")
+        switch session.isPaired {
+            case true:
+                handler(["error": AppWKSessionError.isPaired(true)])
+            case false:
+                counter.reset()
+                handler(["error": AppWKSessionError.isPaired(false)])
+        }
     }
     
     public func sessionReachabilityDidChange(_ session: WCSession) {
-        self.session = session
+        switch session.isReachable {
+            case true:
+                handler(["error": AppWKSessionError.isReachable(true)])
+            case false:
+                counter.reset()
+                handler(["error": AppWKSessionError.isReachable(false)])
+        }
     }
 }

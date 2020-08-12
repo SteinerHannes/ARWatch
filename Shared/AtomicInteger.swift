@@ -55,4 +55,11 @@ public final class AtomicInteger {
         _value += 1
         debugPrint("increment: ", _value)
     }
+    
+    public func reset() {
+        lock.wait()
+        defer { lock.signal() }
+        _value = 0
+        debugPrint("reset: ", _value)
+    }
 }

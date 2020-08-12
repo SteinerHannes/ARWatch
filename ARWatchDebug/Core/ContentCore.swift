@@ -17,7 +17,6 @@ public struct ContentState: Equatable {
 public enum ContentAction: Equatable {
     case onAppear
     case sessionClient(Result<AppWKSessionClient.Action, Never>)
-    case setNavigationARView(isPresented: Bool)
     case buttonTapped
 }
 
@@ -35,9 +34,6 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                         .receive(on: environment.mainQueue)
                         .catchToEffect()
                         .map(ContentAction.sessionClient)
-                case let .setNavigationARView(isPresented: isPresented):
-                    print(isPresented)
-                    return .none
                 case let .sessionClient(.success(.reciveAction(action))):
                     switch action {
                         case let .MMselectedCardChanged(value: value):
@@ -50,6 +46,19 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                         action: AppCoreAction.buttonTapped
                     ).fireAndForget()
                 case .sessionClient(.success(.reciveActionAndError(action: _, position: _))):
+                    return .none
+                case let .sessionClient(.success(.reciveError(error))):
+                    switch error {
+                        
+                        case let .error(error):
+                            print("ERROR: " + error.localizedDescription)
+                        case let .isReachable(bool):
+                            print("ERROR: isReachable \(bool)")
+                        case .disconnected:
+                            print("ERROR: disconnected")
+                        case let .isPaired(bool):
+                            print("ERROR: isPaired \(bool)")
+                    }
                     return .none
             }
         }
@@ -67,13 +76,14 @@ extension Reducer where State == ContentState, Action == ContentAction {
                             state.current = state.history[count - pos].0
                             state.history.removeSubrange((count - pos)...)
                             state.history.append((state.current, ContentAction.sessionClient(.success(.reciveAction(action)))))
-                            let effect = self(&state.current, ContentAction.sessionClient(.success(.reciveAction(action))), environment)
+                            _ = self(&state.current, ContentAction.sessionClient(.success(.reciveAction(action))), environment)
                             state.index = count - pos
-                            var effects = Effect.concatenate(effect)
-                            for action in slice {
+                            //var effects = Effect.concatenate(effect)
+                            for stateAndAction in slice {
                                 state.index += 1
-                                effects = Effect.concatenate(effects,  self(&state.current, action.1, environment))
-                                state.history.append((state.current, action.1))
+//                                effects = Effect.concatenate(effects,  self(&state.current, action.1, environment))
+                                _ = self(&state.current, stateAndAction.1, environment)
+                                state.history.append((state.current, stateAndAction.1))
                                 if state.history.count == maxHistoryCount {
                                     state.history.removeFirst(1)
                                     state.index -= 1
