@@ -10,52 +10,91 @@
 import SwiftUI
 import ComposableArchitecture
 
-enum LoginAction: Equatable {
-    case benutzerNameGeaendert(name: String)
-    case passwortGeaendert(passwort: String)
-    case loginButtonGedrueckt
-    case anmeldeClientAntwort(Result<Bool, Error>)
-}
-
 struct LoginState: Equatable {
-    var benutzername: String = ""
+    var email: String = ""
     var passwort: String = ""
+    var fehlerNachricht: String?
 }
 
+enum LoginAction: Equatable {
+    case loginButtonGedrueckt
+    case emailGeaendert(adresse: String)
+    case passwortGeaendert(passwort: String)
+    case anmeldeClientAntwort(Result<String, Error>)
+    case warnhinweisVerwerfen
+}
 
 public struct LoginEnvironment {
-    var anmeldeClient: AnmeldeClient = AnmeldeClient()
+    var mainQueue: AnySchedulerOf<DispatchQueue>
+    var anmeldung: (adresse: String, passwort: String) -> Effect<String, Error>
 }
 
-let loginKomponetenReducer = Reducer<LoginState, LoginAction, LoginEnvironment> { state, action, environment in
+let loginReducer = Reducer<LoginState, LoginAction, LoginEnvironment>
+{ state, action, environment in
     switch action {
-        case .benutzerNameGeaendert(name: let name):
-            state.benutzername = name
+        case .loginButtonGedrueckt:
+            return environment
+                .anmeldung(adresse: state.email, passwort: state.passwort)
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .map(LoginViewAction.anmeldeClientAntwort)
+        case .emailGeaendert(adresse: let email):
+            state.email = email
             return .none
         case .passwortGeaendert(passwort: let passwort):
             state.passwort = passwort
             return .none
-        case .loginButtonGedrueckt:
-            return environment
-                .anmeldeClient
-                .login(name: state.benutzername, passwort: state.passwort)
-                .catchEffect(LoginViewAction.anmeldeClientAntwort)
         case let .anmeldeClientAntwort(result):
             switch result {
-                case .success(true):
+                case .success(let benutzerName):
                 // Anmeldung erfolgreich
                 case .failure(let error):
-                // Fehler aufgetreten
+                    state.fehlerNachricht = error.beschreibung
             }
+            return .none
+        case .alertVerwerfen:
+            state.fehlerNachricht = nil
             return .none
     }
 }
 
 struct LoginView: View {
-    let store 
+    let store: Store<LoginState, LoginAction>
     
     var body: some View {
-        
+        WithViewStore(self.store) { viewStore in
+            VStack {
+                TextField("E-Mail"
+                    text: self.viewStore.binding(
+                        get: { $0.email },
+                        send: LoginAction.emailGeaendert(adresse:)
+                    )
+                )
+                TextField("Passwort"
+                    text: self.viewStore.binding(
+                        get: { $0.passwort },
+                        send: LoginAction.passwortGeaendert(passwort:)
+                    )
+                )
+                Button(action: {
+                    self.viewStore.send(.loginButtonGedrueckt)
+                }) {
+                    Text("Anmelden")
+                }
+            }
+            .alert(
+                item: viewStore.binding(
+                    get: { $0.fehlerNachricht.map(LoginAlert.init(titel:)) },
+                    send: .warnhinweisVerwerfen
+                ),
+                content: { Alert(titel: Text($0.titel)) }
+            )
+        }.navigationBarTitel("Anmelden")
     }
+}
+
+struct LoginAlert: Identifiable {
+    var title: String
+    var id: String { self.title }
 }
 */
