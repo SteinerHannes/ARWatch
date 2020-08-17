@@ -18,28 +18,46 @@ struct ContentView: View {
         self.viewStore = ViewStore(self.store)
     }
     
+    @State var isMapViewVisible: Bool = false
+    @State var isAudioPlayerVisible: Bool = false
+    @State var isSettingsVisible: Bool = false
+    
     var body: some View {
-        HStack(alignment: .center, spacing: 0) {
-            GeometryReader { geometry in
-                PagingScrollView(
-                    activePageIndex: self.viewStore.binding(
-                        get: { $0.selectedCard },
-                        send: MainMenuAction.selectedCardChanged(value:)),
-                    itemCount: self.viewStore.cards.count,
-                    pageWidth: 150,
-                    tileWidth: 140,
-                    tilePadding: 10
-                ) {
-                    ForEach(self.viewStore.cards, id: \.hashValue) { card in
-                        ZStack(alignment: .center) {
+        VStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center, spacing: 0) {
+                GeometryReader { geometry in
+                    PagingScrollView(
+                        activePageIndex: self.viewStore.binding(
+                            get: { $0.selectedCard },
+                            send: MainMenuAction.selectedCardChanged(value:)),
+                        itemCount: self.viewStore.cards.count,
+                        pageWidth: 150,
+                        tileWidth: 140,
+                        tilePadding: 10
+                    ) {
+                        ForEach(self.viewStore.cards, id: \.hashValue) { card in
                             Card(store: self.store, image: card.image, name: card.name)
                                 .onTapGesture {
-                                    print(card.image)
+                                    if self.viewStore.selectedCard == 0 {
+                                        self.isMapViewVisible = true
+                                    } else if self.viewStore.selectedCard == 1 {
+                                        self.isAudioPlayerVisible = true
+                                    } else if self.viewStore.selectedCard == 2 {
+                                        self.isSettingsVisible = true
+                                    }
                             }
                         }
                     }
                 }
             }
+            NavigationLink("", destination: WatchMapView(), isActive: self.$isMapViewVisible)
+                .frame(width: 0, height: 0, alignment: .center)
+            NavigationLink("", destination: AudioPlayerView(), isActive: self.$isAudioPlayerVisible)
+                .hidden()
+                .frame(width: 0, height: 0, alignment: .center)
+            NavigationLink("", destination: SettingsView(), isActive: self.$isSettingsVisible)
+                .hidden()
+                .frame(width: 0, height: 0, alignment: .center)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
         .onAppear {

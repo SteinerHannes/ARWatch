@@ -33,26 +33,28 @@ struct ContentView: View {
         return "Fehler"
     }
     
+    var view: some View {
+        Group {
+            if self.viewStore.state.value == 0 {
+                MapView()
+            } else if self.viewStore.state.value == 1 {
+                AudioPlayerView()
+            } else if self.viewStore.state.value == 2 {
+                SettingsView()
+            } else {
+                EmptyView()
+            }
+        }
+    }
+    
     var body: some View {
-        GeometryReader { proxy in
-            NavigationView {
-                VStack(alignment: .center, spacing: 20) {
-                    ScrollView(.vertical, showsIndicators: true) {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text(self.name)
-                        }.frame(width: UIScreen.main.bounds.width)
-                    }
-                    .navigationBarTitle("ARWatch", displayMode: .large)
-                    .onAppear{
-                        self.viewStore.send(.onAppear)
-                    }
-                    Button(action: {
-                        self.viewStore.send(.buttonTapped)
-                    }) {
-                        Text("Hello World").font(.largeTitle)
-                    }
-                    Spacer()
-                }
+        NavigationView {
+            VStack(alignment: .center, spacing: 20) {
+                self.view
+            }
+            .navigationBarTitle("\(self.name)", displayMode: .large)
+            .onAppear{
+                self.viewStore.send(.onAppear)
             }
         }
     }
