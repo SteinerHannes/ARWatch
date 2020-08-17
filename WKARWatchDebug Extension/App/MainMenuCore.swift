@@ -23,11 +23,7 @@ public struct CardStruct: Equatable, Hashable {
 
 struct MainMenuState: Equatable {
     var selectedCard: Int = 0
-    let cards: [CardStruct] = [
-        CardStruct.init(name: "Karten", image: "map.fill"),
-        CardStruct.init(name: "Audio Player", image: "headphones"),
-        CardStruct.init(name: "Einstellungen", image: "gear" )
-    ]
+
     var showText: Bool = false
 }
 
