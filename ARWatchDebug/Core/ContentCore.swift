@@ -64,7 +64,8 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
         }
     )
 
-extension Reducer where State == ContentState, Action == ContentAction {
+// MARK: TODO ContentEnvironment MOCK
+extension Reducer where State == ContentState, Action == ContentAction, Environment == ContentEnvironment {
     func timeTravel() -> Reducer<TimeTravelState<State, Action>, TimeTravelAction<Action>, Environment> {
         .init { state, action, environment in
             switch action {
@@ -109,14 +110,14 @@ extension Reducer where State == ContentState, Action == ContentAction {
     }
 }
 
-struct TimeTravelView<Environment, Content: View>: View {
+struct TimeTravelView<Content: View>: View {
     private let timeStore: Store<TimeTravelState<ContentState, ContentAction>, TimeTravelAction<ContentAction>>
     private let content: (Store<ContentState, ContentAction>) -> Content
     
     init(
         initialState: ContentState,
-        reducer: Reducer<ContentState, ContentAction, Environment>,
-        environment: Environment,
+        reducer: Reducer<ContentState, ContentAction, ContentEnvironment>,
+        environment: ContentEnvironment,
         @ViewBuilder content: @escaping (Store<ContentState, ContentAction>) -> Content
     ) {
         self.timeStore = Store<TimeTravelState<ContentState, ContentAction>, TimeTravelAction<ContentAction>>.init(

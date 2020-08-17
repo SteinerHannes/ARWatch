@@ -352,13 +352,13 @@
 			children = (
 				EF54A9D224E3027900A60E2C /* Core */,
 				EF44585D24E28E6200096D3A /* Clients */,
-				EF9C360724DF2F4400DC567D /* ARWatchDebug.entitlements */,
+				EFD07A6424EAB37F00F00406 /* Views */,
 				EF9C35F524DF2F0000DC567D /* AppDelegate.swift */,
 				EF9C35F724DF2F0000DC567D /* SceneDelegate.swift */,
-				EF9C35F924DF2F0000DC567D /* ContentView.swift */,
 				EF9C35FB24DF2F0300DC567D /* Assets.xcassets */,
 				EF9C360024DF2F0300DC567D /* LaunchScreen.storyboard */,
 				EF9C360324DF2F0300DC567D /* Info.plist */,
+				EF9C360724DF2F4400DC567D /* ARWatchDebug.entitlements */,
 				EF9C35FD24DF2F0300DC567D /* Preview Content */,
 			);
 			path = ARWatchDebug;
@@ -370,6 +370,14 @@
 				EF9C35FE24DF2F0300DC567D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EFD07A6424EAB37F00F00406 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EF9C35F924DF2F0000DC567D /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		EFD443C5248683290037CC73 = {
