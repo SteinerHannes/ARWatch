@@ -33,27 +33,22 @@ struct ContentView: View {
         return "Fehler"
     }
     
-    var view: some View {
-        Group {
-            if self.viewStore.state.value == 0 {
-                MapView()
-            } else if self.viewStore.state.value == 1 {
-                AudioPlayerView()
-            } else if self.viewStore.state.value == 2 {
-                SettingsView()
-            } else {
-                EmptyView()
-            }
-        }
-    }
-    
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 20) {
-                self.view
+                if self.viewStore.state.value == 0 {
+                    MapView()
+                } else if self.viewStore.state.value == 1 {
+                    AudioPlayerView()
+                } else if self.viewStore.state.value == 2 {
+                    SettingsView()
+                } else {
+                    EmptyView()
+                }
             }
             .navigationBarTitle("\(self.name)", displayMode: .large)
-            .onAppear{
+            .onAppear {
+                print("LOS")
                 self.viewStore.send(.onAppear)
             }
         }

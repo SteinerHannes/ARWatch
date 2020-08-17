@@ -30,6 +30,7 @@ struct PagerManager<Content: View>: View {
             HStack(spacing: 0) {
                 self.content.frame(width: geometry.size.width)
             }
+            .focusable(true)
             .frame(width: geometry.size.width, alignment: .leading)
             .offset(x: -CGFloat(self.currentIndex) * geometry.size.width)
             .offset(x: self.translation)
@@ -42,12 +43,22 @@ struct PagerManager<Content: View>: View {
                     self.currentIndex = min(max(Int(newIndex), 0), self.pageCount - 1)
                 }
             )
+            .digitalCrownRotation(
+                Binding.init(
+                    get: { Double(self.currentIndex) },
+                    set: {
+                        if $0.truncatingRemainder(dividingBy: 1) == 0 {
+                            self.currentIndex = Int($0)
+                        }
+                    }
+                ),
+                from: 0.0,
+                through: Double(self.pageCount - 1),
+                by: 1.0,
+                sensitivity: .medium,
+                isContinuous: false,
+                isHapticFeedbackEnabled: true
+            )
         }
-    }
-}
-
-struct PageManager_Previews: PreviewProvider {
-    static var previews: some View {
-        PageManager()
     }
 }

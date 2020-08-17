@@ -31,7 +31,6 @@ enum MainMenuAction: Equatable {
     case onAppear
     case sessionClient(Result<WKSessionClient.Action, Never>)
     case selectedCardChanged(value: Int)
-    case digitalCrownChanged(value: Double)
 }
 
 public struct MainMenuEnvironment {
@@ -53,9 +52,6 @@ let mainMenuReducer = Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment
             return environment.connectivityClient.send(
                 action: WKCoreAction.MMselectedCardChanged(value: value)
             ).fireAndForget()
-        case let .digitalCrownChanged(value: value):
-            state.selectedCard = Int(value)
-            return .none
         case let .sessionClient(.success(.reciveAction(action))):
             switch action {
                 case let .reciveTest(text):

@@ -49,7 +49,6 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                     return .none
                 case let .sessionClient(.success(.reciveError(error))):
                     switch error {
-                        
                         case let .error(error):
                             print("ERROR: " + error.localizedDescription)
                         case let .isReachable(bool):
