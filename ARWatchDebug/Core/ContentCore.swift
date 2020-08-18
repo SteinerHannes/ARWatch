@@ -9,16 +9,26 @@
 import Foundation
 import ComposableArchitecture
 import SwiftUI
+import MapKit
 
 public struct ContentState: Equatable {
     var selectedView: MainMenuView = .map
     var visibleView: MainMenuView? = nil
+    var mapState: MapState =
+        .init(mapRegion: MKCoordinateRegion(
+            center:  CLLocationCoordinate2D(latitude: 12.9716,
+                                            longitude: 77.5946),
+            span: MKCoordinateSpan(latitudeDelta: 2.0,
+                                   longitudeDelta: 2.0)
+            )
+        )
 }
 
 public enum ContentAction: Equatable {
     case onAppear
     case sessionClient(Result<AppWKSessionClient.Action, Never>)
     case selectedViewChanged(value: Int)
+    case mapAction(MapAction)
 }
 
 public struct ContentEnvironment {
@@ -73,8 +83,15 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                             print("ERROR: isPaired \(bool)")
                     }
                     return .none
+                case .mapAction(_):
+                    return .none
             }
-        }
+        },
+        mapReducer.pullback(
+            state: \.mapState,
+            action: /ContentAction.mapAction,
+            environment: { $0 }
+        )
     )
 let mockEnvironment = ContentEnvironment.init(sessionClient: .mock,
                                               mainQueue: DispatchQueue.main.eraseToAnyScheduler())

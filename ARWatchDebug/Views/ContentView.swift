@@ -26,7 +26,7 @@ struct ContentView: View {
                         selection: viewStore.binding(
                             get: { $0.selectedView.rawValue },
                             send: ContentAction.selectedViewChanged(value: )
-                        ) ,
+                        ),
                         label: Text("What is your favorite color?")
                     ) {
                         ForEach(MainMenuView.allCases, id: \.self ) { viewCase in
@@ -35,7 +35,11 @@ struct ContentView: View {
                     }.pickerStyle(SegmentedPickerStyle())
                         .padding(.horizontal)
                     if viewStore.state.visibleView == .map {
-                        MapView()
+                        MapView(store: self.store.scope(
+                            state: { $0.mapState },
+                            action: ContentAction.mapAction
+                            )
+                        )
                     } else if viewStore.state.visibleView == .player {
                         AudioPlayerView()
                     } else if viewStore.state.visibleView == .settings {

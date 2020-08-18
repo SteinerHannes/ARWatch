@@ -7,14 +7,17 @@
 //
 
 import Foundation
+import MapKit
 
 public enum AppCoreAction: Equatable {
     case MMselectedCardChanged(value: Int)
+    case MapVselectedRegionChanged(value: MKCoordinateRegion)
 }
 
 extension AppCoreAction: Codable {
     private enum CodingKeys: String, CodingKey {
         case MMselectedCardChanged
+        case MapVselectedRegionChanged
     }
     
     enum AppCoreActionError: Error {
@@ -27,7 +30,10 @@ extension AppCoreAction: Codable {
             self = .MMselectedCardChanged(value: value)
             return
         }
-        
+        if let value = try? values.decode(MKCoordinateRegionContainer.self, forKey: .MapVselectedRegionChanged) {
+            self = .MapVselectedRegionChanged(value: value.region)
+            return
+        }
         throw AppCoreActionError.decoding("AppCoreAction konnte nicht decoded werden")
     }
     
@@ -36,6 +42,8 @@ extension AppCoreAction: Codable {
         switch self {
             case let .MMselectedCardChanged(value: value):
                 try container.encode(value, forKey: .MMselectedCardChanged)
+            case let .MapVselectedRegionChanged(value: region):
+                try container.encode(MKCoordinateRegionContainer(region: region), forKey: .MapVselectedRegionChanged)
         }
 //        throw AppCoreActionError.decoding("AppCoreAction konnte nicht encoded werden")
     }
@@ -158,3 +166,58 @@ extension MainMenuView: Codable {
         }
     }
 }
+
+extension MKCoordinateRegion: Equatable {
+    public static func == (lhs: MKCoordinateRegion, rhs: MKCoordinateRegion) -> Bool {
+        return lhs.span.latitudeDelta == rhs.span.latitudeDelta
+            && lhs.span.longitudeDelta == rhs.span.longitudeDelta
+            && lhs.center.latitude == rhs.center.latitude
+            && lhs.center.longitude == rhs.center.longitude
+    }
+}
+
+class MKCoordinateRegionContainer: Codable {
+    let region: MKCoordinateRegion
+    
+    init(region: MKCoordinateRegion) {
+        self.region = region
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let spanLat = try container.decode(CLLocationDegrees.self, forKey: .spanLat)
+        let spanLong = try container.decode(CLLocationDegrees.self, forKey: .spanLong)
+        let centerLat = try container.decode(CLLocationDegrees.self, forKey: .centerLat)
+        let centerLong = try container.decode(CLLocationDegrees.self, forKey: .centerLong)
+        region = .init(
+            center: .init(latitude: centerLat, longitude: centerLong),
+            span: .init(latitudeDelta: spanLat, longitudeDelta: spanLong))
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var conntainer = encoder.container(keyedBy: CodingKeys.self)
+        try conntainer.encode(region.span.latitudeDelta, forKey: .spanLat)
+        try conntainer.encode(region.span.longitudeDelta, forKey: .spanLong)
+        try conntainer.encode(region.center.latitude, forKey: .centerLat)
+        try conntainer.encode(region.center.longitude, forKey: .centerLong)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case spanLat
+        case spanLong
+        case centerLat
+        case centerLong
+    }
+}
+
+public func MKMapRectForCoordinateRegion(region:MKCoordinateRegion) -> MKMapRect {
+    let topLeft = CLLocationCoordinate2D(latitude: region.center.latitude + (region.span.latitudeDelta/2), longitude: region.center.longitude - (region.span.longitudeDelta/2))
+    let bottomRight = CLLocationCoordinate2D(latitude: region.center.latitude - (region.span.latitudeDelta/2), longitude: region.center.longitude + (region.span.longitudeDelta/2))
+    
+    let a = MKMapPoint(topLeft)
+    let b = MKMapPoint(bottomRight)
+    
+    return MKMapRect(origin: MKMapPoint(x:min(a.x,b.x), y:min(a.y,b.y)), size: MKMapSize(width: abs(a.x-b.x), height: abs(a.y-b.y)))
+}
+
+

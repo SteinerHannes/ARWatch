@@ -51,9 +51,16 @@ struct ContentView: View {
                         .frame(width: 8, height: 8)
                         .foregroundColor(viewStore.selectedCard == MainMenuView.settings ? Color.white : Color.gray)
                 }
-                NavigationLink("", destination: WatchMapView(), isActive: viewStore.binding(
-                    get: { $0.isMapViewVisible },
-                    send: MainMenuAction.setWatchMapView(isActive:))
+                NavigationLink(
+                    "",
+                    destination: WatchMapView(
+                        store: self.store.scope(
+                            state: { $0.mapState },
+                            action: MainMenuAction.mapAction
+                        )
+                    ), isActive: viewStore.binding(
+                        get: { $0.isMapViewVisible },
+                        send: MainMenuAction.setWatchMapView(isActive:))
                 ).frame(width: 0, height: 0, alignment: .center)
                 NavigationLink("",destination: AudioPlayerView(), isActive: viewStore.binding(
                     get: { $0.isAudioPlayerVisible },

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF110CDE24EAC6E4004D869E /* PageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF110CDD24EAC6E4004D869E /* PageManager.swift */; };
+		EF191C3324EBDB6E00A67EF8 /* MapCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF191C3224EBDB6E00A67EF8 /* MapCore.swift */; };
 		EF1FFF5624EAB88700B574DE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FFF5524EAB88700B574DE /* MapView.swift */; };
 		EF1FFF5824EABE2300B574DE /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FFF5724EABE2300B574DE /* AudioPlayerView.swift */; };
 		EF1FFF5A24EABE3400B574DE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FFF5924EABE3400B574DE /* SettingsView.swift */; };
@@ -164,6 +165,7 @@
 /* Begin PBXFileReference section */
 		EF08167A24B48F2300A738B7 /* example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = example.swift; sourceTree = "<group>"; };
 		EF110CDD24EAC6E4004D869E /* PageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageManager.swift; sourceTree = "<group>"; };
+		EF191C3224EBDB6E00A67EF8 /* MapCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCore.swift; sourceTree = "<group>"; };
 		EF1FFF5524EAB88700B574DE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EF1FFF5724EABE2300B574DE /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 		EF1FFF5924EABE3400B574DE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -327,9 +329,9 @@
 		EF51B29B24E278FF00EC9149 /* WKARWatchDebug Extension */ = {
 			isa = PBXGroup;
 			children = (
+				EFD877F824E28233006AAB55 /* App */,
 				EFD8780024E2831D006AAB55 /* View */,
 				EFD877FD24E282E0006AAB55 /* Clients */,
-				EFD877F824E28233006AAB55 /* App */,
 				EF51B2B824E2795C00EC9149 /* WKARWatchDebug Extension.entitlements */,
 				EF51B29E24E278FF00EC9149 /* HostingController.swift */,
 				EF51B2A024E278FF00EC9149 /* ExtensionDelegate.swift */,
@@ -355,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				EF54A9D324E302A800A60E2C /* ContentCore.swift */,
+				EF191C3224EBDB6E00A67EF8 /* MapCore.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 			files = (
 				EF54A9D424E302A800A60E2C /* ContentCore.swift in Sources */,
 				EF9C35F624DF2F0000DC567D /* AppDelegate.swift in Sources */,
+				EF191C3324EBDB6E00A67EF8 /* MapCore.swift in Sources */,
 				EFD07A6C24EAB48300F00406 /* AudioPlayerView.swift in Sources */,
 				EF54A9D024E2C7F900A60E2C /* AtomicInteger.swift in Sources */,
 				EF9C35F824DF2F0000DC567D /* SceneDelegate.swift in Sources */,
