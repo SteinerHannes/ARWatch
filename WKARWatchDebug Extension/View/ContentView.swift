@@ -11,60 +11,63 @@ import ComposableArchitecture
 
 struct ContentView: View {
     let store: Store<MainMenuState,MainMenuAction>
-    @ObservedObject var viewStore: ViewStore<MainMenuState,MainMenuAction>
     
     init(_ store: Store<MainMenuState,MainMenuAction>) {
         self.store = store
-        self.viewStore = ViewStore(self.store)
+        let viewStore = ViewStore(store)
+        viewStore.send(.onAppear)
     }
     
-    @State var isMapViewVisible: Bool = false
-    @State var isAudioPlayerVisible: Bool = false
-    @State var isSettingsVisible: Bool = false
-    
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            VStack {
-                PagerManager(pageCount: 3,
-                             currentIndex: viewStore.binding(
-                                get: { $0.selectedCard },
-                                send: MainMenuAction
-                                    .selectedCardChanged(value:))
-                ) {
-                    Card(image: "map.fill", name: "Map")
-                    Card(image: "headphones", name: "Audio Player")
-                    Card(image: "gear", name: "Settings")
+        WithViewStore(self.store) { viewStore in
+            VStack(alignment: .center, spacing: 0) {
+                VStack {
+                    PagerManager(
+                        pageCount: 4,
+                        currentIndex: viewStore.binding(
+                            get: { $0.selectedCard.rawValue },
+                            send: MainMenuAction.selectedCardChanged(value:))
+                    ) {
+                        Card(image: "map.fill", name: "Map").onTapGesture {
+                            viewStore.send(.setWatchMapView(isActive: true))
+                        }
+                        Card(image: "headphones", name: "Audio Player").onTapGesture {
+                            viewStore.send(.setAudioPlayerView(isActive: true))
+                        }
+                        Card(image: "gear", name: "Settings").onTapGesture {
+                            viewStore.send(.setSettingsView(isActive: true))
+                        }
+                    }
                 }
+                Spacer()
+                HStack {
+                    Circle()
+                        .frame(width: 8, height: 8)
+                        .foregroundColor(viewStore.selectedCard == MainMenuView.map ? Color.white : Color.gray)
+                    Circle()
+                        .frame(width: 8, height: 8)
+                        .foregroundColor(viewStore.selectedCard == MainMenuView.player ? Color.white  :Color.gray)
+                    Circle()
+                        .frame(width: 8, height: 8)
+                        .foregroundColor(viewStore.selectedCard == MainMenuView.settings ? Color.white : Color.gray)
+                }
+                NavigationLink("", destination: WatchMapView(), isActive: viewStore.binding(
+                    get: { $0.isMapViewVisible },
+                    send: MainMenuAction.setWatchMapView(isActive:))
+                ).frame(width: 0, height: 0, alignment: .center)
+                NavigationLink("",destination: AudioPlayerView(), isActive: viewStore.binding(
+                    get: { $0.isAudioPlayerVisible },
+                    send: MainMenuAction.setAudioPlayerView(isActive:))
+                ).frame(width: 0, height: 0, alignment: .center)
+                NavigationLink("",destination: SettingsView(), isActive: viewStore.binding(
+                    get: { $0.isSettingsViewVisible },
+                    send: MainMenuAction.setSettingsView(isActive:))
+                ).frame(width: 0, height: 0, alignment: .center)
             }
-            Spacer()
-            HStack {
-                Circle()
-                    .frame(width: 8, height: 8)
-                    .foregroundColor(self.viewStore.selectedCard == 0 ? Color.white : Color.gray)
-                Circle()
-                    .frame(width: 8, height: 8)
-                    .foregroundColor(self.viewStore.selectedCard == 1 ? Color.white  :Color.gray)
-                Circle()
-                    .frame(width: 8, height: 8)
-                    .foregroundColor(self.viewStore.selectedCard == 2 ? Color.white : Color.gray)
-            }
-        }
-        .frame(minWidth: 0, maxWidth: .infinity)
-        .onAppear {
-            self.viewStore.send(.onAppear)
+            .frame(minWidth: 0, maxWidth: .infinity)
         }
     }
 }
-
-
-//NavigationLink("", destination: WatchMapView(), isActive: self.$isMapViewVisible)
-//    .frame(width: 0, height: 0, alignment: .center)
-//NavigationLink("", destination: AudioPlayerView(), isActive: self.$isAudioPlayerVisible)
-//    .hidden()
-//    .frame(width: 0, height: 0, alignment: .center)
-//NavigationLink("", destination: SettingsView(), isActive: self.$isSettingsVisible)
-//    .hidden()
-//    .frame(width: 0, height: 0, alignment: .center)
 
 struct Card: View {
     var image: String
@@ -88,7 +91,7 @@ struct Card: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeTravelView(
+        TimeTravelView<MainMenuEnvironment, ContentView>(
             initialState: MainMenuState(),
             reducer: mainMenuReducer,
             environment: MainMenuEnvironment()

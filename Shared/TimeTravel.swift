@@ -26,24 +26,3 @@ struct TimeTravelState<ChildState: Equatable, Action: Equatable>: Equatable {
 enum TimeTravelAction<Action: Equatable>: Equatable {
     case child(Action)
 }
-
-//extension Reducer where State: Equatable, Action: Equatable {
-//    func timeTravel() -> Reducer<TimeTravelState<State, Action>, TimeTravelAction<Action>, Environment> {
-//        .init { state, action, environment in
-//            switch action {
-//                case let .child(childAction):
-//                    let effect = self(&state.current, childAction, environment)
-//                    state.index += 1
-//                    if state.history.count > state.index {
-//                        state.history.removeSubrange(state.index...)
-//                    }
-//                    state.history.append((state.current, childAction))
-//                    if state.history.count == maxHistoryCount {
-//                        state.history.removeFirst(1)
-//                        state.index -= 1
-//                    }
-//                    return effect.map(TimeTravelAction.child)
-//            }
-//        }
-//    }
-//}

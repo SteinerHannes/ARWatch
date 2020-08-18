@@ -11,13 +11,14 @@ import ComposableArchitecture
 import SwiftUI
 
 public struct ContentState: Equatable {
-    var value: Int = 0
+    var selectedView: MainMenuView = .map
+    var visibleView: MainMenuView? = nil
 }
 
 public enum ContentAction: Equatable {
     case onAppear
     case sessionClient(Result<AppWKSessionClient.Action, Never>)
-    case buttonTapped
+    case selectedViewChanged(value: Int)
 }
 
 public struct ContentEnvironment {
@@ -38,12 +39,25 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                     switch action {
                         case let .MMselectedCardChanged(value: value):
                             print("GET MMselectedCardChanged: ", value)
-                            state.value = value
+                            state.selectedView = MainMenuView(rawValue: value)!
+                            return .none
+                        case let .MMsetWatchMapView(isActive: value):
+                            print("GET MMsetWatchMapView: ", value)
+                            state.visibleView = (value ? .map : nil)
+                            return .none
+                        case let .MMsetAudioPlayerView(isActive: value):
+                            print("GET MMsetAudioPlayerView: ", value)
+                            state.visibleView = (value ? .player : nil)
+                            return .none
+                        case let .MMsetSettingsView(isActive: value):
+                            print("GET MMsetSettingsView: ", value)
+                            state.visibleView = (value ? .settings : nil)
                             return .none
                 }
-                case .buttonTapped:
+                case .selectedViewChanged(value: let value):
+                    state.selectedView = MainMenuView.init(rawValue: value)!
                     return environment.sessionClient.send(
-                        action: AppCoreAction.buttonTapped
+                        action: .MMselectedCardChanged(value: value)
                     ).fireAndForget()
                 case .sessionClient(.success(.reciveActionAndError(action: _, position: _))):
                     return .none
@@ -62,7 +76,8 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
             }
         }
     )
-
+let mockEnvironment = ContentEnvironment.init(sessionClient: .mock,
+                                              mainQueue: DispatchQueue.main.eraseToAnyScheduler())
 // MARK: TODO ContentEnvironment MOCK
 extension Reducer where State == ContentState, Action == ContentAction, Environment == ContentEnvironment {
     func timeTravel() -> Reducer<TimeTravelState<State, Action>, TimeTravelAction<Action>, Environment> {
@@ -76,20 +91,18 @@ extension Reducer where State == ContentState, Action == ContentAction, Environm
                             state.current = state.history[count - pos].0
                             state.history.removeSubrange((count - pos)...)
                             state.history.append((state.current, ContentAction.sessionClient(.success(.reciveAction(action)))))
-                            _ = self(&state.current, ContentAction.sessionClient(.success(.reciveAction(action))), environment)
+                            _ = self(&state.current, ContentAction.sessionClient(.success(.reciveAction(action))), mockEnvironment)
                             state.index = count - pos
-                            //var effects = Effect.concatenate(effect)
                             for stateAndAction in slice {
                                 state.index += 1
-//                                effects = Effect.concatenate(effects,  self(&state.current, action.1, environment))
-                                _ = self(&state.current, stateAndAction.1, environment)
+                                _ = self(&state.current, stateAndAction.1, mockEnvironment)
                                 state.history.append((state.current, stateAndAction.1))
                                 if state.history.count == maxHistoryCount {
                                     state.history.removeFirst(1)
                                     state.index -= 1
                                 }
                             }
-                            return .none//effects.map(TimeTravelAction.child)
+                            return .none
                         default:
                             break
                     }
@@ -121,7 +134,7 @@ struct TimeTravelView<Content: View>: View {
     ) {
         self.timeStore = Store<TimeTravelState<ContentState, ContentAction>, TimeTravelAction<ContentAction>>.init(
             initialState: TimeTravelState(current: initialState),
-            reducer: reducer.timeTravel(),
+            reducer: reducer.timeTravel().debugActions(),
             environment: environment
         )
         self.content = content

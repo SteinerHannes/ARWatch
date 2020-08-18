@@ -34,6 +34,8 @@
 		EF54A9D024E2C7F900A60E2C /* AtomicInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF54A9CD24E2C7F900A60E2C /* AtomicInteger.swift */; };
 		EF54A9D124E2C7F900A60E2C /* AtomicInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF54A9CD24E2C7F900A60E2C /* AtomicInteger.swift */; };
 		EF54A9D424E302A800A60E2C /* ContentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF54A9D324E302A800A60E2C /* ContentCore.swift */; };
+		EF76BB6A24EAEBC0007C61E2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF76BB6924EAEBC0007C61E2 /* MapKit.framework */; };
+		EF76BB6C24EAEBDA007C61E2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF76BB6B24EAEBDA007C61E2 /* MapKit.framework */; };
 		EF8273BE248A8AB400948B9A /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8273BD248A8AB400948B9A /* PagingScrollView.swift */; };
 		EF9C35F624DF2F0000DC567D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9C35F524DF2F0000DC567D /* AppDelegate.swift */; };
 		EF9C35F824DF2F0000DC567D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9C35F724DF2F0000DC567D /* SceneDelegate.swift */; };
@@ -186,6 +188,8 @@
 		EF51B2B824E2795C00EC9149 /* WKARWatchDebug Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WKARWatchDebug Extension.entitlements"; sourceTree = "<group>"; };
 		EF54A9CD24E2C7F900A60E2C /* AtomicInteger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicInteger.swift; sourceTree = "<group>"; };
 		EF54A9D324E302A800A60E2C /* ContentCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCore.swift; sourceTree = "<group>"; };
+		EF76BB6924EAEBC0007C61E2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS6.2.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
+		EF76BB6B24EAEBDA007C61E2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EF8273BD248A8AB400948B9A /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
 		EF9C35F324DF2F0000DC567D /* ARWatchDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARWatchDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9C35F524DF2F0000DC567D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -242,6 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF76BB6A24EAEBC0007C61E2 /* MapKit.framework in Frameworks */,
 				EF51B2BA24E2799200EC9149 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +255,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF76BB6C24EAEBDA007C61E2 /* MapKit.framework in Frameworks */,
 				EFD877ED24E27F0D006AAB55 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +307,8 @@
 		EF4881AB248A7D370026187C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EF76BB6B24EAEBDA007C61E2 /* MapKit.framework */,
+				EF76BB6924EAEBC0007C61E2 /* MapKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

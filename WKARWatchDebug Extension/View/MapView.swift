@@ -10,19 +10,24 @@ import SwiftUI
 import MapKit
 
 struct WatchMapView: WKInterfaceObjectRepresentable {
-    
-    func makeWKInterfaceObject(context: WKInterfaceObjectRepresentableContext<WatchMapView>) -> WKInterfaceMap {
-        return WKInterfaceMap()
-    }
-    
-    func updateWKInterfaceObject(_ view: WKInterfaceMap, context: WKInterfaceObjectRepresentableContext<WatchMapView>) {
+    func updateWKInterfaceObject(_ wkInterfaceObject: WKInterfaceMap, context: WKInterfaceObjectRepresentableContext<WatchMapView>) {
         let coordinate = CLLocationCoordinate2D(
             latitude: 12.9716, longitude: 77.5946)
         let span = MKCoordinateSpan(latitudeDelta: 2.0, longitudeDelta: 2.0)
         let region = MKCoordinateRegion(center: coordinate, span: span)
-        view.setRegion(region)
+        wkInterfaceObject.setRegion(region)
+    }
+
+    func makeWKInterfaceObject(context: WKInterfaceObjectRepresentableContext<WatchMapView>) -> WKInterfaceMap {
+        return WKInterfaceMap()
     }
 }
+
+//struct WatchMapView: View {
+//    var body: some View {
+//        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+//    }
+//}
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {

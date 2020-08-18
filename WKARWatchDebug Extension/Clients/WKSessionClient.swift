@@ -67,6 +67,13 @@ extension WKSessionClient {
             }
         }
     )
+    
+    static let mock = WKSessionClient(
+        create: { () -> Effect<Action, Never> in
+            .run { _ in return AnyCancellable { } }
+    },
+        send: { _ in .fireAndForget { } }
+    )
 }
 
 public enum WKSessionError: Error, Equatable {

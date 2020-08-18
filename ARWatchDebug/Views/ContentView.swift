@@ -10,46 +10,41 @@ import SwiftUI
 import ComposableArchitecture
 
 struct ContentView: View {
-    
     let store: Store<ContentState, ContentAction>
-    
-    @ObservedObject var viewStore: ViewStore<ContentState, ContentAction>
     
     init(_ store: Store<ContentState, ContentAction>) {
         self.store = store
-        self.viewStore = ViewStore(self.store)
-    }
-    
-    var name: String {
-        if self.viewStore.state.value == 0 {
-            return "Karten"
-        }
-        if self.viewStore.state.value == 1 {
-            return "Audio Player"
-        }
-        if self.viewStore.state.value == 2 {
-            return "Einstellungen"
-        }
-        return "Fehler"
+        let  viewStore = ViewStore(self.store)
+        viewStore.send(.onAppear)
     }
     
     var body: some View {
-        NavigationView {
-            VStack(alignment: .center, spacing: 20) {
-                if self.viewStore.state.value == 0 {
-                    MapView()
-                } else if self.viewStore.state.value == 1 {
-                    AudioPlayerView()
-                } else if self.viewStore.state.value == 2 {
-                    SettingsView()
-                } else {
-                    EmptyView()
+        WithViewStore(self.store) { viewStore in
+            NavigationView {
+                VStack(alignment: .leading, spacing: 20) {
+                    Picker(
+                        selection: viewStore.binding(
+                            get: { $0.selectedView.rawValue },
+                            send: ContentAction.selectedViewChanged(value: )
+                        ) ,
+                        label: Text("What is your favorite color?")
+                    ) {
+                        ForEach(MainMenuView.allCases, id: \.self ) { viewCase in
+                            Text("\(viewCase.titel)").tag(viewCase.rawValue)
+                        }
+                    }.pickerStyle(SegmentedPickerStyle())
+                        .padding(.horizontal)
+                    if viewStore.state.visibleView == .map {
+                        MapView()
+                    } else if viewStore.state.visibleView == .player {
+                        AudioPlayerView()
+                    } else if viewStore.state.visibleView == .settings {
+                        SettingsView()
+                    } else {
+                        EmptyView()
+                    }
                 }
-            }
-            .navigationBarTitle("\(self.name)", displayMode: .large)
-            .onAppear {
-                print("LOS")
-                self.viewStore.send(.onAppear)
+                .navigationBarTitle("\(viewStore.selectedView.titel)", displayMode: .large)
             }
         }
     }
