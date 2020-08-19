@@ -400,8 +400,8 @@
 			children = (
 				EF9C35F924DF2F0000DC567D /* ContentView.swift */,
 				EFD07A6724EAB45E00F00406 /* MapView.swift */,
-				EFD07A6924EAB46E00F00406 /* SettingsView.swift */,
 				EFD07A6B24EAB48300F00406 /* AudioPlayerView.swift */,
+				EFD07A6924EAB46E00F00406 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
