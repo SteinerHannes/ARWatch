@@ -21,6 +21,7 @@ struct TimeTravelState<ChildState: Equatable, Action: Equatable>: Equatable {
     var history: [(ChildState, Action)] = []
     var current: ChildState
     var index: Int = -1
+    var isReachable: Bool = false
 }
 
 enum TimeTravelAction<Action: Equatable>: Equatable {

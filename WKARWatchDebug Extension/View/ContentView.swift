@@ -98,7 +98,7 @@ struct Card: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        TimeTravelView<MainMenuEnvironment, ContentView>(
+        TimeTravelView<ContentView>(
             initialState: MainMenuState(),
             reducer: mainMenuReducer,
             environment: MainMenuEnvironment()

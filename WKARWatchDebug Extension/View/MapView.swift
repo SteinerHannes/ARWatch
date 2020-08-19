@@ -58,7 +58,7 @@ struct WatchMapView_Previews: PreviewProvider {
                         span: MKCoordinateSpan(latitudeDelta: 2.0, longitudeDelta: 2.0)
                     )
                 ),
-                reducer: mapReducer,
+                reducer: watchMapReducer,
                 environment: MainMenuEnvironment()
             )
         )
