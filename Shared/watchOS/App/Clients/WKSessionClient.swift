@@ -18,6 +18,7 @@ public struct WKSessionClient {
         case reciveAction(AppCoreAction)
         case reciveActionAndError(action: AppCoreAction, position: Int)
         case reciveError(WKSessionError)
+        case reciveState(MainMenuState)
     }
     
     private var create: () -> Effect<Action, Never>
@@ -42,6 +43,10 @@ extension WKSessionClient {
                     fatalError("WCSession is not supported on this device.")
                 }
                 let manager = WKSessionManager { (message) in
+                    if let state = message["state"] {
+                        subscriber.send(.reciveState(state as! MainMenuState))
+                        return
+                    }
                     guard let action = message["action"] else {
                         let error = message["error"] as! WKSessionError
                         subscriber.send(.reciveError(error))
@@ -139,12 +144,16 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
     
     public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         if let encodedState = message["state"] {
-            #warning("<#T##message###>")
+            let newState = MainMenuState.initMainMenuState(from: encodedState  as! Data, decoder: decoder)
+            handler(["state": newState])
+            return
         }
         
-        let encodedAction = message["action"]! as! Data
+        guard let encodedAction = message["action"] else {
+            return
+        }
         let number = message["number"]! as! Int
-        let action = try! self.decoder.decode(AppCoreAction.self, from: encodedAction)
+        let action = try! self.decoder.decode(AppCoreAction.self, from: encodedAction as! Data)
         let counter = self.counter.value
         debugPrint("Paketnummer: \(number), Counter: \(counter)")
         if number == counter + 1 {

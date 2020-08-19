@@ -6,13 +6,15 @@
 //  Copyright © 2020 Hannes Steiner. All rights reserved.
 //
 
-#if os(watchOS)
+
 import WatchConnectivity
 import Combine
 import Foundation
 import ComposableArchitecture
 import SwiftUI
 import MapKit
+
+#if os(watchOS) || os(iOS)
 
 public struct MainMenuState: Equatable {
     var selectedCard: MainMenuView = .map
@@ -29,6 +31,9 @@ public struct MainMenuState: Equatable {
         var mapRegion: MKCoordinateRegion
     }
 }
+
+#endif
+#if os(watchOS)
 
 enum MainMenuAction: Equatable {
     case onAppear
@@ -110,6 +115,8 @@ let mainMenuReducer: Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment>
                             print("ERROR: isPaired \(bool)")
                     }
                     return .none
+                case .sessionClient(.success(.reciveState(_))):
+                    return .none
                 case .mapAction(_):
                     return .none
             }
@@ -143,10 +150,8 @@ extension Reducer where State == MainMenuState, Action == MainMenuAction, Enviro
                             state.history.append((state.current, MainMenuAction.sessionClient(.success(.reciveAction(action)))))
                             _ = self(&state.current, MainMenuAction.sessionClient(.success(.reciveAction(action))), watchMockEnvironment)
                             state.index = count - pos
-                            //var effects = Effect.concatenate(effect)
                             for stateAndAction in slice {
                                 state.index += 1
-//                                effects = Effect.concatenate(effects,  self(&state.current, action.1, environment))
                                 _ = self(&state.current, stateAndAction.1, watchMockEnvironment)
                                 state.history.append((state.current, stateAndAction.1))
                                 if state.history.count == maxHistoryCount {
@@ -154,7 +159,13 @@ extension Reducer where State == MainMenuState, Action == MainMenuAction, Enviro
                                     state.index -= 1
                                 }
                             }
-                            return .none//effects.map(TimeTravelAction.child)
+                            return .none
+                        
+                        case let .sessionClient(.success(.reciveState(newState))):
+                            state.current = newState
+                            state.history = []
+                            state.index = -1
+                            return .none
                         default:
                             break
                     }

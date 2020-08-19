@@ -163,8 +163,6 @@
 		EFD877FE24E2830C006AAB55 /* WKSessionClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKSessionClient.swift; sourceTree = "<group>"; };
 		EFEA827D24DF1AFA00E7C162 /* TimeTravel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravel.swift; sourceTree = "<group>"; };
 		EFEF72D724ED1E6000B7B819 /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
-		EFEF72E524ED219600B7B819 /* Shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shared.h; sourceTree = "<group>"; };
-		EFEF72E624ED219700B7B819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFEF730A24ED23B600B7B819 /* TimeTravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravelView.swift; sourceTree = "<group>"; };
 		EFEF730C24ED23F000B7B819 /* TimeTravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravelView.swift; sourceTree = "<group>"; };
 		EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCoreActions.swift; sourceTree = "<group>"; };
@@ -307,7 +305,6 @@
 				EF9C35F424DF2F0000DC567D /* ARWatchDebug */,
 				EF51B28C24E278FD00EC9149 /* WKARWatchDebug */,
 				EF51B29B24E278FF00EC9149 /* WKARWatchDebug Extension */,
-				EFEF72E424ED219600B7B819 /* Shared */,
 				EFD443CF248683290037CC73 /* Products */,
 				EF4881AB248A7D370026187C /* Frameworks */,
 			);
@@ -375,15 +372,6 @@
 				EFD877F824E28233006AAB55 /* App */,
 			);
 			path = watchOS;
-			sourceTree = "<group>";
-		};
-		EFEF72E424ED219600B7B819 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				EFEF72E524ED219600B7B819 /* Shared.h */,
-				EFEF72E624ED219700B7B819 /* Info.plist */,
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		EFF2466D248E478900BC5B0B /* Shared */ = {

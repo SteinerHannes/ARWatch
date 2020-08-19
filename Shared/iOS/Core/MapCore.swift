@@ -6,7 +6,7 @@
 //  Copyright © 2020 Hannes Steiner. All rights reserved.
 //
 
-#if os(iOS)
+#if os(iOS) || os(watchOS)
 
 
 import Foundation
@@ -34,6 +34,9 @@ extension MapState: Codable {
     }
     
 }
+#endif
+
+#if os(iOS)
 
 public enum MapAction: Equatable {
     case regionChanges(MKCoordinateRegion)

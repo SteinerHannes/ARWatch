@@ -6,14 +6,14 @@
 //  Copyright © 2020 Hannes Steiner. All rights reserved.
 //
 
-#if os(iOS)
-
 import Foundation
 import ComposableArchitecture
 import SwiftUI
 import MapKit
 import WatchConnectivity
 import Combine
+
+#if os(iOS) || os(watchOS)
 
 public struct ContentState: Equatable {
     var selectedView: MainMenuView = .map
@@ -27,34 +27,9 @@ public struct ContentState: Equatable {
             )
         )
 }
+#endif
 
-extension ContentState: Codable {
-    private enum CodingKeys: String, CodingKey {
-        case selectedView
-        case visibleView
-        case mapState
-    }
-    
-    enum ContentStateError: Error {
-        case unknown
-    }
-    
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        selectedView = try container.decode(MainMenuView.self, forKey: .selectedView)
-        visibleView = try container.decode(MainMenuView?.self, forKey: .visibleView)
-        mapState = try container.decode(MapState.self, forKey: .mapState)
-        throw ContentStateError.unknown
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(selectedView, forKey: .selectedView)
-        try container.encode(visibleView, forKey: .visibleView)
-        try container.encode(mapState, forKey: .mapState)
-    }
-}
-
+#if os(iOS)
 public enum ContentAction: Equatable {
     case onAppear
     case sessionClient(Result<AppWKSessionClient.Action, Never>)
