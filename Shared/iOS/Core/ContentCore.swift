@@ -55,7 +55,7 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                     switch action {
                         case let .MMselectedCardChanged(value: value):
                             print("GET MMselectedCardChanged: ", value)
-                            state.selectedView = MainMenuView(rawValue: value)!
+                            state.selectedView = MainMenuView(rawValue: value) ?? .map
                             return .none
                         case let .MMsetWatchMapView(isActive: value):
                             print("GET MMsetWatchMapView: ", value)
@@ -75,8 +75,6 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                     return environment.sessionClient.send(
                         action: .MMselectedCardChanged(value: value)
                     ).fireAndForget()
-                case .sessionClient(.success(.reciveActionAndError(action: _, position: _))):
-                    return .none
                 case let .sessionClient(.success(.reciveError(error))):
                     switch error {
                         case let .error(error):
@@ -88,6 +86,10 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                         case let .isPaired(bool):
                             print("ERROR: isPaired \(bool)")
                     }
+                    return .none
+                case .sessionClient(.success(.reciveActionAndError(action: _, position: _))):
+                    return .none
+                case .sessionClient(.success(.reciveState(_))):
                     return .none
                 case .mapAction(_):
                     return .none
@@ -109,7 +111,7 @@ extension Reducer where State == ContentState, Action == ContentAction, Environm
                 case let .child(childAction):
                     let count = state.history.count
                     switch childAction {
-                        case let ContentAction.sessionClient(.success(.reciveActionAndError(action: action, position: pos))):
+                        case let .sessionClient(.success(.reciveActionAndError(action: action, position: pos))):
                             let slice = state.history.suffix(from: count - pos)
                             state.current = state.history[count - pos].0
                             state.history.removeSubrange((count - pos)...)
@@ -126,7 +128,7 @@ extension Reducer where State == ContentState, Action == ContentAction, Environm
                                 }
                             }
                             return .none
-                        case let ContentAction.sessionClient(.success(.reciveError(error))):
+                        case let .sessionClient(.success(.reciveError(error))):
                             switch error {
                                 case let .error(error):
                                     state.isReachable = false
@@ -134,6 +136,8 @@ extension Reducer where State == ContentState, Action == ContentAction, Environm
                                 case let .isReachable(bool):
                                     if !state.isReachable && bool {
                                         state.isReachable = bool
+                                        state.history = []
+                                        state.index = -1
                                         return environment
                                             .sessionClient
                                             .sync(state: state.current)
@@ -146,6 +150,11 @@ extension Reducer where State == ContentState, Action == ContentAction, Environm
                                 case let .isPaired(bool):
                                     print("ERROR: isPaired \(bool)")
                             }
+                            return .none
+                        case let .sessionClient(.success(.reciveState(newState))):
+                            state.current = newState
+                            state.history = []
+                            state.index = -1
                             return .none
                         default:
                             break

@@ -21,7 +21,7 @@ struct TimeTravelView<Content: View>: View {
     ) {
         self.timeStore = Store<TimeTravelState<ContentState, ContentAction>, TimeTravelAction<ContentAction>>.init(
             initialState: TimeTravelState(current: initialState),
-            reducer: reducer.timeTravel().debugActions(),
+            reducer: reducer.timeTravel().debug(),
             environment: environment
         )
         self.content = content

@@ -18,6 +18,7 @@ public struct AppWKSessionClient {
         case reciveAction(WKCoreAction)
         case reciveActionAndError(action: WKCoreAction, position: Int)
         case reciveError(AppWKSessionError)
+        case reciveState(ContentState)
     }
     
     private var create: () -> Effect<Action, Never>
@@ -47,6 +48,10 @@ extension AppWKSessionClient {
                     fatalError("WCSession is not supported on this device.")
                 }
                 let manager = AppWKSessionManager { (message) in
+                    if let state = message["state"] {
+                        subscriber.send(.reciveState(state as! ContentState))
+                        return
+                    }
                     guard let action = message["action"] else {
                         let error = message["error"] as! AppWKSessionError
                         subscriber.send(.reciveError(error))
@@ -153,9 +158,17 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
     }
     
     public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        let encodedAction = message["action"]! as! Data
+        if let encodedState = message["state"] {
+            let newState = ContentState.initContentState(from: encodedState as! Data, decoder: decoder)
+            self.counter.increment()
+            handler(["state": newState])
+            return
+        }
+        guard let encodedAction = message["action"] else {
+            return
+        }
         let number = message["number"]! as! Int
-        let action = try! self.decoder.decode(WKCoreAction.self, from: encodedAction)
+        let action = try! self.decoder.decode(WKCoreAction.self, from: encodedAction as! Data)
         let counter = self.counter.value
         debugPrint("Paketnummer: \(number), Counter: \(counter)")
         if number == counter + 1 {
@@ -175,6 +188,8 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
             return
         }
         let encodedAction = try! self.encoder.encode(action)
+        let counterValue = counter.value
+        debugPrint("Paketnummer: \(counterValue + 1), Counter: \(counterValue)")
         let msg = ["action": encodedAction, "number": counter.incrementAndGet()] as [String : Any]
         session?.sendMessage(
             msg,
@@ -204,28 +219,30 @@ public final class AppWKSessionManager: NSObject, WCSessionDelegate {
     
     // The session calls this method when it detects that the user has switched to a different Apple Watch.
     public func sessionDidBecomeInactive(_ session: WCSession) {
-        handler(["error": AppWKSessionError.isPaired(false)])
+        //handler(["error": AppWKSessionError.isPaired(false)])
         debugPrint("sessionDidBecomeInactive")
     }
     
     public func sessionDidDeactivate(_ session: WCSession) {
-        handler(["error": AppWKSessionError.isPaired(false)])
+        //handler(["error": AppWKSessionError.isPaired(false)])
         debugPrint("sessionDidDeactivate")
     }
     
     public func sessionWatchStateDidChange(_ session: WCSession) {
         switch session.isPaired {
             case true:
-                handler(["error": AppWKSessionError.isPaired(true)])
+                counter.reset()
+                //handler(["error": AppWKSessionError.isPaired(true)])
             case false:
                 counter.reset()
-                handler(["error": AppWKSessionError.isPaired(false)])
+                //handler(["error": AppWKSessionError.isPaired(false)])
         }
     }
     
     public func sessionReachabilityDidChange(_ session: WCSession) {
         switch session.isReachable {
             case true:
+                counter.reset()
                 handler(["error": AppWKSessionError.isReachable(true)])
             case false:
                 counter.reset()

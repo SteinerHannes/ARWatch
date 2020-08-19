@@ -86,7 +86,6 @@ extension MainMenuState: Codable {
         isAudioPlayerVisible = try container.decode(Bool.self, forKey: .isAudioPlayerVisible)
         isSettingsViewVisible = try container.decode(Bool.self, forKey: .isSettingsViewVisible)
         mapState = try container.decode(MapState.self, forKey: .mapState)
-        throw ContentStateError.unknown
     }
     
     public func encode(to encoder: Encoder) throws {

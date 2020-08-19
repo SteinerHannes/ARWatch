@@ -23,6 +23,7 @@ public struct WKSessionClient {
     
     private var create: () -> Effect<Action, Never>
     private var send: (WKCoreAction) -> Effect<Never, Never>
+    private var sync: (MainMenuState) -> Effect<Never, Never>
     
     func start() -> Effect<Action, Never> {
         self.create()
@@ -30,6 +31,10 @@ public struct WKSessionClient {
     
     func send(action: WKCoreAction) -> Effect<Never, Never> {
         return self.send(action)
+    }
+    
+    func sync(state: MainMenuState) -> Effect<Never, Never> {
+        return self.sync(state)
     }
 }
 
@@ -53,8 +58,9 @@ extension WKSessionClient {
                         return
                     }
                     if let position = message["number"] {
-                        subscriber.send(.reciveActionAndError(action: action as! AppCoreAction,
-                                                              position: position as! Int))
+//                        subscriber.send(.reciveActionAndError(action: action as! AppCoreAction,
+//                                                              position: position as! Int))
+                        subscriber.send(.reciveAction(action as! AppCoreAction))
                     } else {
                         subscriber.send(.reciveAction(action as! AppCoreAction))
                     }
@@ -71,14 +77,24 @@ extension WKSessionClient {
                 print("action send:", action)
                 watchSharedWKSessionManager?.send(action: action)
             }
+        },
+        sync: { state in
+            .fireAndForget {
+                guard let manager = watchSharedWKSessionManager else {
+                    debugPrint("WKSessionManager noch nicht initialisiert")
+                    return
+                }
+                manager.sync(state: state)
+            }
         }
     )
     
     static let mock = WKSessionClient(
         create: { () -> Effect<Action, Never> in
             .run { _ in return AnyCancellable { } }
-        },
-        send: { _ in .fireAndForget { } }
+        }, send: { _ in .fireAndForget { }
+        }, sync: { _ in .fireAndForget { }
+        }
     )
 }
 
@@ -145,6 +161,7 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
     public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         if let encodedState = message["state"] {
             let newState = MainMenuState.initMainMenuState(from: encodedState  as! Data, decoder: decoder)
+            self.counter.increment()
             handler(["state": newState])
             return
         }
@@ -159,13 +176,13 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
         if number == counter + 1 {
             self.counter.increment()
             handler(["action" : action])
+            WKInterfaceDevice.current().play(.notification)
         } else {
             let difference = counter - number + 1
             self.counter.increment()
             handler(["action": action, "number": difference])
             WKInterfaceDevice.current().play(.failure)
         }
-        WKInterfaceDevice.current().play(.notification)
     }
     
     func send(action: WKCoreAction) {
@@ -175,6 +192,8 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
             return
         }
         let encodedAction = try! self.encoder.encode(action)
+        let counterValue = counter.value
+        debugPrint("Paketnummer: \(counterValue + 1), Counter: \(counterValue)")
         let msg = ["action": encodedAction, "number": counter.incrementAndGet()] as [String : Any]
         session?.sendMessage(
             msg,
@@ -185,9 +204,27 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
         })
     }
     
+    func sync(state: MainMenuState) {
+        if !(session?.isReachable ?? false) {
+            counter.reset()
+            handler(["error": WKSessionError.isReachable(false)])
+            return
+        }
+        let encodedState = try! self.encoder.encode(state)
+        let msg = ["state": encodedState, "number": counter.incrementAndGet()] as [String : Any]
+        session?.sendMessage(
+            msg,
+            replyHandler: nil,
+            errorHandler: { (error) in
+                debugPrint(error)
+                self.handler(["error": WKSessionError.error(error)])
+        })
+    }
+    
     public func sessionReachabilityDidChange(_ session: WCSession) {
         switch session.isReachable {
             case true:
+                counter.reset()
                 handler(["error": WKSessionError.isReachable(true)])
             case false:
                 counter.reset()
