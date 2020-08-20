@@ -12,12 +12,18 @@ import MapKit
 public enum AppCoreAction: Equatable {
     case MMselectedCardChanged(value: Int)
     case MapVselectedRegionChanged(value: MKCoordinateRegion)
+    case AudioStart
+    case AudioStop(at: Int)
+    case AudioSet(to: Int)
 }
 
 extension AppCoreAction: Codable {
     private enum CodingKeys: String, CodingKey {
         case MMselectedCardChanged
         case MapVselectedRegionChanged
+        case AudioStart
+        case AudioStop
+        case AudioSet
     }
     
     enum AppCoreActionError: Error {
@@ -34,6 +40,18 @@ extension AppCoreAction: Codable {
             self = .MapVselectedRegionChanged(value: value.region)
             return
         }
+        if ((try? values.decode(Int.self, forKey: .AudioStart)) != nil) {
+            self = .AudioStart
+            return
+        }
+        if let value = try? values.decode(Int.self, forKey: .AudioStop) {
+            self = .AudioStop(at: value)
+            return
+        }
+        if let value = try? values.decode(Int.self, forKey: .AudioSet) {
+            self = .AudioSet(to: value)
+            return
+        }
         throw AppCoreActionError.decoding("AppCoreAction konnte nicht decoded werden")
     }
     
@@ -44,6 +62,12 @@ extension AppCoreAction: Codable {
                 try container.encode(value, forKey: .MMselectedCardChanged)
             case let .MapVselectedRegionChanged(value: region):
                 try container.encode(MKCoordinateRegionContainer(region: region), forKey: .MapVselectedRegionChanged)
+            case .AudioStart:
+                try container.encode(1, forKey: .AudioStart)
+            case let .AudioStop(at: time):
+                try container.encode(time, forKey: .AudioStop)
+            case let .AudioSet(to: time):
+                try container.encode(time, forKey: .AudioSet)
         }
 //        throw AppCoreActionError.decoding("AppCoreAction konnte nicht encoded werden")
     }
@@ -54,6 +78,9 @@ public enum WKCoreAction: Equatable {
     case MMsetWatchMapView(isActive: Bool)
     case MMsetAudioPlayerView(isActive: Bool)
     case MMsetSettingsView(isActive: Bool)
+    case AudioStart
+    case AudioStop(at: Int)
+    case AudioSet(to: Int)
 }
 
 extension WKCoreAction: Codable {
@@ -62,6 +89,9 @@ extension WKCoreAction: Codable {
         case MMsetWatchMapView
         case MMsetAudioPlayerView
         case MMsetSettingsView
+        case AudioStart
+        case AudioStop
+        case AudioSet
     }
     
     enum WKCoreActionError: Error {
@@ -86,7 +116,18 @@ extension WKCoreAction: Codable {
             self = .MMsetSettingsView(isActive: value)
             return
         }
-        
+        if ((try? values.decode(Int.self, forKey: .AudioStart)) != nil) {
+            self = .AudioStart
+            return
+        }
+        if let value = try? values.decode(Int.self, forKey: .AudioStop) {
+            self = .AudioStop(at: value)
+            return
+        }
+        if let value = try? values.decode(Int.self, forKey: .AudioSet) {
+            self = .AudioSet(to: value)
+            return
+        }
         throw WKCoreActionError.decoding("WKCoreAction konnte nicht decoded werden")
     }
     
@@ -102,6 +143,12 @@ extension WKCoreAction: Codable {
                     try container.encode(activ, forKey: .MMsetAudioPlayerView)
                 case let .MMsetSettingsView(isActive: activ):
                     try container.encode(activ, forKey: .MMsetSettingsView)
+                case .AudioStart:
+                    try container.encode(1, forKey: .AudioStart)
+                case let .AudioStop(at: time):
+                    try container.encode(time, forKey: .AudioStop)
+                case let .AudioSet(to: time):
+                    try container.encode(time, forKey: .AudioSet)
             }
         } catch let error as EncodingError {
             print(error.localizedDescription)
@@ -174,50 +221,6 @@ extension MKCoordinateRegion: Equatable {
             && lhs.center.latitude == rhs.center.latitude
             && lhs.center.longitude == rhs.center.longitude
     }
-}
-
-class MKCoordinateRegionContainer: Codable {
-    let region: MKCoordinateRegion
-    
-    init(region: MKCoordinateRegion) {
-        self.region = region
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let spanLat = try container.decode(CLLocationDegrees.self, forKey: .spanLat)
-        let spanLong = try container.decode(CLLocationDegrees.self, forKey: .spanLong)
-        let centerLat = try container.decode(CLLocationDegrees.self, forKey: .centerLat)
-        let centerLong = try container.decode(CLLocationDegrees.self, forKey: .centerLong)
-        region = .init(
-            center: .init(latitude: centerLat, longitude: centerLong),
-            span: .init(latitudeDelta: spanLat, longitudeDelta: spanLong))
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var conntainer = encoder.container(keyedBy: CodingKeys.self)
-        try conntainer.encode(region.span.latitudeDelta, forKey: .spanLat)
-        try conntainer.encode(region.span.longitudeDelta, forKey: .spanLong)
-        try conntainer.encode(region.center.latitude, forKey: .centerLat)
-        try conntainer.encode(region.center.longitude, forKey: .centerLong)
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case spanLat
-        case spanLong
-        case centerLat
-        case centerLong
-    }
-}
-
-public func MKMapRectForCoordinateRegion(region:MKCoordinateRegion) -> MKMapRect {
-    let topLeft = CLLocationCoordinate2D(latitude: region.center.latitude + (region.span.latitudeDelta/2), longitude: region.center.longitude - (region.span.longitudeDelta/2))
-    let bottomRight = CLLocationCoordinate2D(latitude: region.center.latitude - (region.span.latitudeDelta/2), longitude: region.center.longitude + (region.span.longitudeDelta/2))
-    
-    let a = MKMapPoint(topLeft)
-    let b = MKMapPoint(bottomRight)
-    
-    return MKMapRect(origin: MKMapPoint(x:min(a.x,b.x), y:min(a.y,b.y)), size: MKMapSize(width: abs(a.x-b.x), height: abs(a.y-b.y)))
 }
 
 

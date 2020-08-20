@@ -58,13 +58,22 @@ struct ContentView: View {
                             state: { $0.mapState },
                             action: MainMenuAction.mapAction
                         )
-                    ), isActive: viewStore.binding(
+                    ),
+                    isActive: viewStore.binding(
                         get: { $0.isMapViewVisible },
                         send: MainMenuAction.setWatchMapView(isActive:))
                 ).frame(width: 0, height: 0, alignment: .center)
-                NavigationLink("",destination: AudioPlayerView(), isActive: viewStore.binding(
-                    get: { $0.isAudioPlayerVisible },
-                    send: MainMenuAction.setAudioPlayerView(isActive:))
+                NavigationLink(
+                    "",
+                    destination: AudioPlayerView(
+                        store: self.store.scope(
+                            state: { $0.audioState },
+                            action: MainMenuAction.audioAction
+                        )
+                    ),
+                    isActive: viewStore.binding(
+                        get: { $0.isAudioPlayerVisible },
+                        send: MainMenuAction.setAudioPlayerView(isActive:))
                 ).frame(width: 0, height: 0, alignment: .center)
                 NavigationLink("",destination: SettingsView(), isActive: viewStore.binding(
                     get: { $0.isSettingsViewVisible },

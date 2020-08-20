@@ -41,11 +41,17 @@ struct ContentView: View {
                             )
                         )
                     } else if viewStore.state.visibleView == .player {
-                        AudioPlayerView()
+                        AudioPlayerView(store: self.store.scope(
+                            state: { $0.audioState },
+                            action: ContentAction.audioAction
+                            )
+                        )
+                        Spacer()
                     } else if viewStore.state.visibleView == .settings {
                         SettingsView()
+                        Spacer()
                     } else {
-                        EmptyView()
+                        Spacer()
                     }
                 }
                 .navigationBarTitle("\(viewStore.selectedView.titel)", displayMode: .large)

@@ -26,6 +26,13 @@ public struct ContentState: Equatable {
                                    longitudeDelta: 2.0)
             )
         )
+    var audioState: AudioState =
+        .init(currentTrack: .init(
+            titel: "Under Pressure",
+            artist: "Queen & David Bowie",
+            album: "Hot Space",
+            length: 320)
+        )
 }
 #endif
 
@@ -35,11 +42,13 @@ public enum ContentAction: Equatable {
     case sessionClient(Result<AppWKSessionClient.Action, Never>)
     case selectedViewChanged(value: Int)
     case mapAction(MapAction)
+    case audioAction(AudioAction)
 }
 
 public struct ContentEnvironment {
     var sessionClient: AppWKSessionClient = .live
     var mainQueue: AnySchedulerOf<DispatchQueue> = DispatchQueue.main.eraseToAnyScheduler()
+    var audioEnvironment = AudioEnvironment()
 }
 
 public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironment> =
@@ -69,6 +78,16 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                             print("GET MMsetSettingsView: ", value)
                             state.visibleView = (value ? .settings : nil)
                             return .none
+                        case .AudioStart:
+                            state.audioState.isPlaying = true
+                            return environment.audioEnvironment.player.resume().fireAndForget()
+                        case let .AudioStop(at: time):
+                            state.audioState.isPlaying = false
+                            return environment.audioEnvironment.player.setTo(time: time).fireAndForget()
+                        case let .AudioSet(to: time):
+                            state.audioState.isPlaying = false
+                            state.audioState.time = time
+                            return environment.audioEnvironment.player.setTo(time: time).fireAndForget()
                 }
                 case .selectedViewChanged(value: let value):
                     state.selectedView = MainMenuView.init(rawValue: value)!
@@ -93,14 +112,38 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                     return .none
                 case .mapAction(_):
                     return .none
+                case let .audioAction(action):
+                    switch action {
+                        case .play:
+                            return environment.sessionClient.send(
+                                action: AppCoreAction.AudioStart
+                            ).fireAndForget()
+                        case .pause:
+                            return environment.sessionClient.send(
+                                action: AppCoreAction.AudioStop(at: state.audioState.time)
+                            ).fireAndForget()
+                        case let .setTrack(to: time):
+                            return environment.sessionClient.send(
+                                action: AppCoreAction.AudioSet(to: Int(time))
+                            ).fireAndForget()
+                        default:
+                            break
+                    }
+                    return .none
             }
         },
         mapReducer.pullback(
             state: \.mapState,
             action: /ContentAction.mapAction,
             environment: { $0 }
+        ),
+        audioReducer.pullback(
+            state: \.audioState,
+            action: /ContentAction.audioAction,
+            environment: { $0.audioEnvironment }
         )
     )
+
 let mockEnvironment = ContentEnvironment.init(sessionClient: .mock,
                                               mainQueue: DispatchQueue.main.eraseToAnyScheduler())
 
@@ -155,7 +198,7 @@ extension Reducer where State == ContentState, Action == ContentAction, Environm
                             state.current = newState
                             state.history = []
                             state.index = -1
-                            return .none
+                            return environment.audioEnvironment.player.setTo(time: state.current.audioState.time).fireAndForget()
                         default:
                             break
                     }
@@ -174,5 +217,4 @@ extension Reducer where State == ContentState, Action == ContentAction, Environm
         }
     }
 }
-
 #endif

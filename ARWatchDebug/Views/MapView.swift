@@ -9,16 +9,13 @@
 import SwiftUI
 import MapKit
 import ComposableArchitecture
-import Combine
 
 struct MapView: UIViewRepresentable {
     let viewStore: ViewStore<MapState, MapAction>
-    var cancellables: Set<AnyCancellable> = []
     
     init(store: Store<MapState, MapAction>) {
         self.viewStore = ViewStore(store)
     }
-    
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView(frame: .zero)

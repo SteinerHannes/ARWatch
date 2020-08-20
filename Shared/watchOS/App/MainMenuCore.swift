@@ -30,6 +30,13 @@ public struct MainMenuState: Equatable {
     struct MapState: Equatable {
         var mapRegion: MKCoordinateRegion
     }
+    var audioState: AudioState =
+        .init(currentTrack: .init(
+            titel: "Under Pressure",
+            artist: "Queen & David Bowie",
+            album: "Hot Space",
+            length: 320)
+        )
 }
 
 #endif
@@ -42,6 +49,7 @@ enum MainMenuAction: Equatable {
     case setWatchMapView(isActive: Bool)
     case setAudioPlayerView(isActive: Bool)
     case setSettingsView(isActive: Bool)
+    case audioAction(AudioAction)
     case mapAction(MapAction)
     
     enum MapAction: Equatable {
@@ -52,15 +60,11 @@ enum MainMenuAction: Equatable {
 public struct MainMenuEnvironment {
     var connectivityClient: WKSessionClient = .live
     var mainQueue = DispatchQueue.main.eraseToAnyScheduler()
+    var audioEnvironment = AudioEnvironment()
 }
 
 let mainMenuReducer: Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment> =
     .combine(
-        watchMapReducer.pullback(
-            state: \.mapState,
-            action: /MainMenuAction.mapAction,
-            environment: { $0 }
-        ),
         Reducer { state, action, environment in
             switch action {
                 case .onAppear:
@@ -96,6 +100,16 @@ let mainMenuReducer: Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment>
                             return .none
                         case let .MapVselectedRegionChanged(value: region):
                             return Effect(value: MainMenuAction.mapAction(.regionChanges(region)))
+                        case .AudioStart:
+                            state.audioState.isPlaying = true
+                            return environment.audioEnvironment.player.resume().fireAndForget()
+                        case let .AudioStop(at: time):
+                            state.audioState.isPlaying = false
+                            return environment.audioEnvironment.player.setTo(time: time).fireAndForget()
+                        case let .AudioSet(to: time):
+                            state.audioState.isPlaying = false
+                            state.audioState.time = time
+                            return environment.audioEnvironment.player.setTo(time: time).fireAndForget()
                 }
                 case let .sessionClient(.success(.reciveError(error))):
                     switch error {
@@ -115,8 +129,36 @@ let mainMenuReducer: Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment>
                     return .none
                 case .mapAction(_):
                     return .none
+                case let .audioAction(action):
+                    switch action {
+                        case .play:
+                            return environment.connectivityClient.send(
+                                action: WKCoreAction.AudioStart
+                            ).fireAndForget()
+                        case .pause:
+                            return environment.connectivityClient.send(
+                                action: WKCoreAction.AudioStop(at: state.audioState.time)
+                                ).fireAndForget()
+                        case let .setTrack(to: time):
+                            return environment.connectivityClient.send(
+                                action: WKCoreAction.AudioSet(to: Int(time))
+                            ).fireAndForget()
+                        default:
+                            break
+                    }
+                    return .none
             }
-        }
+        },
+        watchMapReducer.pullback(
+            state: \.mapState,
+            action: /MainMenuAction.mapAction,
+            environment: { $0 }
+        ),
+        audioReducer.pullback(
+            state: \.audioState,
+            action: /MainMenuAction.audioAction,
+            environment: { $0.audioEnvironment }
+        )
     )
 
 let watchMapReducer = Reducer<MainMenuState.MapState, MainMenuAction.MapAction, MainMenuEnvironment> { state, action, environment in
@@ -183,7 +225,7 @@ extension Reducer where State == MainMenuState, Action == MainMenuAction, Enviro
                             state.current = newState
                             state.history = []
                             state.index = -1
-                            return .none
+                            return environment.audioEnvironment.player.setTo(time: state.current.audioState.time).fireAndForget()
                         default:
                             break
                     }

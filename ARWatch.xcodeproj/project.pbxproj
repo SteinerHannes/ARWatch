@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		EF110CDE24EAC6E4004D869E /* PageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF110CDD24EAC6E4004D869E /* PageManager.swift */; };
 		EF1FFF5624EAB88700B574DE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FFF5524EAB88700B574DE /* MapView.swift */; };
-		EF1FFF5824EABE2300B574DE /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FFF5724EABE2300B574DE /* AudioPlayerView.swift */; };
-		EF1FFF5A24EABE3400B574DE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1FFF5924EABE3400B574DE /* SettingsView.swift */; };
 		EF44585F24E28E8100096D3A /* AppWKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF44585E24E28E8100096D3A /* AppWKSessionClient.swift */; };
 		EF44586024E2913D00096D3A /* WKARWatchDebug Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EF51B29724E278FF00EC9149 /* WKARWatchDebug Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EF51B28F24E278FD00EC9149 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF51B28D24E278FD00EC9149 /* Interface.storyboard */; };
@@ -33,8 +31,6 @@
 		EF9C35FF24DF2F0300DC567D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF9C35FE24DF2F0300DC567D /* Preview Assets.xcassets */; };
 		EF9C360224DF2F0300DC567D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF9C360024DF2F0300DC567D /* LaunchScreen.storyboard */; };
 		EFD07A6824EAB45E00F00406 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD07A6724EAB45E00F00406 /* MapView.swift */; };
-		EFD07A6A24EAB46E00F00406 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD07A6924EAB46E00F00406 /* SettingsView.swift */; };
-		EFD07A6C24EAB48300F00406 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD07A6B24EAB48300F00406 /* AudioPlayerView.swift */; };
 		EFD877ED24E27F0D006AAB55 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EFD877EC24E27F0D006AAB55 /* ComposableArchitecture */; };
 		EFD877FF24E2830C006AAB55 /* WKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD877FE24E2830C006AAB55 /* WKSessionClient.swift */; };
 		EFEF72FC24ED229500B7B819 /* MainMenuCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD877F924E2829B006AAB55 /* MainMenuCore.swift */; };
@@ -54,6 +50,12 @@
 		EFEF730B24ED23B600B7B819 /* TimeTravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEF730A24ED23B600B7B819 /* TimeTravelView.swift */; };
 		EFEF730D24ED23F000B7B819 /* TimeTravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEF730C24ED23F000B7B819 /* TimeTravelView.swift */; };
 		EFEF730E24ED24C700B7B819 /* WKSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD877FE24E2830C006AAB55 /* WKSessionClient.swift */; };
+		EFF4729924ED79300022E525 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4729824ED79300022E525 /* AudioPlayerView.swift */; };
+		EFF4729A24ED79770022E525 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4729824ED79300022E525 /* AudioPlayerView.swift */; };
+		EFF4729D24ED7CDF0022E525 /* AudioCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4729C24ED7CDF0022E525 /* AudioCore.swift */; };
+		EFF4729E24ED7E310022E525 /* AudioCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4729C24ED7CDF0022E525 /* AudioCore.swift */; };
+		EFF472A024ED8E300022E525 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4729F24ED8E300022E525 /* SettingsView.swift */; };
+		EFF472A124ED8E3F0022E525 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4729F24ED8E300022E525 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,8 +125,6 @@
 		EF110CDD24EAC6E4004D869E /* PageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageManager.swift; sourceTree = "<group>"; };
 		EF191C3224EBDB6E00A67EF8 /* MapCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCore.swift; sourceTree = "<group>"; };
 		EF1FFF5524EAB88700B574DE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		EF1FFF5724EABE2300B574DE /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
-		EF1FFF5924EABE3400B574DE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EF44585E24E28E8100096D3A /* AppWKSessionClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWKSessionClient.swift; sourceTree = "<group>"; };
 		EF51B28B24E278FD00EC9149 /* WKARWatchDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKARWatchDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF51B28E24E278FD00EC9149 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -156,8 +156,6 @@
 		EF9C360324DF2F0300DC567D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF9C360724DF2F4400DC567D /* ARWatchDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ARWatchDebug.entitlements; sourceTree = "<group>"; };
 		EFD07A6724EAB45E00F00406 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		EFD07A6924EAB46E00F00406 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		EFD07A6B24EAB48300F00406 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 		EFD4AB7624E3F033004C4249 /* simple_example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simple_example.swift; sourceTree = "<group>"; };
 		EFD877F924E2829B006AAB55 /* MainMenuCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuCore.swift; sourceTree = "<group>"; };
 		EFD877FE24E2830C006AAB55 /* WKSessionClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKSessionClient.swift; sourceTree = "<group>"; };
@@ -166,6 +164,9 @@
 		EFEF730A24ED23B600B7B819 /* TimeTravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravelView.swift; sourceTree = "<group>"; };
 		EFEF730C24ED23F000B7B819 /* TimeTravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravelView.swift; sourceTree = "<group>"; };
 		EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCoreActions.swift; sourceTree = "<group>"; };
+		EFF4729824ED79300022E525 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
+		EFF4729C24ED7CDF0022E525 /* AudioCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCore.swift; sourceTree = "<group>"; };
+		EFF4729F24ED8E300022E525 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,8 +291,6 @@
 			children = (
 				EF9C35F924DF2F0000DC567D /* ContentView.swift */,
 				EFD07A6724EAB45E00F00406 /* MapView.swift */,
-				EFD07A6B24EAB48300F00406 /* AudioPlayerView.swift */,
-				EFD07A6924EAB46E00F00406 /* SettingsView.swift */,
 				EFEF730C24ED23F000B7B819 /* TimeTravelView.swift */,
 			);
 			path = Views;
@@ -343,8 +342,6 @@
 				EFD8780124E28323006AAB55 /* Components */,
 				EF51B29C24E278FF00EC9149 /* ContentView.swift */,
 				EF1FFF5524EAB88700B574DE /* MapView.swift */,
-				EF1FFF5724EABE2300B574DE /* AudioPlayerView.swift */,
-				EF1FFF5924EABE3400B574DE /* SettingsView.swift */,
 				EFEF730A24ED23B600B7B819 /* TimeTravelView.swift */,
 			);
 			path = View;
@@ -377,6 +374,8 @@
 		EFF2466D248E478900BC5B0B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				EFF4729B24ED7CC80022E525 /* Core */,
+				EFF4729724ED78F20022E525 /* Views */,
 				EFEF72D624ED1D8D00B7B819 /* watchOS */,
 				EFEF72D524ED1D8200B7B819 /* iOS */,
 				EFF2466E248E47A300BC5B0B /* SharedCoreActions.swift */,
@@ -385,6 +384,23 @@
 				EFEF72D724ED1E6000B7B819 /* Mapper.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		EFF4729724ED78F20022E525 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EFF4729824ED79300022E525 /* AudioPlayerView.swift */,
+				EFF4729F24ED8E300022E525 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EFF4729B24ED7CC80022E525 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EFF4729C24ED7CDF0022E525 /* AudioCore.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -539,16 +555,17 @@
 				EF51B29D24E278FF00EC9149 /* ContentView.swift in Sources */,
 				EFD877FF24E2830C006AAB55 /* WKSessionClient.swift in Sources */,
 				EF51B2A324E278FF00EC9149 /* NotificationController.swift in Sources */,
-				EF1FFF5A24EABE3400B574DE /* SettingsView.swift in Sources */,
 				EF110CDE24EAC6E4004D869E /* PageManager.swift in Sources */,
 				EFEF730724ED22A400B7B819 /* AtomicInteger.swift in Sources */,
 				EFEF730924ED22A700B7B819 /* Mapper.swift in Sources */,
 				EF51B2A124E278FF00EC9149 /* ExtensionDelegate.swift in Sources */,
-				EF1FFF5824EABE2300B574DE /* AudioPlayerView.swift in Sources */,
 				EFEF730524ED22A100B7B819 /* TimeTravel.swift in Sources */,
+				EFF4729E24ED7E310022E525 /* AudioCore.swift in Sources */,
+				EFF4729A24ED79770022E525 /* AudioPlayerView.swift in Sources */,
 				EF51B2A524E278FF00EC9149 /* NotificationView.swift in Sources */,
 				EFEF72FD24ED229600B7B819 /* MainMenuCore.swift in Sources */,
 				EFEF730324ED229E00B7B819 /* SharedCoreActions.swift in Sources */,
+				EFF472A124ED8E3F0022E525 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,19 +576,20 @@
 				EFEF72FE24ED229800B7B819 /* ContentCore.swift in Sources */,
 				EFEF730D24ED23F000B7B819 /* TimeTravelView.swift in Sources */,
 				EFEF730224ED229E00B7B819 /* SharedCoreActions.swift in Sources */,
+				EFF472A024ED8E300022E525 /* SettingsView.swift in Sources */,
 				EFEF730824ED22A600B7B819 /* Mapper.swift in Sources */,
 				EFEF72FC24ED229500B7B819 /* MainMenuCore.swift in Sources */,
 				EFEF730E24ED24C700B7B819 /* WKSessionClient.swift in Sources */,
 				EFEF730624ED22A300B7B819 /* AtomicInteger.swift in Sources */,
 				EF9C35F624DF2F0000DC567D /* AppDelegate.swift in Sources */,
 				EFEF730024ED229B00B7B819 /* MapCore.swift in Sources */,
-				EFD07A6C24EAB48300F00406 /* AudioPlayerView.swift in Sources */,
+				EFF4729D24ED7CDF0022E525 /* AudioCore.swift in Sources */,
 				EF9C35F824DF2F0000DC567D /* SceneDelegate.swift in Sources */,
 				EF9C35FA24DF2F0000DC567D /* ContentView.swift in Sources */,
 				EFEF730424ED22A000B7B819 /* TimeTravel.swift in Sources */,
+				EFF4729924ED79300022E525 /* AudioPlayerView.swift in Sources */,
 				EFD07A6824EAB45E00F00406 /* MapView.swift in Sources */,
 				EF44585F24E28E8100096D3A /* AppWKSessionClient.swift in Sources */,
-				EFD07A6A24EAB46E00F00406 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
