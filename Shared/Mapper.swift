@@ -52,6 +52,7 @@ extension ContentState: Codable {
         case visibleView
         case mapState
         case audioState
+        case settingsState
     }
     
     enum ContentStateError: Error {
@@ -64,6 +65,7 @@ extension ContentState: Codable {
         visibleView = try container.decode(MainMenuView?.self, forKey: .visibleView)
         mapState = try container.decode(MapState.self, forKey: .mapState)
         audioState = try container.decode(AudioState.self, forKey: .audioState)
+        settingsState = try container.decode(SettingsState.self, forKey: .settingsState)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -72,6 +74,7 @@ extension ContentState: Codable {
         try container.encode(visibleView, forKey: .visibleView)
         try container.encode(mapState, forKey: .mapState)
         try container.encode(audioState, forKey: .audioState)
+        try container.encode(settingsState, forKey: .settingsState)
     }
 }
 
@@ -83,6 +86,7 @@ extension MainMenuState: Codable {
         case isSettingsViewVisible
         case mapState
         case audioState
+        case settingsState
     }
     
     enum ContentStateError: Error {
@@ -97,6 +101,7 @@ extension MainMenuState: Codable {
         isSettingsViewVisible = try container.decode(Bool.self, forKey: .isSettingsViewVisible)
         mapState = try container.decode(MapState.self, forKey: .mapState)
         audioState = try container.decode(AudioState.self, forKey: .audioState)
+        settingsState = try container.decode(SettingsState.self, forKey: .settingsState)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -107,6 +112,7 @@ extension MainMenuState: Codable {
         try container.encode(isSettingsViewVisible, forKey: .isSettingsViewVisible)
         try container.encode(mapState, forKey: .mapState)
         try container.encode(audioState, forKey: .audioState)
+        try container.encode(settingsState, forKey: .settingsState)
     }
 }
 
@@ -171,6 +177,22 @@ extension AudioState: Codable {
         try conteiner.encode(currentTrack, forKey: .currentTrack)
         try conteiner.encode(time, forKey: .time)
         try conteiner.encode(isPlaying, forKey: .isPlaying)
+    }
+}
+
+extension SettingsState: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case name
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var conteiner = encoder.container(keyedBy: CodingKeys.self)
+        try conteiner.encode(name, forKey: .name)
     }
 }
 

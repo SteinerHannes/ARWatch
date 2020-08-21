@@ -19,8 +19,8 @@ struct SettingsView: View {
     var body: some View {
         WithViewStore(self.store) { viewStore in
             Form {
-                Text("Hello World!")
-                TextField("Name", text: viewStore.binding(
+                Text("Text: \(viewStore.name)")
+                TextField("Text:", text: viewStore.binding(
                     get: { $0.name },
                     send: SettingsAction.nameChanged(to:)
                     )
