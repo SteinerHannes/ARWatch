@@ -15,6 +15,7 @@ public enum AppCoreAction: Equatable {
     case AudioStart
     case AudioStop(at: Int)
     case AudioSet(to: Int)
+    case SettingsNameChanged(name: String)
 }
 
 extension AppCoreAction: Codable {
@@ -24,6 +25,7 @@ extension AppCoreAction: Codable {
         case AudioStart
         case AudioStop
         case AudioSet
+        case SettingsNameChanged
     }
     
     enum AppCoreActionError: Error {
@@ -52,6 +54,10 @@ extension AppCoreAction: Codable {
             self = .AudioSet(to: value)
             return
         }
+        if let value = try? values.decode(String.self, forKey: .SettingsNameChanged) {
+            self = .SettingsNameChanged(name: value)
+            return
+        }
         throw AppCoreActionError.decoding("AppCoreAction konnte nicht decoded werden")
     }
     
@@ -68,6 +74,8 @@ extension AppCoreAction: Codable {
                 try container.encode(time, forKey: .AudioStop)
             case let .AudioSet(to: time):
                 try container.encode(time, forKey: .AudioSet)
+            case let .SettingsNameChanged(name: name):
+                try container.encode(name, forKey: .SettingsNameChanged)
         }
 //        throw AppCoreActionError.decoding("AppCoreAction konnte nicht encoded werden")
     }
@@ -81,6 +89,7 @@ public enum WKCoreAction: Equatable {
     case AudioStart
     case AudioStop(at: Int)
     case AudioSet(to: Int)
+    case SettingsNameChanged(name: String)
 }
 
 extension WKCoreAction: Codable {
@@ -92,6 +101,7 @@ extension WKCoreAction: Codable {
         case AudioStart
         case AudioStop
         case AudioSet
+        case SettingsNameChanged
     }
     
     enum WKCoreActionError: Error {
@@ -128,6 +138,10 @@ extension WKCoreAction: Codable {
             self = .AudioSet(to: value)
             return
         }
+        if let value = try? values.decode(String.self, forKey: .SettingsNameChanged) {
+            self = .SettingsNameChanged(name: value)
+            return
+        }
         throw WKCoreActionError.decoding("WKCoreAction konnte nicht decoded werden")
     }
     
@@ -149,6 +163,8 @@ extension WKCoreAction: Codable {
                     try container.encode(time, forKey: .AudioStop)
                 case let .AudioSet(to: time):
                     try container.encode(time, forKey: .AudioSet)
+                case let .SettingsNameChanged(name: name):
+                    try container.encode(name, forKey: .SettingsNameChanged)
             }
         } catch let error as EncodingError {
             print(error.localizedDescription)

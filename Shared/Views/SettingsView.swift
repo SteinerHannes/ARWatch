@@ -7,17 +7,31 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct SettingsView: View {
+    let store: Store<SettingsState,SettingsAction>
+    
+    init(store: Store<SettingsState,SettingsAction>) {
+        self.store = store
+    }
+    
     var body: some View {
-        Form {
-            Text("Hello World!")
+        WithViewStore(self.store) { viewStore in
+            Form {
+                Text("Hello World!")
+                TextField("Name", text: viewStore.binding(
+                    get: { $0.name },
+                    send: SettingsAction.nameChanged(to:)
+                    )
+                )
+            }
         }
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
-}
+//struct SettingsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingsView()
+//    }
+//}

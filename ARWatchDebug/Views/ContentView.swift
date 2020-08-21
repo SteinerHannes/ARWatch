@@ -48,7 +48,12 @@ struct ContentView: View {
                         )
                         Spacer()
                     } else if viewStore.state.visibleView == .settings {
-                        SettingsView()
+                        SettingsView(
+                            store: self.store.scope(
+                                state: { $0.settingsState },
+                                action: ContentAction.settingsAction
+                            )
+                        )
                         Spacer()
                     } else {
                         Spacer()

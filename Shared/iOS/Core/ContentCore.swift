@@ -33,6 +33,7 @@ public struct ContentState: Equatable {
             album: "Hot Space",
             length: 320)
         )
+    var settingsState = SettingsState()
 }
 #endif
 
@@ -43,6 +44,7 @@ public enum ContentAction: Equatable {
     case selectedViewChanged(value: Int)
     case mapAction(MapAction)
     case audioAction(AudioAction)
+    case settingsAction(SettingsAction)
 }
 
 public struct ContentEnvironment {
@@ -88,6 +90,9 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                             state.audioState.isPlaying = false
                             state.audioState.time = time
                             return environment.audioEnvironment.player.setTo(time: time).fireAndForget()
+                        case let .SettingsNameChanged(name: name):
+                            state.settingsState.name = name
+                            return .none
                 }
                 case .selectedViewChanged(value: let value):
                     state.selectedView = MainMenuView.init(rawValue: value)!
@@ -130,6 +135,8 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
                             break
                     }
                     return .none
+                case .settingsAction(_):
+                    return .none
             }
         },
         mapReducer.pullback(
@@ -141,6 +148,11 @@ public let contentReducer: Reducer<ContentState, ContentAction, ContentEnvironme
             state: \.audioState,
             action: /ContentAction.audioAction,
             environment: { $0.audioEnvironment }
+        ),
+        settingsReducer.pullback(
+            state: \.settingsState,
+            action: /ContentAction.settingsAction,
+            environment: { SettingsEnvironment(sessionClient: $0.sessionClient, mainQueue: $0.mainQueue) }
         )
     )
 

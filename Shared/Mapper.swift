@@ -20,7 +20,8 @@ extension MainMenuState {
             isAudioPlayerVisible: state.visibleView == .player ? true : false,
             isSettingsViewVisible: state.visibleView == .settings ? true : false,
             mapState: MainMenuState.MapState(mapRegion: state.mapState.mapRegion),
-            audioState: state.audioState
+            audioState: state.audioState,
+            settingsState: state.settingsState
         )
     }
 }
@@ -38,7 +39,8 @@ extension ContentState {
             selectedView: state.selectedCard,
             visibleView: visibleView,
             mapState: MapState(mapRegion: state.mapState.mapRegion),
-            audioState: state.audioState
+            audioState: state.audioState,
+            settingsState: state.settingsState
         )
     }
     

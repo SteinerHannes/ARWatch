@@ -140,6 +140,7 @@ public final class WKSessionManager: NSObject, WCSessionDelegate {
         session = WCSession.default
         session!.delegate = self
         session!.activate()
+        handler(["error": WKSessionError.isReachable(session!.isReachable)])
     }
     
     // MARK: - WCSessionDelegate

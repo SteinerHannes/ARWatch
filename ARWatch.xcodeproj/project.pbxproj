@@ -56,6 +56,8 @@
 		EFF4729E24ED7E310022E525 /* AudioCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4729C24ED7CDF0022E525 /* AudioCore.swift */; };
 		EFF472A024ED8E300022E525 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4729F24ED8E300022E525 /* SettingsView.swift */; };
 		EFF472A124ED8E3F0022E525 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4729F24ED8E300022E525 /* SettingsView.swift */; };
+		EFF472A624EEA9170022E525 /* SettingsCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF472A524EEA9170022E525 /* SettingsCore.swift */; };
+		EFF472A724EEB1430022E525 /* SettingsCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF472A524EEA9170022E525 /* SettingsCore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +169,7 @@
 		EFF4729824ED79300022E525 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 		EFF4729C24ED7CDF0022E525 /* AudioCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCore.swift; sourceTree = "<group>"; };
 		EFF4729F24ED8E300022E525 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EFF472A524EEA9170022E525 /* SettingsCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				EFF4729C24ED7CDF0022E525 /* AudioCore.swift */,
+				EFF472A524EEA9170022E525 /* SettingsCore.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -566,6 +570,7 @@
 				EFEF72FD24ED229600B7B819 /* MainMenuCore.swift in Sources */,
 				EFEF730324ED229E00B7B819 /* SharedCoreActions.swift in Sources */,
 				EFF472A124ED8E3F0022E525 /* SettingsView.swift in Sources */,
+				EFF472A724EEB1430022E525 /* SettingsCore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,6 +581,7 @@
 				EFEF72FE24ED229800B7B819 /* ContentCore.swift in Sources */,
 				EFEF730D24ED23F000B7B819 /* TimeTravelView.swift in Sources */,
 				EFEF730224ED229E00B7B819 /* SharedCoreActions.swift in Sources */,
+				EFF472A624EEA9170022E525 /* SettingsCore.swift in Sources */,
 				EFF472A024ED8E300022E525 /* SettingsView.swift in Sources */,
 				EFEF730824ED22A600B7B819 /* Mapper.swift in Sources */,
 				EFEF72FC24ED229500B7B819 /* MainMenuCore.swift in Sources */,

@@ -37,6 +37,7 @@ public struct MainMenuState: Equatable {
             album: "Hot Space",
             length: 320)
         )
+    var settingsState = SettingsState()
 }
 
 #endif
@@ -50,6 +51,7 @@ enum MainMenuAction: Equatable {
     case setAudioPlayerView(isActive: Bool)
     case setSettingsView(isActive: Bool)
     case audioAction(AudioAction)
+    case settingsAction(SettingsAction)
     case mapAction(MapAction)
     
     enum MapAction: Equatable {
@@ -110,6 +112,9 @@ let mainMenuReducer: Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment>
                             state.audioState.isPlaying = false
                             state.audioState.time = time
                             return environment.audioEnvironment.player.setTo(time: time).fireAndForget()
+                        case let .SettingsNameChanged(name: name):
+                            state.settingsState.name = name
+                            return .none
                 }
                 case let .sessionClient(.success(.reciveError(error))):
                     switch error {
@@ -147,6 +152,8 @@ let mainMenuReducer: Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment>
                             break
                     }
                     return .none
+                case .settingsAction(_):
+                    return .none
             }
         },
         watchMapReducer.pullback(
@@ -158,6 +165,11 @@ let mainMenuReducer: Reducer<MainMenuState, MainMenuAction, MainMenuEnvironment>
             state: \.audioState,
             action: /MainMenuAction.audioAction,
             environment: { $0.audioEnvironment }
+        ),
+        settingsReducer.pullback(
+            state: \.settingsState,
+            action: /MainMenuAction.settingsAction,
+            environment: { SettingsEnvironment(connectivityClient: $0.connectivityClient , mainQueue: $0.mainQueue) }
         )
     )
 

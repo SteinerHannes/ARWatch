@@ -75,9 +75,17 @@ struct ContentView: View {
                         get: { $0.isAudioPlayerVisible },
                         send: MainMenuAction.setAudioPlayerView(isActive:))
                 ).frame(width: 0, height: 0, alignment: .center)
-                NavigationLink("",destination: SettingsView(), isActive: viewStore.binding(
-                    get: { $0.isSettingsViewVisible },
-                    send: MainMenuAction.setSettingsView(isActive:))
+                NavigationLink(
+                    "",
+                    destination: SettingsView(
+                        store: self.store.scope(
+                            state: { $0.settingsState },
+                            action: MainMenuAction.settingsAction
+                        )
+                    ),
+                    isActive: viewStore.binding(
+                        get: { $0.isSettingsViewVisible },
+                        send: MainMenuAction.setSettingsView(isActive:))
                 ).frame(width: 0, height: 0, alignment: .center)
             }
             .frame(minWidth: 0, maxWidth: .infinity)
