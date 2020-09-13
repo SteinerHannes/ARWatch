@@ -170,8 +170,8 @@ extension Reducer where State == ContentState, Action == ContentAction, Environm
                             let slice = state.history.suffix(from: count - pos)
                             state.current = state.history[count - pos].0
                             state.history.removeSubrange((count - pos)...)
-                            state.history.append((state.current, ContentAction.sessionClient(.success(.reciveAction(action)))))
-                            _ = self(&state.current, ContentAction.sessionClient(.success(.reciveAction(action))), mockEnvironment)
+                            state.history.append((state.current, .sessionClient(.success(.reciveAction(action)))))
+                            _ = self(&state.current, .sessionClient(.success(.reciveAction(action))), mockEnvironment)
                             state.index = count - pos
                             for stateAndAction in slice {
                                 state.index += 1
@@ -223,8 +223,8 @@ extension Reducer where State == ContentState, Action == ContentAction, Environm
                         state.history.removeFirst(1)
                         state.index -= 1
                     }
-                    let effect = self(&state.current, childAction, environment)
-                    return effect.map(TimeTravelAction.child)
+                    return self(&state.current, childAction, environment)
+                        .map(TimeTravelAction.child)
             }
         }
     }

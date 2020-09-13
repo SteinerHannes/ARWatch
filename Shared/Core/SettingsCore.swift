@@ -10,11 +10,9 @@ import Foundation
 import ComposableArchitecture
 
 #if os(iOS) || os(watchOS)
-
 public struct SettingsState: Equatable {
     var name: String = ""
 }
-
 #endif
 #if os(iOS) || os(watchOS)
 public enum SettingsAction: Equatable {

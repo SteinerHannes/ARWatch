@@ -23,7 +23,7 @@ struct ContentView: View {
             VStack(alignment: .center, spacing: 0) {
                 VStack {
                     PagerManager(
-                        pageCount: 4,
+                        pageCount: 3,
                         currentIndex: viewStore.binding(
                             get: { $0.selectedCard.rawValue },
                             send: MainMenuAction.selectedCardChanged(value:))

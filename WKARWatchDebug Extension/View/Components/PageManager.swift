@@ -15,7 +15,6 @@ struct PagerManager<Content: View>: View {
     @Binding var currentIndex: Int
     let content: Content
     
-    //Set the initial values for the variables
     init(pageCount: Int, currentIndex: Binding<Int>, @ViewBuilder content: () -> Content) {
         self.pageCount = pageCount
         self._currentIndex = currentIndex
@@ -24,7 +23,6 @@ struct PagerManager<Content: View>: View {
     
     @GestureState private var translation: CGFloat = 0
     
-    //Set the animation
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: 0) {
@@ -34,15 +32,6 @@ struct PagerManager<Content: View>: View {
             .frame(width: geometry.size.width, alignment: .leading)
             .offset(x: -CGFloat(self.currentIndex) * geometry.size.width)
             .offset(x: self.translation)
-            .gesture(
-                DragGesture().updating(self.$translation) { value, state, _ in
-                    state = value.translation.width
-                }.onEnded { value in
-                    let offset = value.translation.width / geometry.size.width
-                    let newIndex = (CGFloat(self.currentIndex) - offset).rounded()
-                    self.currentIndex = min(max(Int(newIndex), 0), self.pageCount - 1)
-                }
-            )
             .digitalCrownRotation(
                 Binding.init(
                     get: { Double(self.currentIndex) },
@@ -58,6 +47,15 @@ struct PagerManager<Content: View>: View {
                 sensitivity: .medium,
                 isContinuous: false,
                 isHapticFeedbackEnabled: true
+            )
+            .gesture(
+                DragGesture().updating(self.$translation) { value, state, _ in
+                    state = value.translation.width
+                }.onEnded { value in
+                    let offset = value.translation.width / geometry.size.width
+                    let newIndex = (CGFloat(self.currentIndex) - offset).rounded()
+                    self.currentIndex = min(max(Int(newIndex), 0), self.pageCount - 1)
+                }
             )
         }
     }

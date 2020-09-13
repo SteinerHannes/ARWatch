@@ -28,11 +28,21 @@ struct TimeTravelView<Content: View>: View {
     }
     
     var body: some View {
-        self.content(
-            self.timeStore.scope(
-                state: \TimeTravelState.current,
-                action: TimeTravelAction.child
-            )
-        )
+        WithViewStore(self.timeStore) { viewStore in
+            ZStack {
+                self.content(
+                    self.timeStore.scope(
+                        state: \TimeTravelState.current,
+                        action: TimeTravelAction.child
+                    )
+                ).disabled(!viewStore.isReachable)
+                if !viewStore.isReachable {
+                    HStack {
+                        // MARK: TODO
+                        EmptyView()
+                    }
+                }
+            }
+        }
     }
 }
